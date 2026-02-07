@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сводка CPO TravelLine — 7 февраля 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232736;
+    --border: #2e3347;
+    --text: #e4e6ef;
+    --text2: #9ca0b5;
+    --accent: #6c8cff;
+    --accent2: #4ecdc4;
+    --red: #ff6b6b;
+    --orange: #ffa94d;
+    --green: #51cf66;
+    --yellow: #ffd43b;
+    --pink: #f06595;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { color: var(--text2); font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; }
+  .header .meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Stats bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .number { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-card .label { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav::-webkit-scrollbar { height: 0; }
+  .nav-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* Sections */
+  .section {
+    display: none;
+    animation: fadeIn .3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 12px;
+    transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card-body { font-size: 14px; color: var(--text2); }
+  .card-body a { color: var(--accent); text-decoration: none; }
+  .card-body a:hover { text-decoration: underline; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-item.hot::before { background: var(--red); }
+  .timeline-date { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .timeline-text { font-size: 14px; color: var(--text2); }
+
+  /* Engagement badges */
+  .engagement {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--surface2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .badge.views { color: var(--accent); }
+  .badge.fwd { color: var(--orange); }
+  .badge.react { color: var(--yellow); }
+
+  /* Source tag */
+  .source-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(108,140,255,.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .source-tag a { color: var(--accent); text-decoration: none; }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--surface2);
+    color: var(--text2);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Sentiment dots */
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+  .dot.red { background: var(--red); }
+  .dot.yellow { background: var(--yellow); }
+  .dot.green { background: var(--green); }
+
+  /* Quote */
+  .quote {
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin: 10px 0;
+    background: var(--surface2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .quote-author { font-style: normal; font-size: 12px; color: var(--text2); margin-top: 6px; }
+
+  /* Competitor grid */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .comp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    transition: all .2s;
+  }
+  .comp-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .comp-card .comp-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .comp-card .comp-sub { font-size: 12px; color: var(--text2); margin-bottom: 10px; }
+  .comp-card .comp-item { font-size: 13px; color: var(--text2); margin-bottom: 6px; padding-left: 16px; position: relative; }
+  .comp-card .comp-item::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+  .tag-new {
+    display: inline-block;
+    font-size: 10px;
+    background: var(--green);
+    color: #000;
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Collapsible */
+  .collapse-toggle {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .collapse-toggle::after {
+    content: '▸';
+    transition: transform .2s;
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .collapse-toggle.open::after { transform: rotate(90deg); }
+  .collapse-content { display: none; padding-top: 12px; }
+  .collapse-content.open { display: block; }
+
+  /* Recommendation cards */
+  .rec-card {
+    display: flex;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .rec-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .rec-icon.marketing { background: rgba(108,140,255,.15); }
+  .rec-icon.product { background: rgba(78,205,196,.15); }
+  .rec-icon.sales { background: rgba(255,169,77,.15); }
+  .rec-icon.intel { background: rgba(240,101,149,.15); }
+
+  /* Threat / opportunity */
+  .insight-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .insight-card.threat { border-left: 3px solid var(--red); }
+  .insight-card.opportunity { border-left: 3px solid var(--green); }
+  .insight-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .insight-label.red { color: var(--red); }
+  .insight-label.green { color: var(--green); }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .container { padding: 10px; }
+    .header { padding: 20px 16px; }
+    .header h1 { font-size: 18px; }
+    .stat-card .number { font-size: 22px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .comp-grid { grid-template-columns: 1fr; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>📊 Еженедельная сводка для CPO</h1>
+    <div class="meta">
+      <span>📅 24 янв — 7 фев 2026</span>
+      <span>📡 21 канал</span>
+      <span>💬 3 732 сообщения</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="number">21</div>
+      <div class="label">Telegram-каналов</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" style="color:var(--orange)">3 732</div>
+      <div class="label">сообщений</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" style="color:var(--red)">7</div>
+      <div class="label">сетей ушли от ЯП</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" style="color:var(--green)">+55%</div>
+      <div class="label">рост посуточного рынка</div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav">
+    <button class="nav-btn active" data-section="main">🔥 Война комиссий</button>
+    <button class="nav-btn" data-section="competitors">🏢 Конкуренты</button>
+    <button class="nav-btn" data-section="market">📰 Рынок</button>
+    <button class="nav-btn" data-section="travelline">🔊 Голос TL</button>
+    <button class="nav-btn" data-section="voice">🗣 Голос клиента</button>
+    <button class="nav-btn" data-section="conclusions">💡 Выводы</button>
+  </div>
+
+  <!-- ===== SECTION: MAIN ===== -->
+  <div class="section active" id="main">
+    <div class="section-title">🔥 Война комиссий — отели vs Яндекс Путешествия</div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">27 января</div>
+        <div class="card-title">Коллективное письмо в Яндекс</div>
+        <div class="timeline-text">Крупнейшие сети (~100 000 номеров) потребовали сохранить комиссию 15%. Подписали ACCOR, Азимут, Космос, Мантера, Максима Хотелс, Славянка, Alean Collection.</div>
+        <div class="engagement">
+          <span class="badge views">👁 5 957</span>
+          <span class="badge fwd">↗ 141</span>
+          <span class="badge react">👏87 🤔14 🤡10</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5137" target="_blank">@wrkhotel/5137</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">28 января</div>
+        <div class="card-title">Яндекс проигнорировал. Ультиматум</div>
+        <div class="timeline-text">Авторы письма ставят условие: отключение в случае отказа. Для несетевых отелей Яндекс — 40–50% продаж, рост комиссии «фатален».</div>
+        <div class="engagement">
+          <span class="badge views">👁 5 672</span>
+          <span class="badge fwd">↗ 80</span>
+          <span class="badge react">👍115 🤡14 👏11</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5140" target="_blank">@wrkhotel/5140</a></div>
+      </div>
+
+      <div class="timeline-item hot">
+        <div class="timeline-date">5 февраля ⚡️</div>
+        <div class="card-title">Массовое отключение сетей</div>
+        <div class="timeline-text">Mantera, Азимут, Космос, Алеан, Ателика, Аккорды, Русские сезоны <strong>отключились</strong> от ЯП. Крупнейшее массовое отключение в истории рынка.</div>
+        <div class="engagement">
+          <span class="badge views">👁 4 633</span>
+          <span class="badge fwd">↗ 265</span>
+          <span class="badge react">👏186 🤯18</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5153" target="_blank">@wrkhotel/5153</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">5 февраля</div>
+        <div class="card-title">ФАС: навязывание тарифов неправомерно</div>
+        <div class="timeline-text">ФАС указала на неправомерность навязывания коммерческих тарифов гостевым домам.</div>
+        <div class="engagement">
+          <span class="badge views">👁 4 425</span>
+          <span class="badge fwd">↗ 144</span>
+          <span class="badge react">🔥62 👏23</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5154" target="_blank">@wrkhotel/5154</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">6 февраля</div>
+        <div class="card-title">Конкуренты троллят Яндекс</div>
+        <div class="timeline-text">СММ Островка и Туту высмеивают ситуацию. Отельеры злорадствуют: 😁85 и 😁115.</div>
+        <div class="engagement">
+          <span class="badge views">👁 3 603 / 3 747</span>
+          <span class="badge react">😁85 😁115</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5157" target="_blank">@wrkhotel/5157</a>, <a href="https://t.me/wrkhotel/5155" target="_blank">5155</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">7 февраля</div>
+        <div class="card-title">Депутат: нужен госагрегатор</div>
+        <div class="timeline-text">Тарбаев заявил о необходимости нового агрегатора с господдержкой. Реакция: 🤡 — доминирующая эмоция.</div>
+        <div class="engagement">
+          <span class="badge views">👁 1 376</span>
+          <span class="badge react">🤡45 🤣17</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5159" target="_blank">@wrkhotel/5159</a></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; border-color: var(--accent);">
+      <div class="card-title">📊 Реакция в чатах</div>
+      <div class="card-body">
+        <table class="data-table">
+          <tr><th>Чат</th><th>«яндекс»</th><th>«комиссия»</th><th>«отключ»</th></tr>
+          <tr><td>@chat_hotel (1 479 сообщ.)</td><td><strong>77</strong></td><td><strong>63</strong></td><td>22</td></tr>
+          <tr><td>TL: Беседка (1 490 сообщ.)</td><td><strong>101</strong></td><td><strong>58</strong></td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quote">
+      «Записала бы видео: слышали? крупнейшие сети уходят от Яндекс — бронируйте напрямую»
+      <div class="quote-author">— Марина Владимировна, 06.02, <a href="https://t.me/chat_hotel/138314" target="_blank">chat_hotel</a></div>
+    </div>
+
+    <div class="card" style="border-color: var(--green);">
+      <div class="card-title">⚡️ Вывод для TravelLine</div>
+      <div class="card-body">Массовое отключение от ЯП = перераспределение трафика. Отели будут искать прямые каналы продаж. TravelLine как поставщик модуля бронирования — основной бенефициар. Message «бронируйте напрямую» уже звучит в чатах.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: COMPETITORS ===== -->
+  <div class="section" id="competitors">
+    <div class="section-title">🏢 Конкуренты</div>
+
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;">OTA-конкуренты</div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-name">Яндекс Путешествия</div>
+        <div class="comp-sub">@yandex_travel_pro · 22 поста</div>
+        <div class="comp-item">Премия «Приятно оставаться» — 620 отелей (2 894 👁, 39 ↗)</div>
+        <div class="comp-item">Конкурс UGC с iPhone 17 (2 019 👁, 33 ↗)</div>
+        <div class="comp-item">Статья НДС для гостиниц — «тушение пожара» на фоне конфликта</div>
+        <div class="comp-item">B2B-тарифы: Holiday Tagansky +20% корп. бронирований</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Островок</div>
+        <div class="comp-sub">@extranetetg · 20 постов</div>
+        <div class="comp-item">Guests' Choice 2025 — ежегодная премия (2 123 👁, 🎉26)</div>
+        <div class="comp-item">Конференция «Ориентир» — масштабное мероприятие</div>
+        <div class="comp-item">Обновление мобильного приложения (2 198 👁, 🔥10)</div>
+        <div class="comp-item">СММ троллит Яндекс (3 603 👁 в @wrkhotel)</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Bronevik.com <span class="tag-new">NEW</span></div>
+        <div class="comp-sub">@bronevik_com · 27 постов</div>
+        <div class="comp-item">Фокус: корпоративный бизнес-тревел</div>
+        <div class="comp-item">26% бронирований — «путешествия выходного дня»</div>
+        <div class="comp-item">Переток спроса в экономный сегмент</div>
+        <div class="comp-item">Охват: 400–1 000 👁, но качественный B2B-контент</div>
+      </div>
+    </div>
+
+    <div style="font-size:14px;color:var(--text2);margin:20px 0 16px;">B2B SaaS конкуренты</div>
+    <div class="comp-grid">
+      <div class="comp-card" style="border-color: var(--red);">
+        <div class="comp-name">Bnovo ⚠️</div>
+        <div class="comp-sub">@bnovonews · 28 постов</div>
+        <div class="comp-item"><strong>API «Профессионал»</strong> — двухсторонний (GET+PUT+POST+вебхуки) — прямой конкурент API TL</div>
+        <div class="comp-item"><strong>Программа лояльности</strong> — промокод = номер телефона (1 636 👁, ❤15)</div>
+        <div class="comp-item">Вебинар по лояльности 11.02 с Batanov Consulting</div>
+        <div class="comp-item">Дайджест рынка: новогодний туризм 80,7 млрд ₽</div>
+        <div class="source-tag"><a href="https://t.me/bnovonews/3682" target="_blank">API</a> · <a href="https://t.me/bnovonews/3674" target="_blank">Лояльность</a></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Hotellab <span class="tag-new">NEW</span></div>
+        <div class="comp-sub">@hotellab_io · 10 постов</div>
+        <div class="comp-item">Аналитика января: Казань ADR +31% при загрузке -7,5%</div>
+        <div class="comp-item">AI-отчёт (AIM) — первые шаги AI в RM</div>
+        <div class="comp-item">Курс RM — 49 000₽, набор закрыт</div>
+        <div class="source-tag"><a href="https://t.me/hotellab_io/1110" target="_blank">@hotellab_io/1110</a></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Контур.Отель <span class="tag-new">NEW</span></div>
+        <div class="comp-sub">@otelkontur · 17 постов</div>
+        <div class="comp-item">⚡️ В «белом списке» Минцифры — работает при ограничениях связи</div>
+        <div class="comp-item">Вебинар по миграционному учёту (616 👁, 18 ↗)</div>
+        <div class="comp-item">Конкурс с подарочными боксами</div>
+        <div class="source-tag"><a href="https://t.me/otelkontur/3299" target="_blank">@otelkontur/3299</a> · <a href="https://t.me/wrkhotel/5152" target="_blank">@wrkhotel/5152</a></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">Бронируй Онлайн <span class="tag-new">NEW</span></div>
+        <div class="comp-sub">@bronirui_online · 19 постов</div>
+        <div class="comp-item">1 000 участников в чате отельеров</div>
+        <div class="comp-item">Клиентские менеджеры в MAX-мессенджере</div>
+        <div class="comp-item">SEO-гайд по акциям + подкаст «загрузка 150%»</div>
+        <div class="source-tag"><a href="https://t.me/bronirui_online/1738" target="_blank">@bronirui_online/1738</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: MARKET ===== -->
+  <div class="section" id="market">
+    <div class="section-title">📰 Рынок и регулирование</div>
+
+    <div class="card-title" style="margin-bottom:12px">Регуляторные изменения</div>
+
+    <div class="card">
+      <div class="card-title">🔍 Тайные закупки для проверки звёздности</div>
+      <div class="card-body">Росаккредитация и Роскачество будут проверять, действительно ли проводятся выездные оценки и не завышается ли звёздность отелей.</div>
+      <div class="engagement"><span class="badge views">👁 5 971</span><span class="badge fwd">↗ 124</span><span class="badge react">👍22 🤬14 🤔10</span></div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5143" target="_blank">@wrkhotel/5143</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 Новые правила гостиничных услуг с 1 марта 2026</div>
+      <div class="card-body">Обновляются условия бронирования и отмен, требования к договорам. Депутат Нилов предлагает убрать «несоразмерные штрафы из депозитов».</div>
+      <div class="engagement"><span class="badge views">👁 2 693</span><span class="badge react">🤡65 🤬35</span></div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5158" target="_blank">@wrkhotel/5158</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📑 УВМ Москвы усложнила подачу документов</div>
+      <div class="card-body">Принцип «до первой ошибки» — весь пакет возвращается. Требуется личное присутствие руководителя при каждой подаче.</div>
+      <div class="engagement"><span class="badge views">👁 4 968</span><span class="badge react">🤬52 🤯10</span></div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5146" target="_blank">@wrkhotel/5146</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏠 КС РФ разрешил регистрацию в апартаментах</div>
+      <div class="card-body">Граждане могут регистрироваться по месту пребывания в нежилых помещениях — апартаментах.</div>
+      <div class="engagement"><span class="badge views">👁 4 504</span><span class="badge react">👍13 👏11</span></div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5150" target="_blank">@wrkhotel/5150</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💰 Турналог: лишь 12% на развитие туризма</div>
+      <div class="card-body">Турналог принёс 5,5 млрд ₽ в 2025, но только 681 млн (12%) ушли на развитие. Отельеры разгневаны.</div>
+      <div class="engagement"><span class="badge views">👁 4 703</span><span class="badge react">🤬72 🤡16</span></div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5148" target="_blank">@wrkhotel/5148</a></div>
+    </div>
+
+    <div class="card-title" style="margin:20px 0 12px">Рыночные данные (Hotellab, январь 2026)</div>
+    <div class="card">
+      <table class="data-table">
+        <tr><th>Регион</th><th>Загрузка</th><th>ADR</th><th>Тренд</th></tr>
+        <tr><td>Москва</td><td>66%</td><td>12 000₽+</td><td>✅ Стабильно</td></tr>
+        <tr><td>Казань</td><td>43,9% (−7,5%)</td><td>10 700₽ (+31%)</td><td>⚠️ Ценовой пузырь</td></tr>
+        <tr><td>СПб</td><td>51%</td><td>Бюджет +21%</td><td>📈 За счёт тарифов</td></tr>
+        <tr><td>Краснодарский край</td><td>Стабильно</td><td>19 000₽ (+39%)</td><td>🚀 RevPAR +56%</td></tr>
+        <tr><td>Екатеринбург</td><td>&lt;48%</td><td>—</td><td>📉 RevPAR −8%</td></tr>
+      </table>
+      <div class="source-tag"><a href="https://t.me/hotellab_io/1110" target="_blank">@hotellab_io/1110</a></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="card-title">📈 Другие тренды</div>
+      <div class="card-body">
+        • Рынок посуточной аренды <strong>+55%</strong> за год<br>
+        • 26% бронирований — «путешествия выходного дня» (Bronevik.com)<br>
+        • <strong>320 000 вакансий</strong> в гостиничном бизнесе, зарплаты +30%<br>
+        • Спрос на подработку в отрасли <strong>×2,3</strong> (Коммерсант)
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: TRAVELLINE ===== -->
+  <div class="section" id="travelline">
+    <div class="section-title">🔊 Голос TravelLine</div>
+
+    <div class="card-title" style="margin-bottom:12px">Что публиковал @travelline_news (24 поста)</div>
+
+    <div class="card" style="border-color: var(--green);">
+      <div class="card-title">🏆 Топ-пост: Авито Путешествия не отключается</div>
+      <div class="card-body">TravelLine сохраняет интеграцию с Авито. Отключения 9 февраля не будет. Планируется перезапуск в 2026 году. <strong>Самый резонансный пост за весь период.</strong></div>
+      <div class="engagement">
+        <span class="badge views">👁 4 584</span>
+        <span class="badge fwd">↗ 98</span>
+        <span class="badge react">🔥49 ❤42 🤝13</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8872" target="_blank">@travelline_news/8872</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 6 мероприятий в первой половине февраля</div>
+      <div class="card-body">Бизнес-завтраки Hotel Advisors (Сочи, СПб, Москва), HR Only, Hospitality Sales Forum. Спикеры: Шаров, Тимохов, Соколова, Драбкин.</div>
+      <div class="engagement"><span class="badge views">👁 3 261</span><span class="badge react">🔥13 ❤7</span></div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8873" target="_blank">@travelline_news/8873</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🆕 «Новинки платформы» в TL: Помощнике</div>
+      <div class="card-body">Все обновления инструментов собраны в одном разделе.</div>
+      <div class="engagement"><span class="badge views">👁 3 865</span><span class="badge react">❤20 🔥10 👏8</span></div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8870" target="_blank">@travelline_news/8870</a></div>
+    </div>
+    <div class="card">
+      <div class="card-title">😂 Мемы дня — рекорд по реакциям</div>
+      <div class="card-body">Лёгкий контент работает для вовлечения: 😁57 🔥27 ❤14</div>
+      <div class="engagement"><span class="badge views">👁 2 916</span><span class="badge fwd">↗ 41</span></div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8880" target="_blank">@travelline_news/8880</a></div>
+    </div>
+
+    <div class="card-title" style="margin:20px 0 12px">Как рынок отреагировал</div>
+
+    <div class="quote">
+      «TravelLine продолжает сотрудничество с Авито Путешествия»
+      <div class="quote-author">— @wrkhotel · 4 653 👁 · 👏27 😁7 👍4 · <a href="https://t.me/wrkhotel/5145" target="_blank">ссылка</a></div>
+    </div>
+    <div class="quote">
+      «Подключили модуль Тревеллайн в ТГ и в ВК»
+      <div class="quote-author">— inruho.ru, @chat_hotel · <a href="https://t.me/chat_hotel/137202" target="_blank">ссылка</a></div>
+    </div>
+    <div class="quote">
+      «Мобильная версия шахматки вернулась в прежний вид. Спасибо, что услышали ❤️»
+      <div class="quote-author">— Viktoria Vinogradova, TL: Беседка</div>
+    </div>
+    <div class="quote" style="border-color: var(--orange);">
+      «Я все считаю удорожание расходов при переходе с бново на ТЛ»
+      <div class="quote-author">— Anna F, TL: Беседка · ⚠️ негативный сигнал</div>
+    </div>
+    <div class="quote" style="border-color: var(--red);">
+      «Дважды форму заполнял и тишина»
+      <div class="quote-author">— Эдуард Габаидзе, TL: Беседка · 🔴 жалоба на sales</div>
+    </div>
+
+    <div class="card-title" style="margin:20px 0 12px">Sentiment по TravelLine</div>
+    <div class="card">
+      <table class="data-table">
+        <tr><th>Площадка</th><th>Позитивно</th><th>Негативно</th></tr>
+        <tr><td>@chat_hotel</td><td><span class="dot green"></span>Рекомендации коллегам, модуль ТГ/ВК</td><td>—</td></tr>
+        <tr><td>TL: Беседка</td><td><span class="dot green"></span>Шахматка, брони с сайта, интеграции</td><td><span class="dot red"></span>Стоимость vs Bnovo, баги, тишина от sales</td></tr>
+        <tr><td>@wrkhotel</td><td><span class="dot green"></span>Авито не отключается 👏</td><td>—</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="card-title">📊 Упоминания в TL: Беседке (1 490 сообщ.)</div>
+      <div class="card-body">
+        TravelLine — <strong>43</strong> · Поддержка — <strong>32</strong> · Баг — <strong>12</strong> · Ошибка — <strong>9</strong> · API — <strong>6</strong> · Модуль бронирования — <strong>4</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: VOICE ===== -->
+  <div class="section" id="voice">
+    <div class="section-title">🗣 Голос клиента</div>
+
+    <div class="card-title" style="margin-bottom:12px">Упоминания ключевых тем</div>
+    <div class="card">
+      <div class="card-body" style="font-size:13px;font-weight:600;margin-bottom:8px">@chat_hotel · 1 479 сообщений · 4 662 участника</div>
+      <table class="data-table">
+        <tr><th>Тема</th><th>Упоминаний</th><th>Тональность</th></tr>
+        <tr><td>Яндекс Путешествия</td><td>77</td><td><span class="dot red"></span>Негативная</td></tr>
+        <tr><td>Комиссии OTA</td><td>63</td><td><span class="dot red"></span>Ключевая боль</td></tr>
+        <tr><td>Авито Путешествия</td><td>38</td><td><span class="dot yellow"></span>Тревога</td></tr>
+        <tr><td>Отключение от OTA</td><td>22</td><td><span class="dot green"></span>Поддержка</td></tr>
+        <tr><td>Островок</td><td>11</td><td><span class="dot yellow"></span>Нейтральная</td></tr>
+        <tr><td>Контур</td><td>10</td><td><span class="dot green"></span>Позитивная</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-body" style="font-size:13px;font-weight:600;margin-bottom:8px">TL: Беседка · 1 490 сообщений · 7 516 участников</div>
+      <table class="data-table">
+        <tr><th>Тема</th><th>Упоминаний</th><th>Тональность</th></tr>
+        <tr><td>Яндекс</td><td>101</td><td><span class="dot red"></span>Комиссии, УПД, подменные номера</td></tr>
+        <tr><td>Комиссии</td><td>58</td><td><span class="dot red"></span>Боль #1</td></tr>
+        <tr><td>TravelLine</td><td>43</td><td><span class="dot yellow"></span>Фичи, вопросы, баги</td></tr>
+        <tr><td>Поддержка</td><td>32</td><td><span class="dot yellow"></span>Запросы к ТЛ</td></tr>
+        <tr><td>Островок</td><td>29</td><td><span class="dot yellow"></span>Сравнения</td></tr>
+        <tr><td>Авито</td><td>26</td><td><span class="dot yellow"></span>Интеграция</td></tr>
+      </table>
+    </div>
+
+    <div class="card-title" style="margin:20px 0 12px">Характерные цитаты</div>
+
+    <div class="quote">
+      «У кого объекты в Лен области? Какие площадки больше всего генерят брони? У нас на 1-ом месте Суточно! ЯП на 2ом»
+      <div class="quote-author">— Nadezhda, TL: Беседка · про OTA-зависимость</div>
+    </div>
+    <div class="quote">
+      «Мы почти с первого дня создали сайт и установили модуль бронирования ТL, поставили интернет-эквайринг от ТБанка»
+      <div class="quote-author">— Monnet, TL: Беседка · позитивный кейс</div>
+    </div>
+    <div class="quote">
+      «Подменные номера использует и авито, и другие OTA — это их борьба с перетягиванием гостя на прямую бронь»
+      <div class="quote-author">— Maria Yakunina, TL: Беседка</div>
+    </div>
+    <div class="quote">
+      «Нам зарядили 20%. Техподдержка бесполезная, непонятки с отчётами. Отказались без сожаления»
+      <div class="quote-author">— Светлана, TL: Беседка · про OTA-комиссии</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: CONCLUSIONS ===== -->
+  <div class="section" id="conclusions">
+    <div class="section-title">💡 Выводы для TravelLine</div>
+
+    <div style="font-size:14px;color:var(--red);font-weight:700;margin-bottom:12px">🔴 Угрозы</div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #1</div>
+      <div class="card-title">Bnovo: двухсторонний API + программа лояльности</div>
+      <div class="card-body">Bnovo запустил API «Профессионал» (GET+PUT+POST+вебхуки) и программу лояльности с автопромокодами. Прямая конкуренция с TL по API и retention-инструментам.</div>
+      <div class="source-tag"><a href="https://t.me/bnovonews/3682" target="_blank">@bnovonews/3682</a></div>
+    </div>
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #2</div>
+      <div class="card-title">Контур.Отель в «белом списке» Минцифры</div>
+      <div class="card-body">Конкурентное преимущество в стабильности: работает при ограничениях мобильного интернета. TravelLine пока не имеет этого статуса.</div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5152" target="_blank">@wrkhotel/5152</a></div>
+    </div>
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #3</div>
+      <div class="card-title">Сравнение стоимости: TL vs Bnovo</div>
+      <div class="card-body">«Считаю удорожание расходов при переходе с бново на ТЛ» — отельер в Беседке. Ценовой барьер для привлечения клиентов Bnovo.</div>
+    </div>
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #4</div>
+      <div class="card-title">Баги и медленная поддержка</div>
+      <div class="card-body">12 упоминаний «баг», 9 «ошибка», 32 «поддержка» в Беседке. Жалоба на тишину от sales: «дважды заполнял форму и тишина».</div>
+    </div>
+
+    <div style="font-size:14px;color:var(--green);font-weight:700;margin:24px 0 12px">🟢 Возможности</div>
+
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #1</div>
+      <div class="card-title">Война комиссий = рост спроса на прямые продажи</div>
+      <div class="card-body">Отели уходят от OTA → нужен модуль бронирования + сайт. TravelLine — основной бенефициар. Message «бронируйте напрямую» уже звучит в чатах.</div>
+    </div>
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #2</div>
+      <div class="card-title">Авито-интеграция = доверие</div>
+      <div class="card-body">Решение не отключать Авито получило 🔥49 ❤42 — лучший по вовлечённости пост TL. Продолжать нарратив «слушаем отельеров».</div>
+    </div>
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #3</div>
+      <div class="card-title">Кейсы прямых бронирований</div>
+      <div class="card-body">«Весь январь сыпались брони с официального сайта» (Monnet) — собирать и публиковать такие кейсы.</div>
+    </div>
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #4</div>
+      <div class="card-title">Быстрая реакция на фидбек</div>
+      <div class="card-body">«Шахматка вернулась в прежний вид. Спасибо ❤️» (Viktoria) — отельеры ценят скорость. Усиливать это.</div>
+    </div>
+
+    <div style="font-size:14px;color:var(--accent);font-weight:700;margin:24px 0 12px">📋 Рекомендации</div>
+
+    <div class="rec-card">
+      <div class="rec-icon marketing">📣</div>
+      <div><div class="card-title">Маркетинг</div><div class="card-body">Подготовить кейс/статью «Как отелю зарабатывать без OTA-зависимости» на волне конфликта с Яндексом</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon product">⚙️</div>
+      <div><div class="card-title">Продукт</div><div class="card-body">Проверить: есть ли TravelLine в «белом списке» Минцифры? Если нет — подать заявку</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon sales">📞</div>
+      <div><div class="card-title">Sales</div><div class="card-body">Проверить воронку — «дважды заполнял форму и тишина» (Эдуард Габаидзе, Беседка)</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon product">⚙️</div>
+      <div><div class="card-title">Продукт</div><div class="card-body">Добавить MAX (мессенджер) в Конструктор сайтов — запрос из Беседки</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon intel">🔎</div>
+      <div><div class="card-title">Конкурентная разведка</div><div class="card-body">Мониторить API «Профессионал» от Bnovo — какие сценарии покрывает, зрелость решения</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:24px;color:var(--text2);font-size:12px;">
+  Отчёт сгенерирован AI · 3 732 сообщений из 21 Telegram-канала · Следующий: 14.02.2026
+</div>
+
+<script>
+  // Navigation
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.section).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Collapsible sections
+  document.querySelectorAll('.collapse-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      toggle.nextElementSibling.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
