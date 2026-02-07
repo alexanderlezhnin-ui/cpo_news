@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPO News — 5 февраля 2026</title>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(106707351, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/106707351" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232736;
+    --border: #2e3347;
+    --text: #e4e6ef;
+    --text2: #9ca0b5;
+    --accent: #6c8cff;
+    --accent2: #4ecdc4;
+    --red: #ff6b6b;
+    --orange: #ffa94d;
+    --green: #51cf66;
+    --yellow: #ffd43b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  .header {
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { color: var(--text2); font-size: 14px; }
+
+  .day-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .nav-link {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .nav-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .nav-link.week { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .nav-link.disabled { opacity: 0.4; cursor: default; }
+  .nav-link.disabled:hover { background: var(--surface); color: var(--text2); }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .number { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-card .label { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Top posts */
+  .card.top-post {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card.top-post:hover { border-color: var(--accent); }
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .channel-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .category-tag {
+    font-size: 11px;
+    background: rgba(108,140,255,.15);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  .card-body {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .card-body strong {
+    color: var(--text);
+  }
+
+  .engagement {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--surface2);
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .badge.views { color: var(--accent); }
+  .badge.fwd { color: var(--orange); }
+  .badge.react { color: var(--yellow); }
+
+  .source-tag {
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .source-tag a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .source-tag a:hover {
+    text-decoration: underline;
+  }
+
+  /* Chat messages */
+  .chat-msg {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .chat-msg:hover {
+    border-color: var(--accent2);
+  }
+  .chat-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .chat-sender {
+    font-weight: 600;
+    color: var(--accent2);
+  }
+  .chat-source {
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .chat-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .chat-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .chat-meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text2);
+    font-size: 12px;
+  }
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 10px; }
+    .header { padding: 20px 16px; }
+    .day-nav { flex-wrap: wrap; justify-content: center; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .post-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>📅 5 февраля 2026</h1>
+    <div class="meta">💬 410 сообщений · 14 каналов · 348 в чатах</div>
+  </div>
+
+  <div class="day-nav"><a href="2026-02-04.html" class="nav-link">← Предыдущий день</a><a href="index.html" class="nav-link week">Вся неделя</a><a href="2026-02-06.html" class="nav-link">Следующий день →</a></div>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="number">410</div>
+      <div class="label">сообщений</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="number">9</div>
+      <div class="label">B2B SaaS конкуренты (за клиентов)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">7</div>
+      <div class="label">OTA-конкуренты (за бронирования)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">46</div>
+      <div class="label">Независимые отраслевые каналы</div>
+    </div>
+  </div>
+
+  <div class="section-title">🔥 Главные публикации дня</div>
+  
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Новости отельеров | WRKHotel</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body"><strong>Сеть отелей Mantera и Азимут отключилась от Яндекс Путешествия в связи с повышением агрегатором комиссии </strong><br><br>__Добавлено позже:<br><br>Сеть отелей Космос, Алеан, Ателика, Аккорды и Русские сезоны тоже заявили об отключении от Яндекс Путешествия. __<br><br>🏨 @wrkhotel</div>
+      <div class="engagement">
+        <span class="badge views">👁 4,633</span>
+        <span class='badge fwd'>↗ 265</span>
+        <span class='badge react'>ReactionPaid()5 👏186 🤯18 🤡7</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5153" target="_blank">Читать в Telegram →</a></div>
+    </div>
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Ночной портье</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body">⚡️Это всё-таки случилось. <strong>Сразу несколько гостиничных сетей объявили об отключении от сервиса «Яндекс Путешествия» на фоне повышения комиссии со стороны агрегатора.</strong><br><br>О приостановке сотрудничества заявили Mantera, AZIMUT Hotels, Cosmos Hotel Group, Alean, Atelika, Accor и «Русские Сезоны». Речь идёт о временном отключении номерного фонда и прямых продаж через канал платформы.<br><br>Решение касается текущих коммерческих условий взаимодействия и уже отражается на представленности сетей в витрине сер...</div>
+      <div class="engagement">
+        <span class="badge views">👁 6,039</span>
+        <span class='badge fwd'>↗ 229</span>
+        
+      </div>
+      <div class="source-tag"><a href="https://t.me/portierdenuit/7417" target="_blank">Читать в Telegram →</a></div>
+    </div>
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Новости отелей</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body"><strong>В Ленобласти планируют построить новый курорт</strong><br><br>В Приозерском районе Ленинградской области на севере Карельского перешейка компания «СКСР» намерена создать рекреационный кластер, в который войдут [гостиница,](https://t.me/Hoteliernews) апартаменты, ледовая арена, SPA-центр, ресторан, а также коттеджный поселок. Об этом РБК Петербург сообщили в компании.<br><br>На новом курорте построят 4-звездочную гостиницу на 220 номеров общей площадью 19 тыс. кв. м, апарт-отель на 144 юнита (17,1 тыс. кв. м) и в...</div>
+      <div class="engagement">
+        <span class="badge views">👁 5,055</span>
+        <span class='badge fwd'>↗ 20</span>
+        <span class='badge react'>ReactionPaid()5 👍42 👏24 🤔15</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/Hoteliernews/11523" target="_blank">Читать в Telegram →</a></div>
+    </div>
+
+  <div class="section-title">🗣 Обсуждения в чатах</div>
+  
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Новости отельеров | WRKHotel</span>
+        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
+      </div>
+      <div class="chat-text"><strong>Сеть отелей Mantera и Азимут отключилась от Яндекс Путешествия в связи с повышением агрегатором комиссии </strong><br><br>__Добавлено позже:<br><br>Сеть отелей Космос, Алеан, Ателика, Аккорды и Русские сезоны тоже заявили об отключении от Яндекс Путешествия. __<br><br>🏨 @wrkhotel</div>
+      <div class="chat-meta">
+        <span>💬 26 ответов</span>
+        <span>ReactionPaid()5 👏186 🤯18 🤡7</span>
+        <a href="https://t.me/chat_hotel/138120" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Новости отельеров | WRKHotel</span>
+        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
+      </div>
+      <div class="chat-text"><strong>ФАС указала на неправомерность навязывания коммерческих тарифов гостевым домам </strong><br><br>🏨 @wrkhotel</div>
+      <div class="chat-meta">
+        
+        <span>🔥62 👏19 👍6 ❤3</span>
+        <a href="https://t.me/chat_hotel/138135" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Александр Такшеев</span>
+        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
+      </div>
+      <div class="chat-text">Только что столкнулся с феноменально интересной ситуацией с Авито. гость забронировал у нас 8 дней пребывания, предоплатил около 30% авито. Потом написал, что они хотят сократить срок на 2 дня и оставят 6 дней вместо забронированных 8. срок отмены позволяет, мы в принципе дали своё согласие гостю но послали его в Авито уменьшать срок пребывания. Мне звонит менеджер Avito чтобы согласовать это сокр...</div>
+      <div class="chat-meta">
+        <span>💬 20 ответов</span>
+        <span>🤬15 👍5 😨5 😁2</span>
+        <a href="https://t.me/chat_hotel/138104" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Vladimir</span>
+        <span class="chat-source">в TL: Беседка</span>
+      </div>
+      <div class="chat-text"><strong>Сеть отелей Mantera и Азимут отключилась от Яндекс Путешествия в связи с повышением агрегатором комиссии </strong><br>__<br>Сеть отелей Космос, Алеан, Ателика, Аккорды и Русские сезоны тоже заявили об отключении от Яндекс Путешествия__<br><br>Вот такую новость обнаружил</div>
+      <div class="chat-meta">
+        <span>💬 14 ответов</span>
+        <span>👍16 👏2</span>
+        <a href="https://t.me/-1001264671967/101814" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Monnet</span>
+        <span class="chat-source">в TL: Беседка</span>
+      </div>
+      <div class="chat-text">На вощвратах через интернет эквайринг уже на приличную сумму на комиссию попали :(</div>
+      <div class="chat-meta">
+        <span>💬 23 ответов</span>
+        
+        <a href="https://t.me/-1001264671967/101758" target="_blank">Открыть →</a>
+      </div>
+    </div>
+
+</div>
+
+<div class="footer">
+  Дневной отчёт CPO News · <a href="index.html">Недельный обзор →</a>
+</div>
+
+</body>
+</html>

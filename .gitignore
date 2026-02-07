@@ -31,3 +31,4 @@ Thumbs.db
 
 # MCP config (contains local paths)
 .mcp.json
+.vercel

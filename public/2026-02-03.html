@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPO News — 3 февраля 2026</title>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(106707351, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/106707351" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232736;
+    --border: #2e3347;
+    --text: #e4e6ef;
+    --text2: #9ca0b5;
+    --accent: #6c8cff;
+    --accent2: #4ecdc4;
+    --red: #ff6b6b;
+    --orange: #ffa94d;
+    --green: #51cf66;
+    --yellow: #ffd43b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  .header {
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { color: var(--text2); font-size: 14px; }
+
+  .day-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .nav-link {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .nav-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .nav-link.week { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .nav-link.disabled { opacity: 0.4; cursor: default; }
+  .nav-link.disabled:hover { background: var(--surface); color: var(--text2); }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-card .number { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-card .label { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Top posts */
+  .card.top-post {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card.top-post:hover { border-color: var(--accent); }
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .channel-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .category-tag {
+    font-size: 11px;
+    background: rgba(108,140,255,.15);
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  .card-body {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .card-body strong {
+    color: var(--text);
+  }
+
+  .engagement {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--surface2);
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .badge.views { color: var(--accent); }
+  .badge.fwd { color: var(--orange); }
+  .badge.react { color: var(--yellow); }
+
+  .source-tag {
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 12px;
+  }
+  .source-tag a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .source-tag a:hover {
+    text-decoration: underline;
+  }
+
+  /* Chat messages */
+  .chat-msg {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .chat-msg:hover {
+    border-color: var(--accent2);
+  }
+  .chat-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .chat-sender {
+    font-weight: 600;
+    color: var(--accent2);
+  }
+  .chat-source {
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .chat-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .chat-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .chat-meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text2);
+    font-size: 12px;
+  }
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 10px; }
+    .header { padding: 20px 16px; }
+    .day-nav { flex-wrap: wrap; justify-content: center; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .post-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>📅 3 февраля 2026</h1>
+    <div class="meta">💬 199 сообщений · 15 каналов · 137 в чатах</div>
+  </div>
+
+  <div class="day-nav"><a href="2026-02-02.html" class="nav-link">← Предыдущий день</a><a href="index.html" class="nav-link week">Вся неделя</a><a href="2026-02-04.html" class="nav-link">Следующий день →</a></div>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="number">199</div>
+      <div class="label">сообщений</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="number">10</div>
+      <div class="label">B2B SaaS конкуренты (за клиентов)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">3</div>
+      <div class="label">OTA-конкуренты (за бронирования)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">5</div>
+      <div class="label">TravelLine (свой канал — как нас видит рынок)</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">44</div>
+      <div class="label">Независимые отраслевые каналы</div>
+    </div>
+  </div>
+
+  <div class="section-title">🔥 Главные публикации дня</div>
+  
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Ночной портье</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body">📌 <strong>С 1 февраля Яндекс.Путешествия и OZON Travel подняли базовую комиссию до 17%. </strong>Для отельеров это плохая новость, и [спорить](https://t.me/portierdenuit/7329) с этим бессмысленно: любой рост комиссии в низкомаржинальном бизнесе напрямую бьёт по экономике. Даже если доля канала кажется «некритичной».<br><br>Проблема здесь не в двух процентных пунктах, а в прецеденте. <strong>Когда крупнейшие цифровые витрины рынка начинают переписывать базовые условия, пространство для манёвра у отелей сжимается.</strong> Особе...</div>
+      <div class="engagement">
+        <span class="badge views">👁 5,274</span>
+        <span class='badge fwd'>↗ 59</span>
+        
+      </div>
+      <div class="source-tag"><a href="https://t.me/portierdenuit/7391" target="_blank">Читать в Telegram →</a></div>
+    </div>
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Новости отелей</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body">👌 <strong>Placemat из ткани: забытая классика или секретное оружие вашего отеля?</strong><br><br>Салфетки, скатерть, посуда - всё на месте. Но в сервировке стола есть один элемент, который часто упускают из виду, а зря. Речь о тканевых placemat’ах (подставках под тарелки).<br><br>Это не просто [<strong>«салфетка под тарелку»</strong>](https://www.kovax.ru/placemat.html)[.](https://www.kovax.ru/placemat.html) Это <strong>мощный инструмент</strong> для создания атмосферы, повышения комфорта и даже экономии.<br><br>**Давайте разберем, какие реальные выго...</div>
+      <div class="engagement">
+        <span class="badge views">👁 4,879</span>
+        
+        <span class='badge react'>ReactionPaid()2 👍37 👏19 🤔11</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/Hoteliernews/11489" target="_blank">Читать в Telegram →</a></div>
+    </div>
+    <div class="card top-post">
+      <div class="post-header">
+        <span class="channel-name">Новости отельеров | WRKHotel</span>
+        <span class="category-tag">Независимые отраслевые каналы</span>
+      </div>
+      <div class="card-body"><strong>Конституционный суд РФ разрешил регистрацию граждан по месту пребывания в апартаментах, являющихся нежилым помещением, в порядке, установленном для аналогичной регистрации в квартирах</strong><br><br>Об этом сообщает Российское агентство правовой и судебной информации - [ссылка.](https://www.rapsinews.ru/judicial_analyst/20260203/311563162.html?utm_source=yxnews&utm_medium=desktop&utm_referrer=https%3A%2F%2Fdzen.ru%2Fnews%2Fsearch)<br><br>До сих пор сделать это было крайне затруднительно, и только если застройщи...</div>
+      <div class="engagement">
+        <span class="badge views">👁 4,504</span>
+        <span class='badge fwd'>↗ 54</span>
+        <span class='badge react'>👍13 👏5 ❤2</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5150" target="_blank">Читать в Telegram →</a></div>
+    </div>
+
+  <div class="section-title">🗣 Обсуждения в чатах</div>
+  
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">TravelLine</span>
+        <span class="chat-source">в TL: Беседка</span>
+      </div>
+      <div class="chat-text">Мемы дня от TravelLine 🙂<br><br>#яработаювотеле #travelline <br>#мемы</div>
+      <div class="chat-meta">
+        <span>💬 4 ответов</span>
+        <span>😁57 🔥27 ❤14 👍2</span>
+        <a href="https://t.me/-1001264671967/101597" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Ivan Ivkin</span>
+        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
+      </div>
+      <div class="chat-text">Коллеги, кто планирует настраивать продвижение в Яндекс.Бизнес будьте осторожны.<br><br>Яндекс тестирует новый тип кампаний. При создании в ЯБ в разделе Продвижение новой кампании у ряда клиентов (по усмотрению Яндекса) создаётся не кампания Яндекс.Бизнеса (как обычно ), а кампания из Яндекс.Директа. У нее там логотип директа и ее видно в ЛК директа.<br><br>В этой кампании есть настройка кнопки Забронировать ...</div>
+      <div class="chat-meta">
+        <span>💬 2 ответов</span>
+        <span>😨19 🤯10 👍2 🙏2</span>
+        <a href="https://t.me/chat_hotel/137979" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Яна Ю 🤓</span>
+        <span class="chat-source">в TL: Беседка</span>
+      </div>
+      <div class="chat-text">А мальчиков администраторов сложно найти , а если приходят - научить программе сложно , бывают студенты , но товарищи не надежные , то любовь , то лето ….</div>
+      <div class="chat-meta">
+        <span>💬 11 ответов</span>
+        <span>😁6 💯5 👍1</span>
+        <a href="https://t.me/-1001264671967/101575" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Новости отельеров | WRKHotel</span>
+        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
+      </div>
+      <div class="chat-text"><strong>Конституционный суд РФ разрешил регистрацию граждан по месту пребывания в апартаментах, являющихся нежилым помещением, в порядке, установленном для аналогичной регистрации в квартирах</strong><br><br>Об этом сообщает Российское агентство правовой и судебной информации - [ссылка.](https://www.rapsinews.ru/judicial_analyst/20260203/311563162.html?utm_source=yxnews&utm_medium=desktop&utm_referrer=https%3A%2F%2F...</div>
+      <div class="chat-meta">
+        <span>💬 1 ответов</span>
+        <span>👍13 👏5 ❤2</span>
+        <a href="https://t.me/chat_hotel/137944" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="chat-msg">
+      <div class="chat-header">
+        <span class="chat-sender">Darija</span>
+        <span class="chat-source">в TL: Беседка</span>
+      </div>
+      <div class="chat-text">Коллеги, добрый день! <br><br>Подскажите пожалуйста, может кто-то располагает информацией) <br>Если отключить Яндекс, через кого из агрегаторов они впоследствии могут отправлять брони в отель?</div>
+      <div class="chat-meta">
+        <span>💬 10 ответов</span>
+        
+        <a href="https://t.me/-1001264671967/101571" target="_blank">Открыть →</a>
+      </div>
+    </div>
+
+</div>
+
+<div class="footer">
+  Дневной отчёт CPO News · <a href="index.html">Недельный обзор →</a>
+</div>
+
+</body>
+</html>
