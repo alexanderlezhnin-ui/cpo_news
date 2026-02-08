@@ -132,6 +132,95 @@ def escape_html(text):
     return text
 
 
+def classify_message(msg):
+    """
+    Classify message by relevance and sentiment for TravelLine CPO.
+
+    Returns:
+        dict with keys:
+        - relevance: 'high' | 'medium' | 'low' | 'irrelevant'
+        - sentiment: 'negative' | 'neutral' | 'positive'
+        - category: 'complaint' | 'competitor_mention' | 'tl_mention' | 'market_signal' | 'other'
+        - tl_related: bool
+        - competitors_mentioned: list[str]
+    """
+    text = msg.get('text', '').lower()
+    result = {
+        'relevance': 'low',
+        'sentiment': 'neutral',
+        'category': 'other',
+        'tl_related': False,
+        'competitors_mentioned': []
+    }
+
+    # TravelLine mentions (high priority)
+    tl_keywords = ['travelline', 'тревеллайн', 'тревелайн', 'tl ', ' tl']
+    for kw in tl_keywords:
+        if kw in text:
+            result['tl_related'] = True
+            result['relevance'] = 'high'
+            result['category'] = 'tl_mention'
+            break
+
+    # Competitor mentions
+    competitors = {
+        'bnovo': ['bnovo', 'бново', 'би-ново'],
+        'hotellab': ['hotellab', 'хотеллаб'],
+        'контур': ['контур.отель', 'контур отель', 'otelkontur'],
+        'островок': ['островок', 'ostrovok'],
+        'яндекс': ['яндекс путешеств', 'yandex travel', 'яндекс.путешеств'],
+        'bronevik': ['bronevik', 'броневик'],
+        'авито': ['авито', 'avito']
+    }
+
+    for comp, keywords in competitors.items():
+        for kw in keywords:
+            if kw in text:
+                result['competitors_mentioned'].append(comp)
+                if result['relevance'] != 'high':
+                    result['relevance'] = 'medium'
+                break
+
+    # Negative sentiment (complaints, problems)
+    negative_keywords = ['проблем', 'не работает', 'баг', 'ошибк', 'жалоб', 'ужас',
+                        'кошмар', 'отключ', 'помогите', 'срочно', 'не могу', 'сломал']
+    for kw in negative_keywords:
+        if kw in text:
+            result['sentiment'] = 'negative'
+            if result['tl_related']:
+                result['category'] = 'complaint'
+                result['relevance'] = 'high'
+            break
+
+    # Positive sentiment
+    positive_keywords = ['спасибо', 'отлично', 'супер', 'рекомендую', 'лучший',
+                        'молодцы', 'круто', 'нравится', 'доволен', 'помогли']
+    for kw in positive_keywords:
+        if kw in text:
+            result['sentiment'] = 'positive'
+            break
+
+    # Market signals (regulatory, trends)
+    market_keywords = ['ндс', 'налог', 'закон', 'регулир', 'госагрегатор',
+                      'минцифры', 'ростуризм', 'тренд', 'рынок']
+    for kw in market_keywords:
+        if kw in text:
+            if result['relevance'] == 'low':
+                result['relevance'] = 'medium'
+            result['category'] = 'market_signal'
+            break
+
+    # Filter out irrelevant (foreign topics, off-topic)
+    irrelevant_keywords = ['новая зеландия', 'new zealand', 'nz farms',
+                          'погода в', 'курс доллар', 'футбол', 'хоккей']
+    for kw in irrelevant_keywords:
+        if kw in text:
+            result['relevance'] = 'irrelevant'
+            break
+
+    return result
+
+
 def get_chat_discussions(messages, n=5):
     """Get interesting chat discussions with context."""
     chat_msgs = [m for m in messages if 'чат' in m.get('category_label', '').lower()]
