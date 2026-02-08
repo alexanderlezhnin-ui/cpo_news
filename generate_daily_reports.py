@@ -221,6 +221,57 @@ def classify_message(msg):
     return result
 
 
+def get_day_delta(data, current_date, prev_date):
+    """
+    Calculate activity delta between two days.
+
+    Returns:
+        dict with keys:
+        - total_today: int
+        - total_yesterday: int
+        - total_delta: int (difference in message count)
+        - total_delta_pct: float (percentage change)
+        - tl_mentions_today: int
+        - tl_mentions_yesterday: int
+        - trend: 'up' | 'down' | 'stable'
+        - label: str (e.g., "ТИХИЙ ДЕНЬ", "АКТИВНЫЙ ДЕНЬ", "ОБЫЧНЫЙ ДЕНЬ")
+    """
+    current_msgs = filter_by_date(data, current_date)
+    prev_msgs = filter_by_date(data, prev_date) if prev_date else []
+
+    current_count = len(current_msgs)
+    prev_count = len(prev_msgs) if prev_msgs else current_count
+
+    delta = current_count - prev_count
+    delta_pct = ((current_count - prev_count) / prev_count * 100) if prev_count > 0 else 0
+
+    # Count TL mentions
+    tl_today = sum(1 for m in current_msgs if classify_message(m)['tl_related'])
+    tl_yesterday = sum(1 for m in prev_msgs if classify_message(m)['tl_related'])
+
+    # Determine trend
+    if delta_pct < -50:
+        trend = 'down'
+        label = 'ТИХИЙ ДЕНЬ'
+    elif delta_pct > 50:
+        trend = 'up'
+        label = 'АКТИВНЫЙ ДЕНЬ'
+    else:
+        trend = 'stable'
+        label = 'ОБЫЧНЫЙ ДЕНЬ'
+
+    return {
+        'total_today': current_count,
+        'total_yesterday': prev_count,
+        'total_delta': delta,
+        'total_delta_pct': round(delta_pct),
+        'tl_mentions_today': tl_today,
+        'tl_mentions_yesterday': tl_yesterday,
+        'trend': trend,
+        'label': label
+    }
+
+
 def get_chat_discussions(messages, n=5):
     """Get interesting chat discussions with context."""
     chat_msgs = [m for m in messages if 'чат' in m.get('category_label', '').lower()]
