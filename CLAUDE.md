@@ -7,7 +7,7 @@ Collects messages from 21 Telegram channels/groups across 5 categories, analyzes
 **Live site**: https://cpo-news.vercel.app
 **GitHub**: https://github.com/ilasuvorov/cpo_news
 
-## Current state (as of 2026-02-07)
+## Current state (as of 2026-02-08)
 
 ### What works
 1. `collect_channels.py` — collects messages from 21 Telegram channels via Telethon
@@ -94,7 +94,12 @@ requirements.txt          — Python deps: telethon, python-dotenv
 - Weekly: 6 tabbed sections (Война комиссий, Конкуренты, Рынок, Голос TL, Голос клиента, Выводы)
 - Daily: 2 sections (Топ публикации, Обсуждения в чатах)
 - Components: timeline, competitor grid cards, data tables, quote blocks, engagement badges
-- All Telegram citations have clickable links: `https://t.me/{channel}/{msg_id}`
+- **UX principle: every data point must link to source** (for trust)
+  - Stats: `.source` class under stat cards
+  - Competitors: post titles are `<a>` links
+  - Quotes: author line includes link to message
+  - Insights: `.source-tag` at bottom
+- All Telegram citations: `https://t.me/{channel}/{msg_id}` or `t.me/c/{chat_id}/{msg_id}` for private groups
 - Mobile-responsive (CSS Grid, media queries @600px)
 
 ### Яндекс Метрика
@@ -130,6 +135,16 @@ requirements.txt          — Python deps: telethon, python-dotenv
 - 6 daily reports (02-07 Feb 2026)
 - Navigation between days and weekly report
 - Auto-generated from data (top posts by engagement)
+
+### ✅ DONE: UX — Source attribution for data trust (2026-02-08)
+**Problem**: Data without sources = low trust. Users couldn't verify claims.
+**Solution**: Every data point now links to its Telegram source.
+- Stats bar: clickable sources under key metrics (7 chains, +55%)
+- Competitors: each post title is a clickable link to Telegram
+- Quotes: all citations link to original messages
+- Opportunities/Threats: source tags at bottom of each card
+- Recommendations: inline links to relevant sources
+- Private group links use `t.me/c/1264671967/...` format (works for members only)
 
 ### NEXT: Automated pipeline
 **Goal**: Run collection + analysis + HTML generation without human intervention.
