@@ -146,6 +146,50 @@ requirements.txt          — Python deps: telethon, python-dotenv
 - Recommendations: inline links to relevant sources
 - Private group links use `t.me/c/1264671967/...` format (works for members only)
 
+### ✅ DONE: UX — Telegram theme + hash navigation (2026-02-08)
+- Color palette updated to Telegram dark theme (#17212b, #232e3c, #64b5f6)
+- Hash navigation: can share links like `#competitors`, `#conclusions`
+- Browser back/forward works
+- Relative time added to timeline ("3 дн. назад", "вчера")
+
+### 🔴 NEXT: Fix Daily Report (current score: 45/100)
+
+**CPO verdict**: Daily report is raw data dump, not a product for CPO.
+
+| Problem | Impact |
+|---------|--------|
+| No actionable insights | News without "so what?" — НДС в Крыму это возможность или нет? |
+| No relevance filter | Top post about NZ farms — zero relevance to TravelLine |
+| Duplication | Same post shown in "Publications" AND "Chats" |
+| Not TL-centric | Where are TL mentions? Customer complaints? Competitor signals about us? |
+| No sentiment | 79 messages — positive day or negative? |
+| No delta | "79 messages" — is that a lot? Yesterday was 400? |
+
+**What CPO wants to see:**
+```
+📊 7 февраля — ТИХИЙ ДЕНЬ (−80% активности)
+
+🔴 ТРЕБУЕТ ВНИМАНИЯ:
+   • Жалоба на sales в Беседке (Эдуард Габаидзе) — 0 ответов
+
+🟡 МОНИТОРИТЬ:
+   • Тарбаев про госагрегатор → рынок смеётся (🤡45)
+   • НДС 0% в Крыму → возможность для маркетинга?
+
+🟢 ПОЗИТИВ:
+   • (пусто)
+
+📈 TravelLine упоминаний: 3 (↓ vs вчера 12)
+```
+
+**To fix:**
+1. Add TL-centric filtering (mentions of travelline, competitors, complaints)
+2. Add sentiment classification (🔴/🟡/🟢)
+3. Add delta vs previous day
+4. Remove irrelevant posts (farms in NZ)
+5. Deduplicate cross-posted content
+6. Add "So what?" interpretation layer
+
 ### NEXT: Automated pipeline
 **Goal**: Run collection + analysis + HTML generation without human intervention.
 - Pipeline: `collect_channels.py` → filter (Haiku) → analyze + cluster topics (Sonnet) → generate HTML (Sonnet)
