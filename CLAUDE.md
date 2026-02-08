@@ -170,6 +170,14 @@ New report format:
 - Each card has: text, sender, channel, reactions, **source link**
 - Stats: TL mentions, competitor breakdown, source attribution
 
+### ✅ DONE: Design sync — Daily ↔ Weekly (2026-02-08)
+Unified Telegram Dark Theme across all reports:
+- Colors: `#17212b` bg, `#232e3c` surface, `#64b5f6` accent
+- Gradient header: `#1e3a5f → #2b3a4a`
+- Border-radius: 10px (was 12px in daily)
+- Card styles: padding 18px, hover border, same fonts
+- All 6 daily reports regenerated with new theme
+
 ### NEXT: Automated pipeline
 **Goal**: Run collection + analysis + HTML generation without human intervention.
 - Pipeline: `collect_channels.py` → filter (Haiku) → analyze + cluster topics (Sonnet) → generate HTML (Sonnet)
