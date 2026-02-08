@@ -272,6 +272,66 @@ def get_day_delta(data, current_date, prev_date):
     }
 
 
+def group_by_priority(messages):
+    """
+    Group messages into priority buckets for CPO.
+
+    Returns:
+        dict with keys:
+        - red: list[msg] — ТРЕБУЕТ ВНИМАНИЯ (complaints about TL, urgent issues)
+        - yellow: list[msg] — МОНИТОРИТЬ (competitor signals, market news)
+        - green: list[msg] — ПОЗИТИВ (positive mentions, wins)
+        - stats: dict with counts and competitor breakdown
+    """
+    red = []
+    yellow = []
+    green = []
+
+    competitor_counts = {}
+    tl_mentions = 0
+
+    for msg in messages:
+        cls = classify_message(msg)
+
+        # Skip irrelevant
+        if cls['relevance'] == 'irrelevant':
+            continue
+
+        # Track stats
+        if cls['tl_related']:
+            tl_mentions += 1
+        for comp in cls['competitors_mentioned']:
+            competitor_counts[comp] = competitor_counts.get(comp, 0) + 1
+
+        # Assign to bucket
+        if cls['tl_related'] and cls['sentiment'] == 'negative':
+            # RED: TL complaint or problem
+            red.append({**msg, '_classification': cls})
+        elif cls['sentiment'] == 'positive' and cls['tl_related']:
+            # GREEN: Positive TL mention
+            green.append({**msg, '_classification': cls})
+        elif cls['relevance'] in ['high', 'medium']:
+            # YELLOW: Monitor (competitors, market signals)
+            yellow.append({**msg, '_classification': cls})
+
+    # Sort by engagement within each bucket
+    red.sort(key=lambda m: get_engagement_score(m), reverse=True)
+    yellow.sort(key=lambda m: get_engagement_score(m), reverse=True)
+    green.sort(key=lambda m: get_engagement_score(m), reverse=True)
+
+    # Limit to top items per bucket
+    return {
+        'red': red[:5],
+        'yellow': yellow[:7],
+        'green': green[:3],
+        'stats': {
+            'tl_mentions': tl_mentions,
+            'competitors': competitor_counts,
+            'total_analyzed': len(messages)
+        }
+    }
+
+
 def get_chat_discussions(messages, n=5):
     """Get interesting chat discussions with context."""
     chat_msgs = [m for m in messages if 'чат' in m.get('category_label', '').lower()]
