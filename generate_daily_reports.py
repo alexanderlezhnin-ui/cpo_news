@@ -332,6 +332,42 @@ def group_by_priority(messages):
     }
 
 
+def deduplicate_messages(messages):
+    """
+    Remove duplicate/cross-posted messages.
+    Uses text similarity to detect reposts.
+    """
+    seen_texts = {}
+    unique = []
+
+    for msg in messages:
+        text = msg.get('text', '')[:200].lower().strip()  # First 200 chars
+
+        # Skip if too similar to already seen
+        is_duplicate = False
+        for seen_text in list(seen_texts.keys()):
+            # Simple similarity: check if 80% of words match
+            words1 = set(text.split())
+            words2 = set(seen_text.split())
+            if len(words1) > 3 and len(words2) > 3:
+                overlap = len(words1 & words2) / max(len(words1), len(words2))
+                if overlap > 0.8:
+                    is_duplicate = True
+                    # Keep the one with more engagement
+                    if get_engagement_score(msg) > seen_texts[seen_text]['score']:
+                        unique.remove(seen_texts[seen_text]['msg'])
+                        unique.append(msg)
+                        del seen_texts[seen_text]
+                        seen_texts[text] = {'msg': msg, 'score': get_engagement_score(msg)}
+                    break
+
+        if not is_duplicate:
+            unique.append(msg)
+            seen_texts[text] = {'msg': msg, 'score': get_engagement_score(msg)}
+
+    return unique
+
+
 def get_chat_discussions(messages, n=5):
     """Get interesting chat discussions with context."""
     chat_msgs = [m for m in messages if 'чат' in m.get('category_label', '').lower()]
