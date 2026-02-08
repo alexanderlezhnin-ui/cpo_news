@@ -152,43 +152,23 @@ requirements.txt          — Python deps: telethon, python-dotenv
 - Browser back/forward works
 - Relative time added to timeline ("3 дн. назад", "вчера")
 
-### 🔴 NEXT: Fix Daily Report (current score: 45/100)
+### ✅ DONE: Fix Daily Report (2026-02-08)
+**Problem**: Daily report was raw data dump (score 45/100).
+**Solution**: TL-centric priority-based reports with sources.
 
-**CPO verdict**: Daily report is raw data dump, not a product for CPO.
+Implemented in `generate_daily_reports.py`:
+- `classify_message()` — TL mentions, competitors, sentiment
+- `get_day_delta()` — activity delta vs yesterday ("ТИХИЙ ДЕНЬ −81%")
+- `group_by_priority()` — 🔴/🟡/🟢 priority buckets
+- `deduplicate_messages()` — removes cross-posts
+- `get_source_link()` — every signal links to Telegram source
+- `generate_signal_html()` — new card format with "Открыть →" button
 
-| Problem | Impact |
-|---------|--------|
-| No actionable insights | News without "so what?" — НДС в Крыму это возможность или нет? |
-| No relevance filter | Top post about NZ farms — zero relevance to TravelLine |
-| Duplication | Same post shown in "Publications" AND "Chats" |
-| Not TL-centric | Where are TL mentions? Customer complaints? Competitor signals about us? |
-| No sentiment | 79 messages — positive day or negative? |
-| No delta | "79 messages" — is that a lot? Yesterday was 400? |
-
-**What CPO wants to see:**
-```
-📊 7 февраля — ТИХИЙ ДЕНЬ (−80% активности)
-
-🔴 ТРЕБУЕТ ВНИМАНИЯ:
-   • Жалоба на sales в Беседке (Эдуард Габаидзе) — 0 ответов
-
-🟡 МОНИТОРИТЬ:
-   • Тарбаев про госагрегатор → рынок смеётся (🤡45)
-   • НДС 0% в Крыму → возможность для маркетинга?
-
-🟢 ПОЗИТИВ:
-   • (пусто)
-
-📈 TravelLine упоминаний: 3 (↓ vs вчера 12)
-```
-
-**To fix:**
-1. Add TL-centric filtering (mentions of travelline, competitors, complaints)
-2. Add sentiment classification (🔴/🟡/🟢)
-3. Add delta vs previous day
-4. Remove irrelevant posts (farms in NZ)
-5. Deduplicate cross-posted content
-6. Add "So what?" interpretation layer
+New report format:
+- Header: "📊 7 февраля — ТИХИЙ ДЕНЬ (−81%)"
+- Priority sections: 🔴 ТРЕБУЕТ ВНИМАНИЯ, 🟡 МОНИТОРИТЬ, 🟢 ПОЗИТИВ
+- Each card has: text, sender, channel, reactions, **source link**
+- Stats: TL mentions, competitor breakdown, source attribution
 
 ### NEXT: Automated pipeline
 **Goal**: Run collection + analysis + HTML generation without human intervention.
