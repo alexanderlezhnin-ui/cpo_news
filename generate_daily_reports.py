@@ -368,6 +368,49 @@ def deduplicate_messages(messages):
     return unique
 
 
+def get_source_link(msg):
+    """Generate Telegram link for a message."""
+    channel = msg.get('channel', '')
+    msg_id = msg.get('id', '')
+
+    if not channel or not msg_id:
+        return '#'
+
+    if str(channel).startswith('-100'):
+        chat_id = str(channel)[4:]
+        return f"https://t.me/c/{chat_id}/{msg_id}"
+    else:
+        return f"https://t.me/{channel}/{msg_id}"
+
+
+def generate_signal_html(msg, priority):
+    """Generate HTML for a single signal card."""
+    text = msg.get('text', '')[:150]
+    if len(msg.get('text', '')) > 150:
+        text += '...'
+    text = escape_html(text)
+
+    channel = msg.get('channel', '')
+    channel_name = msg.get('channel_name', channel)
+    link = get_source_link(msg)
+    sender = msg.get('sender', '')
+    reactions = format_reactions(msg.get('reactions', []))
+
+    return f'''
+    <div class="signal-card {priority}">
+      <div class="signal-content">
+        <div class="signal-title">{text}</div>
+        <div class="signal-meta">
+          {sender} в {channel_name}
+          {' · ' + reactions if reactions else ''}
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="{link}" target="_blank">Открыть →</a>
+      </div>
+    </div>'''
+
+
 def get_chat_discussions(messages, n=5):
     """Get interesting chat discussions with context."""
     chat_msgs = [m for m in messages if 'чат' in m.get('category_label', '').lower()]
@@ -407,14 +450,24 @@ def get_chat_discussions(messages, n=5):
     return [msg for msg, score in interesting[:n]]
 
 
-def generate_html(date_str, messages):
+def generate_html(date_str, messages, data):
     """Generate HTML report for a day."""
+
+    # Deduplicate messages
+    messages = deduplicate_messages(messages)
+
+    # Get previous date for delta
+    idx = DATES.index(date_str)
+    prev_date = DATES[idx-1] if idx > 0 else None
+
+    # Calculate delta
+    delta = get_day_delta(data, date_str, prev_date)
+
+    # Group by priority
+    priority_groups = group_by_priority(messages)
 
     date_ru = format_date_ru(date_str)
     prev_link, next_link = get_nav_links(date_str)
-    top_posts = get_top_posts_diverse(messages, n=3)
-    by_category = group_by_category(messages)
-    chat_discussions = get_chat_discussions(messages, n=5)
 
     # Navigation HTML
     nav_html = '<div class="day-nav">'
@@ -429,92 +482,71 @@ def generate_html(date_str, messages):
         nav_html += '<span class="nav-link disabled">Следующий день →</span>'
     nav_html += '</div>'
 
-    # Top posts HTML - expanded content
-    top_posts_html = ""
-    for msg in top_posts:
-        full_text = msg.get('text', '')
-        # Show up to 500 chars for better context
-        text = full_text[:500]
-        if len(full_text) > 500:
-            text += "..."
-        text = escape_html(text)
+    # Build day summary header
+    delta_sign = '+' if delta['total_delta'] >= 0 else ''
+    delta_class = delta['trend']
+    tl_arrow = '↓' if delta['tl_mentions_today'] < delta['tl_mentions_yesterday'] else '↑'
 
-        views = msg.get('views', 0) or 0
-        forwards = msg.get('forwards', 0) or 0
-        reactions_str = format_reactions(msg.get('reactions', []))
+    header_html = f'''
+  <div class="day-summary">
+    <h1>📊 {date_ru}
+      <span class="day-label {delta_class}">{delta['label']} ({delta_sign}{delta['total_delta_pct']}%)</span>
+    </h1>
+    <div class="day-stats">
+      <span>💬 {delta['total_today']} сообщений (вчера: {delta['total_yesterday']})</span>
+      <span>📍 TravelLine: {delta['tl_mentions_today']} {tl_arrow} vs {delta['tl_mentions_yesterday']}</span>
+    </div>
+  </div>'''
 
-        channel = msg.get('channel', '')
-        channel_name = msg.get('channel_name', channel)
-        msg_id = msg.get('id', '')
-        link = f"https://t.me/{channel}/{msg_id}" if channel and msg_id else "#"
+    # Generate priority sections
+    priority_sections = ''
 
-        # Category tag
-        category = msg.get('category_label', '')
+    if priority_groups['red']:
+        priority_sections += f'''
+  <div class="priority-section">
+    <div class="priority-header red">
+      🔴 ТРЕБУЕТ ВНИМАНИЯ <span class="priority-count">{len(priority_groups['red'])}</span>
+    </div>
+    {''.join(generate_signal_html(m, 'red') for m in priority_groups['red'])}
+  </div>'''
 
-        top_posts_html += f'''
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">{channel_name}</span>
-        <span class="category-tag">{category}</span>
-      </div>
-      <div class="card-body">{text}</div>
-      <div class="engagement">
-        <span class="badge views">👁 {views:,}</span>
-        {"<span class='badge fwd'>↗ " + str(forwards) + "</span>" if forwards else ""}
-        {"<span class='badge react'>" + reactions_str + "</span>" if reactions_str else ""}
-      </div>
-      <div class="source-tag"><a href="{link}" target="_blank">Читать в Telegram →</a></div>
-    </div>'''
+    if priority_groups['yellow']:
+        priority_sections += f'''
+  <div class="priority-section">
+    <div class="priority-header yellow">
+      🟡 МОНИТОРИТЬ <span class="priority-count">{len(priority_groups['yellow'])}</span>
+    </div>
+    {''.join(generate_signal_html(m, 'yellow') for m in priority_groups['yellow'])}
+  </div>'''
 
-    # Category summary HTML
-    category_html = ""
-    for cat_label, cat_messages in sorted(by_category.items()):
-        if 'чат' in cat_label.lower():
-            continue
-        count = len(cat_messages)
-        category_html += f'''
-    <div class="stat-card">
-      <div class="number">{count}</div>
-      <div class="label">{cat_label}</div>
-    </div>'''
+    if priority_groups['green']:
+        priority_sections += f'''
+  <div class="priority-section">
+    <div class="priority-header green">
+      🟢 ПОЗИТИВ <span class="priority-count">{len(priority_groups['green'])}</span>
+    </div>
+    {''.join(generate_signal_html(m, 'green') for m in priority_groups['green'])}
+  </div>'''
 
-    # Chat discussions HTML - expanded with context
-    chats_html = ""
-    if chat_discussions:
-        for msg in chat_discussions:
-            full_text = msg.get('text', '')
-            # Show up to 400 chars
-            text = full_text[:400]
-            if len(full_text) > 400:
-                text += "..."
-            text = escape_html(text)
+    # If no priority signals, show a note
+    if not priority_sections:
+        priority_sections = '<p style="color:var(--text2)">Нет значимых сигналов за этот день</p>'
 
-            sender = msg.get('sender', 'Аноним')
-            channel = msg.get('channel', '')
-            channel_name = msg.get('channel_name', channel)
-            msg_id = msg.get('id', '')
-            link = f"https://t.me/{channel}/{msg_id}" if channel and msg_id else "#"
+    # Stats section with competitor mentions
+    comp_stats = ''.join(
+        f'<span>{comp}: {count}</span>'
+        for comp, count in sorted(priority_groups['stats']['competitors'].items(), key=lambda x: -x[1])[:4]
+    )
 
-            reactions_str = format_reactions(msg.get('reactions', []))
-            replies = msg.get('replies_count', 0) or 0
-
-            chats_html += f'''
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">{sender}</span>
-        <span class="chat-source">в {channel_name}</span>
-      </div>
-      <div class="chat-text">{text}</div>
-      <div class="chat-meta">
-        {"<span>💬 " + str(replies) + " ответов</span>" if replies else ""}
-        {"<span>" + reactions_str + "</span>" if reactions_str else ""}
-        <a href="{link}" target="_blank">Открыть →</a>
-      </div>
-    </div>'''
-
-    # Count channels and chats separately
-    channel_count = len(set(m['channel'] for m in messages if 'чат' not in m.get('category_label', '').lower()))
-    chat_count = len([m for m in messages if 'чат' in m.get('category_label', '').lower()])
+    stats_html = f'''
+  <div class="section-title">📈 Статистика</div>
+  <div class="day-stats" style="margin-bottom:20px">
+    <span>TL упоминаний: {priority_groups['stats']['tl_mentions']}</span>
+    {comp_stats}
+  </div>
+  <div style="font-size:12px;color:var(--text2)">
+    Источник: анализ {priority_groups['stats']['total_analyzed']} сообщений из 21 канала
+  </div>'''
 
     html = f'''<!DOCTYPE html>
 <html lang="ru">
@@ -567,16 +599,6 @@ def generate_html(date_str, messages):
   }}
   .container {{ max-width: 900px; margin: 0 auto; padding: 16px; }}
 
-  .header {{
-    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-  }}
-  .header h1 {{ font-size: 22px; font-weight: 700; margin-bottom: 8px; }}
-  .header .meta {{ color: var(--text2); font-size: 14px; }}
-
   .day-nav {{
     display: flex;
     justify-content: space-between;
@@ -598,22 +620,6 @@ def generate_html(date_str, messages):
   .nav-link.disabled {{ opacity: 0.4; cursor: default; }}
   .nav-link.disabled:hover {{ background: var(--surface); color: var(--text2); }}
 
-  .stats-bar {{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-  }}
-  .stat-card {{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    text-align: center;
-  }}
-  .stat-card .number {{ font-size: 28px; font-weight: 800; color: var(--accent); }}
-  .stat-card .label {{ font-size: 12px; color: var(--text2); margin-top: 2px; }}
-
   .section-title {{
     font-size: 18px;
     font-weight: 700;
@@ -623,118 +629,85 @@ def generate_html(date_str, messages):
     gap: 8px;
   }}
 
-  /* Top posts */
-  .card.top-post {{
+  /* Priority sections */
+  .priority-section {{ margin-bottom: 24px; }}
+  .priority-header {{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }}
+  .priority-header.red {{ color: var(--red); }}
+  .priority-header.yellow {{ color: var(--orange); }}
+  .priority-header.green {{ color: var(--green); }}
+  .priority-count {{
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+  }}
+
+  /* Signal card */
+  .signal-card {{
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }}
-  .card.top-post:hover {{ border-color: var(--accent); }}
-
-  .post-header {{
+    padding: 16px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    gap: 12px;
   }}
-  .channel-name {{
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-  }}
-  .category-tag {{
-    font-size: 11px;
-    background: rgba(108,140,255,.15);
+  .signal-card.red {{ border-left: 3px solid var(--red); }}
+  .signal-card.yellow {{ border-left: 3px solid var(--orange); }}
+  .signal-card.green {{ border-left: 3px solid var(--green); }}
+  .signal-content {{ flex: 1; }}
+  .signal-title {{ font-weight: 600; margin-bottom: 6px; }}
+  .signal-meta {{ font-size: 12px; color: var(--text2); }}
+  .signal-source {{ flex-shrink: 0; }}
+  .signal-source a {{
     color: var(--accent);
-    padding: 3px 10px;
-    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    transition: all 0.2s;
   }}
+  .signal-source a:hover {{ background: var(--accent); color: #fff; }}
 
-  .card-body {{
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.7;
+  /* Day summary header */
+  .day-summary {{
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
   }}
-  .card-body strong {{
-    color: var(--text);
+  .day-summary h1 {{ font-size: 20px; margin-bottom: 8px; }}
+  .day-label {{
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 8px;
   }}
-
-  .engagement {{
+  .day-label.down {{ background: rgba(255,107,107,0.2); color: var(--red); }}
+  .day-label.up {{ background: rgba(81,207,102,0.2); color: var(--green); }}
+  .day-label.stable {{ background: rgba(108,140,255,0.2); color: var(--accent); }}
+  .day-stats {{
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }}
-  .badge {{
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    background: var(--surface2);
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    color: var(--text2);
-  }}
-  .badge.views {{ color: var(--accent); }}
-  .badge.fwd {{ color: var(--orange); }}
-  .badge.react {{ color: var(--yellow); }}
-
-  .source-tag {{
-    display: inline-block;
-    font-size: 12px;
+    gap: 16px;
     margin-top: 12px;
-  }}
-  .source-tag a {{
-    color: var(--accent);
-    text-decoration: none;
-  }}
-  .source-tag a:hover {{
-    text-decoration: underline;
-  }}
-
-  /* Chat messages */
-  .chat-msg {{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }}
-  .chat-msg:hover {{
-    border-color: var(--accent2);
-  }}
-  .chat-header {{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-  }}
-  .chat-sender {{
-    font-weight: 600;
-    color: var(--accent2);
-  }}
-  .chat-source {{
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text2);
   }}
-  .chat-text {{
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 10px;
-  }}
-  .chat-meta {{
-    display: flex;
-    gap: 12px;
-    font-size: 12px;
-    color: var(--text2);
-  }}
-  .chat-meta a {{
-    color: var(--accent);
-    text-decoration: none;
-  }}
+  .day-stats span {{ display: flex; align-items: center; gap: 4px; }}
 
   .footer {{
     text-align: center;
@@ -749,37 +722,23 @@ def generate_html(date_str, messages):
 
   @media (max-width: 600px) {{
     .container {{ padding: 10px; }}
-    .header {{ padding: 20px 16px; }}
+    .day-summary {{ padding: 16px; }}
     .day-nav {{ flex-wrap: wrap; justify-content: center; }}
-    .stats-bar {{ grid-template-columns: repeat(2, 1fr); }}
-    .post-header {{ flex-direction: column; align-items: flex-start; gap: 6px; }}
+    .signal-card {{ flex-direction: column; }}
+    .signal-source {{ align-self: flex-start; }}
   }}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <h1>📅 {date_ru}</h1>
-    <div class="meta">💬 {len(messages)} сообщений · {channel_count} каналов · {chat_count} в чатах</div>
-  </div>
+  {header_html}
 
   {nav_html}
 
-  <div class="stats-bar">
-    <div class="stat-card">
-      <div class="number">{len(messages)}</div>
-      <div class="label">сообщений</div>
-    </div>
-    {category_html}
-  </div>
+  {priority_sections}
 
-  <div class="section-title">🔥 Главные публикации дня</div>
-  {top_posts_html if top_posts_html else '<p style="color:var(--text2)">Нет значимых публикаций за этот день</p>'}
-
-  <div class="section-title">🗣 Обсуждения в чатах</div>
-  {chats_html if chats_html else '<p style="color:var(--text2)">Нет интересных обсуждений за этот день</p>'}
-
+  {stats_html}
 </div>
 
 <div class="footer">
@@ -801,7 +760,7 @@ def main():
         messages = filter_by_date(data, date_str)
         print(f"  Found {len(messages)} messages")
 
-        html = generate_html(date_str, messages)
+        html = generate_html(date_str, messages, data)
         output_file = OUTPUT_DIR / f"{date_str}.html"
 
         with open(output_file, 'w', encoding='utf-8') as f:

@@ -49,16 +49,6 @@
   }
   .container { max-width: 900px; margin: 0 auto; padding: 16px; }
 
-  .header {
-    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-  }
-  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .header .meta { color: var(--text2); font-size: 14px; }
-
   .day-nav {
     display: flex;
     justify-content: space-between;
@@ -80,22 +70,6 @@
   .nav-link.disabled { opacity: 0.4; cursor: default; }
   .nav-link.disabled:hover { background: var(--surface); color: var(--text2); }
 
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    text-align: center;
-  }
-  .stat-card .number { font-size: 28px; font-weight: 800; color: var(--accent); }
-  .stat-card .label { font-size: 12px; color: var(--text2); margin-top: 2px; }
-
   .section-title {
     font-size: 18px;
     font-weight: 700;
@@ -105,118 +79,85 @@
     gap: 8px;
   }
 
-  /* Top posts */
-  .card.top-post {
+  /* Priority sections */
+  .priority-section { margin-bottom: 24px; }
+  .priority-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .priority-header.red { color: var(--red); }
+  .priority-header.yellow { color: var(--orange); }
+  .priority-header.green { color: var(--green); }
+  .priority-count {
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  /* Signal card */
+  .signal-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .card.top-post:hover { border-color: var(--accent); }
-
-  .post-header {
+    padding: 16px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .channel-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .category-tag {
-    font-size: 11px;
-    background: rgba(108,140,255,.15);
+  .signal-card.red { border-left: 3px solid var(--red); }
+  .signal-card.yellow { border-left: 3px solid var(--orange); }
+  .signal-card.green { border-left: 3px solid var(--green); }
+  .signal-content { flex: 1; }
+  .signal-title { font-weight: 600; margin-bottom: 6px; }
+  .signal-meta { font-size: 12px; color: var(--text2); }
+  .signal-source { flex-shrink: 0; }
+  .signal-source a {
     color: var(--accent);
-    padding: 3px 10px;
-    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    transition: all 0.2s;
   }
+  .signal-source a:hover { background: var(--accent); color: #fff; }
 
-  .card-body {
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.7;
+  /* Day summary header */
+  .day-summary {
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
   }
-  .card-body strong {
-    color: var(--text);
+  .day-summary h1 { font-size: 20px; margin-bottom: 8px; }
+  .day-label {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 8px;
   }
-
-  .engagement {
+  .day-label.down { background: rgba(255,107,107,0.2); color: var(--red); }
+  .day-label.up { background: rgba(81,207,102,0.2); color: var(--green); }
+  .day-label.stable { background: rgba(108,140,255,0.2); color: var(--accent); }
+  .day-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    background: var(--surface2);
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-  .badge.views { color: var(--accent); }
-  .badge.fwd { color: var(--orange); }
-  .badge.react { color: var(--yellow); }
-
-  .source-tag {
-    display: inline-block;
-    font-size: 12px;
+    gap: 16px;
     margin-top: 12px;
-  }
-  .source-tag a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .source-tag a:hover {
-    text-decoration: underline;
-  }
-
-  /* Chat messages */
-  .chat-msg {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }
-  .chat-msg:hover {
-    border-color: var(--accent2);
-  }
-  .chat-header {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .chat-sender {
-    font-weight: 600;
-    color: var(--accent2);
-  }
-  .chat-source {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text2);
   }
-  .chat-text {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 10px;
-  }
-  .chat-meta {
-    display: flex;
-    gap: 12px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-  .chat-meta a {
-    color: var(--accent);
-    text-decoration: none;
-  }
+  .day-stats span { display: flex; align-items: center; gap: 4px; }
 
   .footer {
     text-align: center;
@@ -231,152 +172,130 @@
 
   @media (max-width: 600px) {
     .container { padding: 10px; }
-    .header { padding: 20px 16px; }
+    .day-summary { padding: 16px; }
     .day-nav { flex-wrap: wrap; justify-content: center; }
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .post-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .signal-card { flex-direction: column; }
+    .signal-source { align-self: flex-start; }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <h1>📅 4 февраля 2026</h1>
-    <div class="meta">💬 262 сообщений · 13 каналов · 205 в чатах</div>
+  
+  <div class="day-summary">
+    <h1>📊 4 февраля 2026
+      <span class="day-label stable">ОБЫЧНЫЙ ДЕНЬ (+32%)</span>
+    </h1>
+    <div class="day-stats">
+      <span>💬 262 сообщений (вчера: 199)</span>
+      <span>📍 TravelLine: 5 ↓ vs 7</span>
+    </div>
   </div>
 
   <div class="day-nav"><a href="2026-02-03.html" class="nav-link">← Предыдущий день</a><a href="index.html" class="nav-link week">Вся неделя</a><a href="2026-02-05.html" class="nav-link">Следующий день →</a></div>
 
-  <div class="stats-bar">
-    <div class="stat-card">
-      <div class="number">262</div>
-      <div class="label">сообщений</div>
+  
+  <div class="priority-section">
+    <div class="priority-header yellow">
+      🟡 МОНИТОРИТЬ <span class="priority-count">7</span>
     </div>
     
-    <div class="stat-card">
-      <div class="number">2</div>
-      <div class="label">B2B SaaS конкуренты (за клиентов)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">Сегодня 4 февраля — <strong>до Дня Валентина ровно 10 дней</strong>. Вместе с [Hotel Advisors ](http://t.me/hotel_advisors)смотрим на загрузку отелей в самые роман...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7396" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">7</div>
-      <div class="label">OTA-конкуренты (за бронирования)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">И чтобы два раза не вставать и не делать вид, что это разные истории — сразу смотрим на аналитику [Hotel Advisors](http://t.me/hotel_advisors) дальше ...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7397" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">1</div>
-      <div class="label">TravelLine (свой канал — как нас видит рынок)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Турагенты активно обсуждают цены в отелях Анапы на лето 2026 года </strong>— и обсуждают именно цифры, а не абстрактное «дорого». Речь идёт о ранних тарифа...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7404" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">47</div>
-      <div class="label">Независимые отраслевые каналы</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Апарт-отель Sunrise Hill на Сахалине признан одним из лучших в России</strong><br><br>Апарт-отель Sunrise Hill, находящийся рядом с горнолыжным комплексом «Горны...</div>
+        <div class="signal-meta">
+          Новости отелей в Новости отелей
+           · ReactionPaid()1 👍25 👏20 🤩18
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/Hoteliernews/11499" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">👮‍♂️ <strong>Росакредитация и Роскачество начнут проводить «тайные закупки» услуг средств размещения для проверки соответствия звезд</strong><br><br>В пресс-службе Роска...</div>
+        <div class="signal-meta">
+          Светлана в TL: Беседка
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/c/1264671967/101655" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Минцифры внесло Контур.Отель в «белый список»</strong><br><br>Сервисы включенные в этот список будут работать при ограничениях связи мобильного интернета.<br><br>🏨 @wr...</div>
+        <div class="signal-meta">
+          Новости отельеров | WRKHotel в Новости отельеров | WRKHotel
+           · 👍44 🤔10 😁4 👎2
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/wrkhotel/5152" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>В феврале вырос спрос на бронирование отелей в Краснодарском крае</strong><br><br>Бронирования отелей по России оживились в начале февраля после январского затиш...</div>
+        <div class="signal-meta">
+          Новости отелей в Новости отелей
+           · 👍19 🤔16 👏12 🤩5
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/Hoteliernews/11505" target="_blank">Открыть →</a>
+      </div>
     </div>
   </div>
 
-  <div class="section-title">🔥 Главные публикации дня</div>
   
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Ночной портье</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body">Сегодня 4 февраля — <strong>до Дня Валентина ровно 10 дней</strong>. Вместе с [Hotel Advisors ](http://t.me/hotel_advisors)смотрим на загрузку отелей в самые романтические выходные года — 13–15 февраля — и картинка, скажем так, без ажиотажа.<br><br><strong>Москва на 14 февраля пока держится в районе 36%, Петербург — около 38%.</strong> Ни всплеска, ни дефицита: классический городской уикенд без паники и без очередей за последним номером. <strong>Московская область выглядит бодрее (57% в субботу)</strong> — короткий выезд за город у москвич...</div>
-      <div class="engagement">
-        <span class="badge views">👁 5,866</span>
-        <span class='badge fwd'>↗ 41</span>
-        
-      </div>
-      <div class="source-tag"><a href="https://t.me/portierdenuit/7396" target="_blank">Читать в Telegram →</a></div>
-    </div>
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Новости отелей</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body"><strong>Сразу три отеля курорта Miracleon в финале Russian Hospitality Awards 2025</strong><br><br>Курорт Miracleon вошёл в число финалистов одной из ключевых отраслевых премий - Russian Hospitality Awards. Отели курорта стали единственными финалистами из Анапы.<br><br>В [список](https://hospitalityawards.ru/about/news/finalistyi-russian-hospitality-awards-oteli-2025) вошли три объекта курорта:<br>• FЮNF Luxury Resort & SPA Anapa Miracleon 5* - «Лучший SPA-отель»<br>• Mövenpick Resort & SPA Anapa Miracleon 5* - «Лучший семейн...</div>
-      <div class="engagement">
-        <span class="badge views">👁 4,604</span>
-        <span class='badge fwd'>↗ 6</span>
-        <span class='badge react'>ReactionPaid()1 👍36 👏34 🔥32</span>
-      </div>
-      <div class="source-tag"><a href="https://t.me/Hoteliernews/11506" target="_blank">Читать в Telegram →</a></div>
-    </div>
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Новости отельеров | WRKHotel</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body"><strong>Пляжи Анапы нельзя открывать - </strong>заявила глава Роспотребнадзора <br>__<br>«__К сожалению, содержание нефтепродуктов в песке пляжей настолько высоко, что нельзя разрешить там отдых детей, а, напомню, что в Анапе отдыхает в летний период до 30% всех детей, которые отдыхают на морском побережье Российской Федерации. Поэтому делается очень много для того, чтобы очистить прекрасные белые пляжи в Анапе. Результат есть, но он недостаточен для того, чтобы в сегодняшнем дне открывать пляжи. Но время ещё есть...</div>
-      <div class="engagement">
-        <span class="badge views">👁 4,038</span>
-        <span class='badge fwd'>↗ 57</span>
-        <span class='badge react'>🤬33 👍10 🙏7 👏5</span>
-      </div>
-      <div class="source-tag"><a href="https://t.me/wrkhotel/5151" target="_blank">Читать в Telegram →</a></div>
-    </div>
-
-  <div class="section-title">🗣 Обсуждения в чатах</div>
-  
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Новости отельеров | WRKHotel</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text"><strong>Минцифры внесло Контур.Отель в «белый список»</strong><br><br>Сервисы включенные в этот список будут работать при ограничениях связи мобильного интернета.<br><br>🏨 @wrkhotel</div>
-      <div class="chat-meta">
-        <span>💬 1 ответов</span>
-        <span>👍44 🤔10 😁4 👎2</span>
-        <a href="https://t.me/chat_hotel/138014" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Новости отельеров | WRKHotel</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text"><strong>Пляжи Анапы нельзя открывать - </strong>заявила глава Роспотребнадзора <br>__<br>«__К сожалению, содержание нефтепродуктов в песке пляжей настолько высоко, что нельзя разрешить там отдых детей, а, напомню, что в Анапе отдыхает в летний период до 30% всех детей, которые отдыхают на морском побережье Российской Федерации. Поэтому делается очень много для того, чтобы очистить прекрасные белые пляжи в Анапе. Рез...</div>
-      <div class="chat-meta">
-        
-        <span>🤬33 👍10 🙏7 👏5</span>
-        <a href="https://t.me/chat_hotel/138012" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Kovalev Denis</span>
-        <span class="chat-source">в TL: Беседка</span>
-      </div>
-      <div class="chat-text">Коллеги, проверяйте экстранеты ОЗОНА, автоматически ставят новую модель работы (где комиссия = цена продажи гостю минус нетто (17%))</div>
-      <div class="chat-meta">
-        <span>💬 28 ответов</span>
-        <span>❤1</span>
-        <a href="https://t.me/-1001264671967/101667" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Red Kate</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text">И интересно, какую стоимость указывать в бух.учете...</div>
-      <div class="chat-meta">
-        <span>💬 19 ответов</span>
-        
-        <a href="https://t.me/chat_hotel/138018" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Kovalev Denis</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text">Коллеги, проверяйте экстранеты ОЗОНА, автоматически ставят новую модель работы (где комиссия = цена продажи гостю минус нетто (17%))</div>
-      <div class="chat-meta">
-        <span>💬 15 ответов</span>
-        <span>😐3</span>
-        <a href="https://t.me/chat_hotel/138006" target="_blank">Открыть →</a>
-      </div>
-    </div>
-
+  <div class="section-title">📈 Статистика</div>
+  <div class="day-stats" style="margin-bottom:20px">
+    <span>TL упоминаний: 4</span>
+    <span>островок: 8</span><span>bronevik: 6</span><span>авито: 2</span><span>контур: 1</span>
+  </div>
+  <div style="font-size:12px;color:var(--text2)">
+    Источник: анализ 256 сообщений из 21 канала
+  </div>
 </div>
 
 <div class="footer">

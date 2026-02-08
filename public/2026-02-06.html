@@ -49,16 +49,6 @@
   }
   .container { max-width: 900px; margin: 0 auto; padding: 16px; }
 
-  .header {
-    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border);
-  }
-  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .header .meta { color: var(--text2); font-size: 14px; }
-
   .day-nav {
     display: flex;
     justify-content: space-between;
@@ -80,22 +70,6 @@
   .nav-link.disabled { opacity: 0.4; cursor: default; }
   .nav-link.disabled:hover { background: var(--surface); color: var(--text2); }
 
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    text-align: center;
-  }
-  .stat-card .number { font-size: 28px; font-weight: 800; color: var(--accent); }
-  .stat-card .label { font-size: 12px; color: var(--text2); margin-top: 2px; }
-
   .section-title {
     font-size: 18px;
     font-weight: 700;
@@ -105,118 +79,85 @@
     gap: 8px;
   }
 
-  /* Top posts */
-  .card.top-post {
+  /* Priority sections */
+  .priority-section { margin-bottom: 24px; }
+  .priority-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .priority-header.red { color: var(--red); }
+  .priority-header.yellow { color: var(--orange); }
+  .priority-header.green { color: var(--green); }
+  .priority-count {
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  /* Signal card */
+  .signal-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .card.top-post:hover { border-color: var(--accent); }
-
-  .post-header {
+    padding: 16px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .channel-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-  }
-  .category-tag {
-    font-size: 11px;
-    background: rgba(108,140,255,.15);
+  .signal-card.red { border-left: 3px solid var(--red); }
+  .signal-card.yellow { border-left: 3px solid var(--orange); }
+  .signal-card.green { border-left: 3px solid var(--green); }
+  .signal-content { flex: 1; }
+  .signal-title { font-weight: 600; margin-bottom: 6px; }
+  .signal-meta { font-size: 12px; color: var(--text2); }
+  .signal-source { flex-shrink: 0; }
+  .signal-source a {
     color: var(--accent);
-    padding: 3px 10px;
-    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    transition: all 0.2s;
   }
+  .signal-source a:hover { background: var(--accent); color: #fff; }
 
-  .card-body {
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.7;
+  /* Day summary header */
+  .day-summary {
+    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
   }
-  .card-body strong {
-    color: var(--text);
+  .day-summary h1 { font-size: 20px; margin-bottom: 8px; }
+  .day-label {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 8px;
   }
-
-  .engagement {
+  .day-label.down { background: rgba(255,107,107,0.2); color: var(--red); }
+  .day-label.up { background: rgba(81,207,102,0.2); color: var(--green); }
+  .day-label.stable { background: rgba(108,140,255,0.2); color: var(--accent); }
+  .day-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    background: var(--surface2);
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-  .badge.views { color: var(--accent); }
-  .badge.fwd { color: var(--orange); }
-  .badge.react { color: var(--yellow); }
-
-  .source-tag {
-    display: inline-block;
-    font-size: 12px;
+    gap: 16px;
     margin-top: 12px;
-  }
-  .source-tag a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .source-tag a:hover {
-    text-decoration: underline;
-  }
-
-  /* Chat messages */
-  .chat-msg {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }
-  .chat-msg:hover {
-    border-color: var(--accent2);
-  }
-  .chat-header {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .chat-sender {
-    font-weight: 600;
-    color: var(--accent2);
-  }
-  .chat-source {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text2);
   }
-  .chat-text {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 10px;
-  }
-  .chat-meta {
-    display: flex;
-    gap: 12px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-  .chat-meta a {
-    color: var(--accent);
-    text-decoration: none;
-  }
+  .day-stats span { display: flex; align-items: center; gap: 4px; }
 
   .footer {
     text-align: center;
@@ -231,152 +172,130 @@
 
   @media (max-width: 600px) {
     .container { padding: 10px; }
-    .header { padding: 20px 16px; }
+    .day-summary { padding: 16px; }
     .day-nav { flex-wrap: wrap; justify-content: center; }
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .post-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .signal-card { flex-direction: column; }
+    .signal-source { align-self: flex-start; }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <h1>📅 6 февраля 2026</h1>
-    <div class="meta">💬 427 сообщений · 15 каналов · 340 в чатах</div>
+  
+  <div class="day-summary">
+    <h1>📊 6 февраля 2026
+      <span class="day-label stable">ОБЫЧНЫЙ ДЕНЬ (+4%)</span>
+    </h1>
+    <div class="day-stats">
+      <span>💬 427 сообщений (вчера: 410)</span>
+      <span>📍 TravelLine: 6 ↓ vs 10</span>
+    </div>
   </div>
 
   <div class="day-nav"><a href="2026-02-05.html" class="nav-link">← Предыдущий день</a><a href="index.html" class="nav-link week">Вся неделя</a><a href="2026-02-07.html" class="nav-link">Следующий день →</a></div>
 
-  <div class="stats-bar">
-    <div class="stat-card">
-      <div class="number">427</div>
-      <div class="label">сообщений</div>
+  
+  <div class="priority-section">
+    <div class="priority-header yellow">
+      🟡 МОНИТОРИТЬ <span class="priority-count">7</span>
     </div>
     
-    <div class="stat-card">
-      <div class="number">5</div>
-      <div class="label">B2B SaaS конкуренты (за клиентов)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Крупнейшие гостиничные сети прекратили продажи отелей через "Яндекс Путешествия"</strong><br><br>Крупнейшие российские гостиничные операторы «Azimut Hotels», «Co...</div>
+        <div class="signal-meta">
+          Новости отелей в Новости отелей
+           · ReactionPaid()2 👏94 🤔53 😁44
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/Hoteliernews/11527" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">11</div>
-      <div class="label">OTA-конкуренты (за бронирования)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">**Пока рынок обсуждает коллективный выход крупнейших гостиничных операторов из Яндекс Путешествия, конкурирующие OTA времени не теряют — и оперативно ...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7420" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">7</div>
-      <div class="label">TravelLine (свой канал — как нас видит рынок)</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">[⠀<br>](https://smallseotools.com/ru/invisible-character/)**<br>Туту насмехаются над Яндекс Путешествием**<br><br>🏨 @wrkhotel</div>
+        <div class="signal-meta">
+          Новости отельеров | WRKHotel в Новости отельеров | WRKHotel
+           · 😁115 🔥15 👏8 🥴5
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/wrkhotel/5155" target="_blank">Открыть →</a>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="number">64</div>
-      <div class="label">Независимые отраслевые каналы</div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Маркетинг в отеле часто выглядит как склад инструментов без инструкции</strong>: таргет запустили, блогеров позвали, рассылку сделали — а что именно это до...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7423" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">[⠀<br>](https://smallseotools.com/ru/invisible-character/)<br>Теперь и СММщик Островка решил высказаться об отключении крупнейших сетевых отелей от Яндекс П...</div>
+        <div class="signal-meta">
+          Новости отельеров | WRKHotel в Новости отельеров | WRKHotel
+           · 😁85 🔥32 🥴9 🙈3
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/wrkhotel/5157" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title">📌 Пять копеек по ситуации от меня. **Коллективный выход крупнейших гостиничных операторов из «Яндекс Путешествий» — это, безусловно, громкий инфоповод...</div>
+        <div class="signal-meta">
+          Ночной портье в Ночной портье
+          
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/portierdenuit/7422" target="_blank">Открыть →</a>
+      </div>
+    </div>
+    <div class="signal-card yellow">
+      <div class="signal-content">
+        <div class="signal-title"><strong>Рост числа корпоративных бронирований: опыт отелей с B2B-тарифами на Яндекс Путешествиях</strong><br><br>B2B-тарифы — эффективный инструмент для стабильных корпо...</div>
+        <div class="signal-meta">
+          Новости отелей в Новости отелей
+           · 👍40 👏29 🤔27 😁13
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="https://t.me/Hoteliernews/11532" target="_blank">Открыть →</a>
+      </div>
     </div>
   </div>
 
-  <div class="section-title">🔥 Главные публикации дня</div>
   
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Новости отелей</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body"><strong>Крупнейшие гостиничные сети прекратили продажи отелей через "Яндекс Путешествия"</strong><br><br>Крупнейшие российские гостиничные операторы «Azimut Hotels», «Cosmos Hotel Group», группа «Мантера», «Alean Collection», «Русские Сезоны», «Accor», «Ателика», «Кронвелл Групп» отключили продажи своих отелей через агрегатор «Яндекс Путешествия». Причиной такого решения стало повышение базовой комиссии сервисом с 1 февраля с 15% до 17%, сообщили в Российском союзе туриндустрии.<br><br>В конце января сети уже [обращалис...</div>
-      <div class="engagement">
-        <span class="badge views">👁 4,539</span>
-        <span class='badge fwd'>↗ 25</span>
-        <span class='badge react'>ReactionPaid()2 👏94 🤔53 😁44</span>
-      </div>
-      <div class="source-tag"><a href="https://t.me/Hoteliernews/11527" target="_blank">Читать в Telegram →</a></div>
-    </div>
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Ночной портье</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body">**Пока рынок обсуждает коллективный выход крупнейших гостиничных операторов из Яндекс Путешествия, конкурирующие OTA времени не теряют — и оперативно начали делить выпавший инвентарь.<br>**<br><strong>Первым в инфополе зашёл Tutu․ru с максимально прямолинейным месседжем «А мы со всеми дружим».</strong> В креативе — весь пул сетей, синхронно отключивших продажи у Яндекса: Azimut Hotels, Cosmos Hotel Group, Alean Collection, Mantera Group, Accor, «Русские Сезоны», «Ателика» и другие. Сигнал максимально прозрачный: и...</div>
-      <div class="engagement">
-        <span class="badge views">👁 5,012</span>
-        <span class='badge fwd'>↗ 102</span>
-        
-      </div>
-      <div class="source-tag"><a href="https://t.me/portierdenuit/7420" target="_blank">Читать в Telegram →</a></div>
-    </div>
-    <div class="card top-post">
-      <div class="post-header">
-        <span class="channel-name">Новости отельеров | WRKHotel</span>
-        <span class="category-tag">Независимые отраслевые каналы</span>
-      </div>
-      <div class="card-body">[⠀<br>](https://smallseotools.com/ru/invisible-character/)**<br>Туту насмехаются над Яндекс Путешествием**<br><br>🏨 @wrkhotel</div>
-      <div class="engagement">
-        <span class="badge views">👁 3,747</span>
-        <span class='badge fwd'>↗ 118</span>
-        <span class='badge react'>😁115 🔥15 👏8 🥴5</span>
-      </div>
-      <div class="source-tag"><a href="https://t.me/wrkhotel/5155" target="_blank">Читать в Telegram →</a></div>
-    </div>
-
-  <div class="section-title">🗣 Обсуждения в чатах</div>
-  
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Новости отельеров | WRKHotel</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text">[⠀<br>](https://smallseotools.com/ru/invisible-character/)<br>Теперь и СММщик Островка решил высказаться об отключении крупнейших сетевых отелей от Яндекс Путешествия<br><br>🏨 [@wrkhotel](https://t.me/wrkhotel)</div>
-      <div class="chat-meta">
-        <span>💬 17 ответов</span>
-        <span>😁85 🔥32 🥴9 🙈3</span>
-        <a href="https://t.me/chat_hotel/138276" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Новости отельеров | WRKHotel</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text"><strong>Правила предоставления гостиничных услуг в России необходимо изменить, чтобы избавить туристов от “несоразмерных штрафов из депозита за порчу гостиничного имущества”</strong><br><br>«Если разбили стакан, порвали полотенце - вы либо это спишите и вообще не обратите внимание, это расходная часть для отеля. Либо, если вы считаете, что это ущерб, то вы его объективно оцените. Если стакан стоит 300 рублей, а вы х...</div>
-      <div class="chat-meta">
-        <span>💬 23 ответов</span>
-        <span>🤡65 🤬35 🖕9 🤔5</span>
-        <a href="https://t.me/chat_hotel/138336" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Новости отельеров | WRKHotel</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text">[⠀<br>](https://smallseotools.com/ru/invisible-character/)**<br>Туту насмехаются над Яндекс Путешествием**<br><br>🏨 @wrkhotel</div>
-      <div class="chat-meta">
-        <span>💬 4 ответов</span>
-        <span>😁115 🔥15 👏8 🥴5</span>
-        <a href="https://t.me/chat_hotel/138266" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Hotel Advisors</span>
-        <span class="chat-source">в Hotel Advisors</span>
-      </div>
-      <div class="chat-text"><strong>Врываемся в сторис из Амбассадора, где 300+ отельеров принимают участие во VSE SVOI-2026. </strong><br><br><strong>Сергей Данильченко о том, как чувствует себя Санкт-Петербург и апарт-отели: что происходит с рынком</strong><br><br>В Ленинградской области и ряде городов мы видим стадию умеренного роста с признаками замедления. Поэтому важно отдельно посмотреть на ситуацию в Санкт-Петербурге.<br>**Санкт-Петербург: рост сохраняется<br>...</div>
-      <div class="chat-meta">
-        <span>💬 11 ответов</span>
-        <span>🔥13 ❤8 ReactionCustomEmoji(document_id=5343845438359350944)6 💯2</span>
-        <a href="https://t.me/hotel_advisors/5353" target="_blank">Открыть →</a>
-      </div>
-    </div>
-    <div class="chat-msg">
-      <div class="chat-header">
-        <span class="chat-sender">Александр Такшеев</span>
-        <span class="chat-source">в Закрытый чат отельеров | WRKHotel</span>
-      </div>
-      <div class="chat-text">видимо, его оштрафовали за порванное полотенце, что он так озлобился. а вообще, как хорошо- в стране нет больше проблем, кроме гостиничной отрасли. Вот сейчас снимем ответственность с гостей и заживёт страна!</div>
-      <div class="chat-meta">
-        
-        <span>💯23 🤣8 🔥1</span>
-        <a href="https://t.me/chat_hotel/138337" target="_blank">Открыть →</a>
-      </div>
-    </div>
-
+  <div class="section-title">📈 Статистика</div>
+  <div class="day-stats" style="margin-bottom:20px">
+    <span>TL упоминаний: 4</span>
+    <span>яндекс: 14</span><span>bronevik: 14</span><span>авито: 13</span><span>островок: 11</span>
+  </div>
+  <div style="font-size:12px;color:var(--text2)">
+    Источник: анализ 421 сообщений из 21 канала
+  </div>
 </div>
 
 <div class="footer">
