@@ -575,19 +575,20 @@ def generate_html(date_str, messages, data):
 
 <style>
   :root {{
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #232736;
-    --border: #2e3347;
-    --text: #e4e6ef;
-    --text2: #9ca0b5;
-    --accent: #6c8cff;
+    /* Telegram Dark Theme (same as weekly report) */
+    --bg: #17212b;
+    --surface: #232e3c;
+    --surface2: #2b3a4a;
+    --border: #3d4d5f;
+    --text: #f5f5f5;
+    --text2: #8b9bab;
+    --accent: #64b5f6;
     --accent2: #4ecdc4;
-    --red: #ff6b6b;
-    --orange: #ffa94d;
-    --green: #51cf66;
-    --yellow: #ffd43b;
-    --radius: 12px;
+    --red: #e53935;
+    --orange: #ff9800;
+    --green: #4fae4e;
+    --yellow: #ffc107;
+    --radius: 10px;
   }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{
@@ -649,56 +650,61 @@ def generate_html(date_str, messages, data):
     font-size: 12px;
   }}
 
-  /* Signal card */
+  /* Signal card (matches weekly report cards) */
   .signal-card {{
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
+    transition: border-color .2s;
   }}
+  .signal-card:hover {{ border-color: var(--accent); }}
   .signal-card.red {{ border-left: 3px solid var(--red); }}
   .signal-card.yellow {{ border-left: 3px solid var(--orange); }}
   .signal-card.green {{ border-left: 3px solid var(--green); }}
   .signal-content {{ flex: 1; }}
-  .signal-title {{ font-weight: 600; margin-bottom: 6px; }}
-  .signal-meta {{ font-size: 12px; color: var(--text2); }}
+  .signal-title {{ font-size: 15px; font-weight: 600; margin-bottom: 8px; }}
+  .signal-meta {{ font-size: 14px; color: var(--text2); }}
+  .signal-meta a {{ color: var(--accent); text-decoration: none; }}
+  .signal-meta a:hover {{ text-decoration: underline; }}
   .signal-source {{ flex-shrink: 0; }}
   .signal-source a {{
     color: var(--accent);
     text-decoration: none;
     font-size: 13px;
-    padding: 6px 12px;
-    border: 1px solid var(--accent);
-    border-radius: 16px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
     transition: all 0.2s;
   }}
-  .signal-source a:hover {{ background: var(--accent); color: #fff; }}
+  .signal-source a:hover {{ background: var(--accent); color: #fff; border-color: var(--accent); }}
 
-  /* Day summary header */
+  /* Day summary header (matches weekly report) */
   .day-summary {{
-    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    background: linear-gradient(135deg, #1e3a5f 0%, #2b3a4a 100%);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 28px 24px;
     margin-bottom: 20px;
     border: 1px solid var(--border);
   }}
-  .day-summary h1 {{ font-size: 20px; margin-bottom: 8px; }}
+  .day-summary h1 {{ font-size: 22px; font-weight: 700; margin-bottom: 8px; }}
   .day-label {{
     display: inline-block;
     padding: 4px 12px;
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 13px;
     font-weight: 600;
     margin-left: 8px;
   }}
-  .day-label.down {{ background: rgba(255,107,107,0.2); color: var(--red); }}
-  .day-label.up {{ background: rgba(81,207,102,0.2); color: var(--green); }}
-  .day-label.stable {{ background: rgba(108,140,255,0.2); color: var(--accent); }}
+  .day-label.down {{ background: rgba(229,57,53,0.2); color: var(--red); }}
+  .day-label.up {{ background: rgba(79,174,78,0.2); color: var(--green); }}
+  .day-label.stable {{ background: rgba(100,181,246,0.2); color: var(--accent); }}
   .day-stats {{
     display: flex;
     flex-wrap: wrap;
