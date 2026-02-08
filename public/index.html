@@ -25,20 +25,21 @@
 
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #232736;
-    --border: #2e3347;
-    --text: #e4e6ef;
-    --text2: #9ca0b5;
-    --accent: #6c8cff;
+    /* Telegram Dark Theme */
+    --bg: #17212b;
+    --surface: #232e3c;
+    --surface2: #2b3a4a;
+    --border: #3d4d5f;
+    --text: #f5f5f5;
+    --text2: #8b9bab;
+    --accent: #64b5f6;
     --accent2: #4ecdc4;
-    --red: #ff6b6b;
-    --orange: #ffa94d;
-    --green: #51cf66;
-    --yellow: #ffd43b;
+    --red: #e53935;
+    --orange: #ff9800;
+    --green: #4fae4e;
+    --yellow: #ffc107;
     --pink: #f06595;
-    --radius: 12px;
+    --radius: 10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -52,7 +53,7 @@
 
   /* Header */
   .header {
-    background: linear-gradient(135deg, #1e2a4a 0%, #2a1e4a 100%);
+    background: linear-gradient(135deg, #1e3a5f 0%, #2b3a4a 100%);
     border-radius: var(--radius);
     padding: 28px 24px;
     margin-bottom: 20px;
@@ -174,6 +175,7 @@
   }
   .timeline-item.hot::before { background: var(--red); }
   .timeline-date { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .timeline-date .rel { color: var(--text2); font-weight: 400; margin-left: 6px; }
   .timeline-text { font-size: 14px; color: var(--text2); }
 
   /* Engagement badges */
@@ -411,7 +413,7 @@
 
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-date">27 января</div>
+        <div class="timeline-date">27 янв <span class="rel">· 12 дн. назад</span></div>
         <div class="card-title">Коллективное письмо в Яндекс</div>
         <div class="timeline-text">Крупнейшие сети (~100 000 номеров) потребовали сохранить комиссию 15%. Подписали ACCOR, Азимут, Космос, Мантера, Максима Хотелс, Славянка, Alean Collection.</div>
         <div class="engagement">
@@ -423,7 +425,7 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">28 января</div>
+        <div class="timeline-date">28 янв <span class="rel">· 11 дн. назад</span></div>
         <div class="card-title">Яндекс проигнорировал. Ультиматум</div>
         <div class="timeline-text">Авторы письма ставят условие: отключение в случае отказа. Для несетевых отелей Яндекс — 40–50% продаж, рост комиссии «фатален».</div>
         <div class="engagement">
@@ -435,7 +437,7 @@
       </div>
 
       <div class="timeline-item hot">
-        <div class="timeline-date">5 февраля ⚡️</div>
+        <div class="timeline-date">5 фев ⚡️ <span class="rel">· 3 дн. назад</span></div>
         <div class="card-title">Массовое отключение сетей</div>
         <div class="timeline-text">Mantera, Азимут, Космос, Алеан, Ателика, Аккорды, Русские сезоны <strong>отключились</strong> от ЯП. Крупнейшее массовое отключение в истории рынка.</div>
         <div class="engagement">
@@ -447,7 +449,7 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">5 февраля</div>
+        <div class="timeline-date">5 фев <span class="rel">· 3 дн. назад</span></div>
         <div class="card-title">ФАС: навязывание тарифов неправомерно</div>
         <div class="timeline-text">ФАС указала на неправомерность навязывания коммерческих тарифов гостевым домам.</div>
         <div class="engagement">
@@ -459,7 +461,7 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">6 февраля</div>
+        <div class="timeline-date">6 фев <span class="rel">· 2 дн. назад</span></div>
         <div class="card-title">Конкуренты троллят Яндекс</div>
         <div class="timeline-text">СММ Островка и Туту высмеивают ситуацию. Отельеры злорадствуют: 😁85 и 😁115.</div>
         <div class="engagement">
@@ -470,7 +472,7 @@
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">7 февраля</div>
+        <div class="timeline-date">7 фев <span class="rel">· вчера</span></div>
         <div class="card-title">Депутат: нужен госагрегатор</div>
         <div class="timeline-text">Тарбаев заявил о необходимости нового агрегатора с господдержкой. Реакция: 🤡 — доминирующая эмоция.</div>
         <div class="engagement">
@@ -843,15 +845,40 @@
 </div>
 
 <script>
-  // Navigation
+  // Hash navigation
+  function activateTab(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+    const btn = document.querySelector(`.nav-btn[data-section="${sectionId}"]`);
+    if (btn) btn.classList.add('active');
+    section.classList.add('active');
+    return true;
+  }
+
+  // Initialize from hash on load
+  const initialHash = location.hash.slice(1);
+  if (initialHash && !activateTab(initialHash)) {
+    activateTab('main');
+  }
+
+  // Tab clicks update URL hash
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.section).classList.add('active');
+      const section = btn.dataset.section;
+      history.pushState(null, '', `#${section}`);
+      activateTab(section);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  });
+
+  // Handle browser back/forward
+  window.addEventListener('popstate', () => {
+    const hash = location.hash.slice(1);
+    activateTab(hash || 'main');
   });
 
   // Collapsible sections
