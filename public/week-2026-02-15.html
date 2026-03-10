@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сводка CPO TravelLine — 9–15 февраля 2026</title>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(106707351, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/106707351" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<style>
+  :root {
+    /* Telegram Dark Theme */
+    --bg: #17212b;
+    --surface: #232e3c;
+    --surface2: #2b3a4a;
+    --border: #3d4d5f;
+    --text: #f5f5f5;
+    --text2: #8b9bab;
+    --accent: #64b5f6;
+    --accent2: #4ecdc4;
+    --red: #e53935;
+    --orange: #ff9800;
+    --green: #4fae4e;
+    --yellow: #ffc107;
+    --pink: #f06595;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2b3a4a 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { color: var(--text2); font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; }
+  .header .meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Sentiment bar */
+  .sentiment-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .sentiment-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .sentiment-card .name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sentiment-card .bar-container {
+    display: flex;
+    gap: 2px;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    background: var(--surface2);
+  }
+  .sentiment-card .bar-pos { background: var(--green); }
+  .sentiment-card .bar-neu { background: var(--border); }
+  .sentiment-card .bar-neg { background: var(--red); }
+  .sentiment-card .counts {
+    font-size: 11px;
+    color: var(--text2);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .sentiment-card .counts .pos { color: var(--green); }
+  .sentiment-card .counts .neg { color: var(--red); }
+  .sentiment-card.no-data { opacity: 0.5; }
+  .sentiment-card.no-data .name { color: var(--text2); }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav::-webkit-scrollbar { height: 0; }
+  .nav-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* Sections */
+  .section {
+    display: none;
+    animation: fadeIn .3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 12px;
+    transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card-body { font-size: 14px; color: var(--text2); }
+  .card-body a { color: var(--accent); text-decoration: none; }
+  .card-body a:hover { text-decoration: underline; }
+
+  /* Full-width competitor block */
+  .comp-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .comp-block .comp-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-block .comp-name { font-size: 17px; font-weight: 700; }
+  .comp-block .comp-meta { font-size: 12px; color: var(--text2); }
+  .comp-block .comp-item {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 10px;
+    padding-left: 18px;
+    position: relative;
+  }
+  .comp-block .comp-item::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .comp-block.empty { opacity: 0.5; }
+  .comp-block.empty .comp-header { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+  /* Problem / Solution format */
+  .ps-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .ps-block .ps-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .ps-block .ps-label.problem { color: var(--red); }
+  .ps-block .ps-label.solution { color: var(--green); }
+  .ps-block .ps-label.praise { color: var(--accent); }
+  .ps-block .ps-label.complaint { color: var(--orange); }
+  .ps-block .ps-label.pending { color: var(--yellow); }
+  .ps-block .ps-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .ps-block .ps-body { font-size: 14px; color: var(--text2); }
+  .ps-block .ps-status {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .ps-block .ps-status.resolved { background: rgba(79,174,78,.15); color: var(--green); }
+  .ps-block .ps-status.unresolved { background: rgba(229,57,53,.15); color: var(--red); }
+  .ps-block .ps-status.in-progress { background: rgba(255,193,7,.15); color: var(--yellow); }
+
+  /* Engagement badges */
+  .engagement {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--surface2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .badge.views { color: var(--accent); }
+  .badge.fwd { color: var(--orange); }
+  .badge.react { color: var(--yellow); }
+
+  /* Source tag */
+  .source-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(108,140,255,.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .source-tag a { color: var(--accent); text-decoration: none; }
+
+  /* Quote */
+  .quote {
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin: 10px 0;
+    background: var(--surface2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .quote-author { font-style: normal; font-size: 12px; color: var(--text2); margin-top: 6px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-item.hot::before { background: var(--red); }
+  .timeline-date { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .timeline-text { font-size: 14px; color: var(--text2); }
+
+  /* Threat / opportunity */
+  .insight-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .insight-card.threat { border-left: 3px solid var(--red); }
+  .insight-card.opportunity { border-left: 3px solid var(--green); }
+  .insight-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .insight-label.red { color: var(--red); }
+  .insight-label.green { color: var(--green); }
+
+  /* Recommendation cards */
+  .rec-card {
+    display: flex;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .rec-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .rec-icon.marketing { background: rgba(108,140,255,.15); }
+  .rec-icon.product { background: rgba(78,205,196,.15); }
+  .rec-icon.sales { background: rgba(255,169,77,.15); }
+  .rec-icon.intel { background: rgba(240,101,149,.15); }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--surface2);
+    color: var(--text2);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .container { padding: 10px; }
+    .header { padding: 20px 16px; }
+    .header h1 { font-size: 18px; }
+    .sentiment-bar { grid-template-columns: repeat(2, 1fr); }
+    .sentiment-bar > :last-child { grid-column: span 2; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>Еженедельная сводка для CPO</h1>
+    <div class="meta">
+      <span>9–15 февраля 2026</span>
+      <span>22 канала · 5 категорий</span>
+      <span>1 961 сообщение</span>
+    </div>
+  </div>
+
+  <!-- Weekly nav -->
+  <div class="nav" style="margin-bottom:12px">
+    <span style="color:var(--text2);font-size:13px;padding:8px 0;">Недели:</span>
+    <a href="week-2026-02-07.html" class="nav-btn">← 24 янв — 7 фев</a>
+    <span class="nav-btn active" style="cursor:default">9–15 фев</span>
+    <a href="index.html" class="nav-btn">16–22 фев →</a>
+  </div>
+
+  <!-- Sentiment bar -->
+  <div class="sentiment-bar">
+    <div class="sentiment-card">
+      <div class="name">TravelLine</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:13%"></div>
+        <div class="bar-neu" style="width:83%"></div>
+        <div class="bar-neg" style="width:4%"></div>
+      </div>
+      <div class="counts">
+        <span class="pos">+6</span>
+        <span>~37</span>
+        <span class="neg">-2</span>
+      </div>
+    </div>
+    <div class="sentiment-card no-data">
+      <div class="name">Uhotels</div>
+      <div class="bar-container">
+        <div class="bar-neu" style="width:100%"></div>
+      </div>
+      <div class="counts">
+        <span style="color:var(--text2)">нет данных</span>
+      </div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Bnovo</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:33%"></div>
+        <div class="bar-neu" style="width:67%"></div>
+      </div>
+      <div class="counts">
+        <span class="pos">+1</span>
+        <span>~2</span>
+        <span class="neg">-0</span>
+      </div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Бронируй</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:33%"></div>
+        <div class="bar-neu" style="width:50%"></div>
+        <div class="bar-neg" style="width:17%"></div>
+      </div>
+      <div class="counts">
+        <span class="pos">+2</span>
+        <span>~3</span>
+        <span class="neg">-1</span>
+      </div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Контур</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:46%"></div>
+        <div class="bar-neu" style="width:45%"></div>
+        <div class="bar-neg" style="width:9%"></div>
+      </div>
+      <div class="counts">
+        <span class="pos">+5</span>
+        <span>~5</span>
+        <span class="neg">-1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav">
+    <button class="nav-btn active" data-section="b2b">B2B конкуренты</button>
+    <button class="nav-btn" data-section="ota">OTA</button>
+    <button class="nav-btn" data-section="tl-voice">Голос TL</button>
+    <button class="nav-btn" data-section="client-voice">Голос клиента</button>
+    <button class="nav-btn" data-section="market">Рынок</button>
+    <button class="nav-btn" data-section="conclusions">Выводы</button>
+  </div>
+
+  <!-- ===== SECTION: B2B COMPETITORS ===== -->
+  <div class="section active" id="b2b">
+    <div class="section-title">B2B конкуренты</div>
+
+    <!-- Uhotels -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Uhotels</div>
+          <div class="comp-meta">@uhotelsapp · 5 постов · Тихая неделя</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/uhotelsapp/2016" target="_blank" style="color:var(--text)">Переход на ОФД-Я</a></strong> — напоминание клиентам о смене ОФД из-за ухода Первого ОФД с рынка. Техническая коммуникация. 508 просмотров.</div>
+      <div class="comp-item"><strong><a href="https://t.me/uhotelsapp/2020" target="_blank" style="color:var(--text)">Новые правила бронирования</a></strong> — выпустили свой разбор правил с 1 марта. Конкурируют с TL и Контуром за статус эксперта. 468 просмотров.</div>
+      <div class="comp-item">Активность в чатах: <strong>0 упоминаний</strong> — бренд не обсуждается отельерами.</div>
+    </div>
+
+    <!-- Bnovo -->
+    <div class="comp-block" style="border-color: var(--red);">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Bnovo</div>
+          <div class="comp-meta">@bnovonews · 22 поста · Активный продуктовый маркетинг</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/bnovonews/3694" target="_blank" style="color:var(--text)">Календарь часовых услуг</a></strong> — новая фича: бронирование бани, SPA, проката, бассейна с посуточной сеткой. Закрывают нишу, которую TL не покрывает. 1 444 просмотров, 23 репоста.</div>
+      <div class="comp-item"><strong><a href="https://t.me/bnovonews/3698" target="_blank" style="color:var(--text)">Обновлённые отчёты</a></strong> — переработали аналитику: новые дашборды, графики. Работают на восприятие «мы быстрее развиваемся».</div>
+      <div class="comp-item"><strong><a href="https://t.me/bnovonews/3700" target="_blank" style="color:var(--text)">Продуктовый контент</a></strong> — активно публикуют обновления и кейсы. 22 поста за неделю — самый активный B2B-канал.</div>
+      <div class="comp-item">Активность в чатах: <strong>3 упоминания</strong> (+1 позитив, 0 негатив). Нейтральный фон.</div>
+    </div>
+
+    <!-- Бронируй Онлайн -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Бронируй Онлайн</div>
+          <div class="comp-meta">@bronirui_online · 6 постов · Контент-маркетинг</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/bronirui_online/1741" target="_blank" style="color:var(--text)">Нейросети в отельном бизнесе</a></strong> — статья про AI-инструменты для отелей. Позиционируют себя как технологичную компанию. 567 просмотров, 12 реакций.</div>
+      <div class="comp-item"><strong><a href="https://t.me/bronirui_online/1743" target="_blank" style="color:var(--text)">УТП для отелей</a></strong> — экспертный контент по маркетингу. Работают на awareness в сегменте малых отелей.</div>
+    </div>
+
+    <!-- Контур -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Контур.Отель</div>
+          <div class="comp-meta">@otelkontur · 8 постов · Юридическая экспертиза</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/otelkontur/3315" target="_blank" style="color:var(--text)">Разбор новых правил бронирования</a></strong> — параллельно с TL выпустили свой юридический разбор правил с 1 марта. 652 просмотра, 57 репостов. Конкурируют за статус эксперта.</div>
+      <div class="comp-item"><strong><a href="https://t.me/otelkontur/3307" target="_blank" style="color:var(--text)">Финансы для небольших отелей</a></strong> — контент про финучёт для малого бизнеса. Целевая аудитория — небольшие объекты.</div>
+      <div class="comp-item">Активность в чатах: <strong>11 упоминаний</strong> (+5 позитив, -1 негатив). Чат «Контур для отельера»: вопросы по новым правилам, подключению к белому списку Минцифры, миграции бухучёта.</div>
+
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:600">Из чата Контур для отельера:</div>
+        <div class="quote" style="margin:6px 0;">
+          «Подскажите, кто работает с белым списком Минцифры — как проходит подключение?»
+          <div class="quote-author">— отельер, <a href="https://t.me/hotelinfo_official_chat" target="_blank">чат Контур</a></div>
+        </div>
+        <div class="quote" style="margin:6px 0;">
+          «Как разделить роли в Контуре — чтобы горничные видели только уборки, а не финансы?»
+          <div class="quote-author">— отельер, <a href="https://t.me/hotelinfo_official_chat" target="_blank">чат Контур</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: OTA ===== -->
+  <div class="section" id="ota">
+    <div class="section-title">OTA-конкуренты</div>
+
+    <!-- ЯП -->
+    <div class="comp-block" style="border-color: var(--red);">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Яндекс Путешествия</div>
+          <div class="comp-meta">@yandex_travel_pro · 15 постов · Кризис доверия продолжается</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/wrkhotel/5167" target="_blank" style="color:var(--text)">Абрамзон: «мы в переговорах»</a></strong> — попытка оправдать рост комиссии «издержками». Рынок не верит: реакции скептические. Репутационный урон нарастает.</div>
+      <div class="comp-item"><strong><a href="https://t.me/yandex_travel_pro/1881" target="_blank" style="color:var(--text)">Контент про семейный туризм</a></strong> — переключают повестку с комиссий на полезный контент. 3 405 просмотров.</div>
+      <div class="comp-item"><strong><a href="https://t.me/yandex_travel_pro/1880" target="_blank" style="color:var(--text)">Бизнес-путешественники</a></strong> — каждый пятый турист деловой. Продвигают корпоративный сегмент. 2 435 просмотров.</div>
+    </div>
+
+    <!-- Островок -->
+    <div class="comp-block" style="border-color: var(--green);">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Островок</div>
+          <div class="comp-meta">@extranetetg · 22 поста · Выигрывает от кризиса ЯП</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/extranetetg/2090" target="_blank" style="color:var(--text)">«Комиссия не меняется»</a></strong> — прямое заявление на фоне конфликта ЯП. Позиционирование как стабильная альтернатива. Высокая вовлечённость. <strong>Сильный PR-ход.</strong></div>
+      <div class="comp-item"><strong><a href="https://t.me/extranetetg/2092" target="_blank" style="color:var(--text)">Конференция «Ориентир»</a></strong> — крупное отраслевое мероприятие, активная промо-кампания. Конкурируют с TL за внимание отельеров.</div>
+      <div class="comp-item"><strong><a href="https://t.me/extranetetg/2089" target="_blank" style="color:var(--text)">PR через персоналии</a></strong> — продвигают через сотрудников и спикеров. Работают на «человечность» бренда.</div>
+    </div>
+
+    <!-- Bronevik -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Bronevik.com</div>
+          <div class="comp-meta">@bronevik_com · 17 постов · B2B-фокус</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/bronevik_com/2188" target="_blank" style="color:var(--text)">Рост апарт-сегмента ×1,5</a></strong> — исследование с RealtyCalendar: спрос на туристические апартаменты вырос в 1,5 раза в 2025. 691 просмотр.</div>
+      <div class="comp-item"><strong><a href="https://t.me/bronevik_com/2193" target="_blank" style="color:var(--text)">Корпоративные тренды 2026</a></strong> — средний чек 5 790 руб., рост корпоративных бронирований. Позиционируют себя как эксперты B2B-тревела.</div>
+      <div class="comp-item"><strong><a href="https://t.me/bronevik_com/2190" target="_blank" style="color:var(--text)">Channel Manager</a></strong> — продвигают свой channel manager для отелей. Прямая конкуренция с TL в дистрибуции.</div>
+    </div>
+
+    <!-- Hotellab -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Hotellab</div>
+          <div class="comp-meta">@hotellab_io · 2 поста · Тихая неделя</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/hotellab_io/1120" target="_blank" style="color:var(--text)">Партнёрская программа</a></strong> — приглашают отельеров помогать коллегам и зарабатывать. Расширяют дистрибуцию через реферальную модель.</div>
+    </div>
+
+    <!-- Roomlink (бывш. Забронируй + A&A) -->
+    <div class="comp-block" style="border-color: var(--orange);">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Roomlink (бывш. Забронируй + A&A)</div>
+          <div class="comp-meta">Smartway Travel Group · 350 агентств · 22 000 отелей · Корп-тревел</div>
+        </div>
+      </div>
+      <div class="comp-item"><strong><a href="https://t.me/Hoteliernews/11615" target="_blank" style="color:var(--text)">Ребрендинг: Забронируй + A&A → Roomlink</a></strong> — две компании (экстранет + агентский бренд) объединились под новым брендом. Часть Smartway Travel Group, 27+ лет на рынке.</div>
+      <div class="comp-item"><strong><a href="https://t.me/chat_hotel/139133" target="_blank" style="color:var(--text)">Отельеры: брони упали с нового года</a></strong> — «стало мало приходить броней, с нового года как отрезало». При этом «хороший вариант, ЛК понятный».</div>
+      <div class="comp-item"><strong><a href="https://t.me/c/1264671967/102026" target="_blank" style="color:var(--text)">Ценовой арбитраж</a></strong> — отельеры обнаружили: Озон/Островок/Забронируй/Броневик используют связку каналов, берут самую низкую цену и перепродают.</div>
+      <div class="source-tag"><a href="https://t.me/Hoteliernews/11615" target="_blank">@Hoteliernews/11615</a> · <a href="https://t.me/HotelierPRO/9313" target="_blank">@HotelierPRO/9313</a> · <a href="https://t.me/chat_hotel/139091" target="_blank">@chat_hotel</a></div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: TL VOICE ===== -->
+  <div class="section" id="tl-voice">
+    <div class="section-title">Голос TravelLine</div>
+
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;">Что публиковал @travelline_news (19 постов) + что говорят в чатах (45 упоминаний)</div>
+
+    <!-- Хвалят -->
+    <div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:12px">Хвалят</div>
+
+    <div class="ps-block">
+      <div class="ps-label praise">Контент-лидерство</div>
+      <div class="ps-title">Юридический разбор новых правил — рекорд канала</div>
+      <div class="ps-body">TL совместно с гостиничным юристом разобрал обновлённые правила с 1 марта. <strong>326 репостов</strong> — абсолютный рекорд. Отельеры массово пересылают коллегам. TL первым закрыл эту потребность (Контур и Uhotels выпустили свои разборы позже).</div>
+      <div class="engagement">
+        <span class="badge views">4 847</span>
+        <span class="badge fwd">↗ 326</span>
+        <span class="badge react">14 + 10 + 7</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8896" target="_blank">@travelline_news/8896</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label praise">Продукт</div>
+      <div class="ps-title">TL: Reputation — AI-анализ отзывов с 27 площадок</div>
+      <div class="ps-body">Продвигают инструмент сбора и анализа отзывов. Второй по охвату пост недели. Тема AI в отельном бизнесе актуальна — Bnovo и Бронируй тоже пишут про нейросети.</div>
+      <div class="engagement">
+        <span class="badge views">3 668</span>
+        <span class="badge react">9 + 8 + 4</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8895" target="_blank">@travelline_news/8895</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label praise">Ивенты</div>
+      <div class="ps-title">1000+ отельеров на бизнес-завтраках Hotel Advisors</div>
+      <div class="ps-body">Шаров выступил спикером от TL на бизнес-завтраках в трёх городах (Сочи, СПб, Москва). Прямой доступ к decision-makers.</div>
+      <div class="source-tag"><a href="https://t.me/hotel_advisors/5389" target="_blank">@hotel_advisors/5389</a> · <a href="https://t.me/travelline_news/8894" target="_blank">@travelline_news</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label praise">Из чатов</div>
+      <div class="ps-title">Техподдержка отвечает в Беседке</div>
+      <div class="ps-body">TL-бот и техподдержка активно работают в чате. Вопросы по сертификатам и продукту получают ответы.</div>
+      <div class="quote" style="margin-top:8px;">
+        «Пользуетесь ли вы продажей сертификатов через TravelLine? Насколько это удобно — 2 личных кабинета?»
+        <div class="quote-author">— Sergey Safuanov, <a href="https://t.me/c/1264671967/102462" target="_blank">TL: Беседка</a></div>
+      </div>
+      <div class="ps-status resolved">Поддержка ответила</div>
+    </div>
+
+    <!-- Ругают -->
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin:24px 0 12px">Ругают</div>
+
+    <div class="ps-block">
+      <div class="ps-label complaint">Коммуникация</div>
+      <div class="ps-title">Переход в MAX — аудитория против</div>
+      <div class="ps-body">TL начал дублировать контент в MAX (российский мессенджер) из-за нестабильности Telegram. Самый негативный пост недели. Аудитория воспринимает как навязывание.</div>
+      <div class="engagement">
+        <span class="badge views">2 682</span>
+        <span class="badge fwd">↗ 22</span>
+        <span class="badge react">51 + 37 + 11 + 6</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8898" target="_blank">@travelline_news/8898</a></div>
+      <div class="ps-status unresolved">Негатив не снят</div>
+    </div>
+
+    <!-- Проблемы -->
+    <div style="font-size:14px;font-weight:700;color:var(--red);margin:24px 0 12px">Проблемы</div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Поддержка</div>
+      <div class="ps-title">Очередь в техподдержку</div>
+      <div class="ps-body">Отельеры жалуются на время ожидания ответа от техподдержки.</div>
+      <div class="quote" style="margin-top:8px;">
+        «Скорее всего, перед вами позвонили другие отельеры, которым сейчас помогает техподдержка. Как только подойдёт ваша очередь, вам обязательно ответят.»
+        <div class="quote-author">— TravelLine (офиц.), <a href="https://t.me/c/1264671967/102440" target="_blank">TL: Беседка</a></div>
+      </div>
+      <div class="ps-status in-progress">В работе</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: CLIENT VOICE ===== -->
+  <div class="section" id="client-voice">
+    <div class="section-title">Голос клиента</div>
+
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Чаты отельеров: 1 528 сообщений за неделю · Формат: проблема / решение</div>
+
+    <!-- Проблемы -->
+    <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:12px">Проблемы</div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Регуляторика</div>
+      <div class="ps-title">Новые правила бронирования с 1 марта — паника</div>
+      <div class="ps-body">Отельеры не понимают, как применять новые правила по удержаниям при незаезде. Массовые вопросы в чатах: «Как теперь оформлять штрафы за no-show?», «Что делать со старыми договорами?»</div>
+      <div class="ps-status in-progress">TL выпустил разбор, вопросы продолжаются</div>
+      <div class="source-tag"><a href="https://t.me/chat_hotel" target="_blank">@chat_hotel</a> · <a href="https://t.me/c/1264671967" target="_blank">TL: Беседка</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Регуляторика</div>
+      <div class="ps-title">Овербукинг — законопроект вызвал ярость</div>
+      <div class="ps-body">Госдума обсуждает обязанность отелей переселять гостей за свой счёт при овербукинге. Отельеры в шоке: «А как страховать?», «Это убьёт малые отели».</div>
+      <div class="ps-status unresolved">Законопроект на рассмотрении</div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5160" target="_blank">@wrkhotel/5160</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Документы</div>
+      <div class="ps-title">Заселение по загранпаспортам и водительским</div>
+      <div class="ps-body">Отельеры спрашивают: можно ли заселить гостя по загранпаспорту, если нет внутреннего? По водительским? QR-код вместо паспорта с 28 марта — тоже непонятно как работает.</div>
+      <div class="ps-status unresolved">Нет чёткой инструкции</div>
+      <div class="source-tag"><a href="https://t.me/chat_hotel" target="_blank">@chat_hotel</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Операционка</div>
+      <div class="ps-title">Классификация — не все понимают требования</div>
+      <div class="ps-body">Вопросы по обязательной классификации объектов. Какие требования к номерному фонду? Кто проводит? Сколько стоит? Тема не остывает.</div>
+      <div class="ps-status in-progress">Обсуждается</div>
+      <div class="source-tag"><a href="https://t.me/chat_hotel" target="_blank">@chat_hotel</a> · <a href="https://t.me/hotelinfo_official_chat" target="_blank">чат Контур</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label problem">Операционка</div>
+      <div class="ps-title">Курение в номерах — что делать?</div>
+      <div class="ps-body">Постоянная боль отельеров: как бороться, как штрафовать, как доказать. Обсуждают детекторы дыма, штрафные пункты в договоре, опыт коллег.</div>
+      <div class="ps-status unresolved">Системного решения нет</div>
+      <div class="source-tag"><a href="https://t.me/chat_hotel" target="_blank">@chat_hotel</a></div>
+    </div>
+
+    <!-- Решения -->
+    <div style="font-size:14px;font-weight:700;color:var(--green);margin:24px 0 12px">Решения</div>
+
+    <div class="ps-block">
+      <div class="ps-label solution">Юридика</div>
+      <div class="ps-title">TL разобрал правила — 326 репостов</div>
+      <div class="ps-body">TravelLine первым выпустил юридический разбор обновлённых правил совместно с гостиничным юристом. Отельеры массово переслали коллегам. Контур и Uhotels подтянулись позже.</div>
+      <div class="ps-status resolved">Решено — разбор опубликован</div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8896" target="_blank">@travelline_news/8896</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label solution">Технология</div>
+      <div class="ps-title">Саморегистрация — интерес растёт</div>
+      <div class="ps-body">Отельеры обсуждают автоматическую регистрацию гостей. Кто-то уже внедрил, делится опытом. Тема усилится с QR-заселением с 28 марта.</div>
+      <div class="ps-status in-progress">Пилотируется отдельными отелями</div>
+      <div class="source-tag"><a href="https://t.me/chat_hotel" target="_blank">@chat_hotel</a></div>
+    </div>
+
+    <!-- Горячие темы -->
+    <div style="font-size:14px;font-weight:700;color:var(--accent);margin:24px 0 12px">Горячие темы недели</div>
+
+    <div class="card">
+      <table class="data-table">
+        <tr><th>Тема</th><th style="width:50px">Кол.</th><th>Настроение</th></tr>
+        <tr><td><strong>Новые правила с 1 марта</strong></td><td>86</td><td style="color:var(--red)">Паника. Не понимают как применять</td></tr>
+        <tr><td><strong>Яндекс / комиссии</strong></td><td>34</td><td style="color:var(--red)">Скепсис к Абрамзону, ищут альтернативы</td></tr>
+        <tr><td><strong>TravelLine</strong></td><td>33</td><td style="color:var(--yellow)">Смешанно: разбор правил (+), MAX (-)</td></tr>
+        <tr><td><strong>Комиссии OTA</strong></td><td>29</td><td style="color:var(--red)">Турналог + комиссия = двойной удар</td></tr>
+        <tr><td><strong>Поддержка (все PMS)</strong></td><td>18</td><td style="color:var(--yellow)">Жалуются на скорость ответов</td></tr>
+        <tr><td><strong>QR-заселение</strong></td><td>10</td><td style="color:var(--yellow)">Скепсис: «ни один отель не готов»</td></tr>
+        <tr><td><strong>Отключение от OTA</strong></td><td>8</td><td style="color:var(--green)">Тренд продолжается, ищут прямые каналы</td></tr>
+        <tr><td><strong>Островок</strong></td><td>7</td><td style="color:var(--green)">Позитив: стабильная комиссия, Ориентир</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: MARKET ===== -->
+  <div class="section" id="market">
+    <div class="section-title">Рынок (справочно)</div>
+
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Ключевые события недели + война комиссий</div>
+
+    <!-- Война комиссий -->
+    <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:12px">Война комиссий</div>
+
+    <div class="card">
+      <div class="card-title">Абрамзон: «мы в переговорах с сетями»</div>
+      <div class="card-body">Глава Яндекс Путешествий попытался оправдать повышение комиссии «растущими издержками». Рынок не поверил. OTA включают турналог в стоимость бронирования, берут комиссию с полной суммы — по оценкам, до 550 млн руб. допкомиссии «из воздуха» за 2025.</div>
+      <div class="engagement">
+        <span class="badge views">4 681</span>
+        <span class="badge fwd">↗ 84</span>
+      </div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5167" target="_blank">@wrkhotel/5167</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Галочкин дал интервью «Ночному портье»</div>
+      <div class="card-body">CEO TravelLine высказался о ситуации на рынке. Тарбаев предложил идею госплатформы бронирования.</div>
+      <div class="source-tag"><a href="https://t.me/portierdenuit" target="_blank">@portierdenuit</a></div>
+    </div>
+
+    <!-- Регуляторика -->
+    <div style="font-size:14px;font-weight:700;color:var(--orange);margin:24px 0 12px">Регуляторика</div>
+
+    <div class="timeline">
+      <div class="timeline-item hot">
+        <div class="timeline-date">9 фев</div>
+        <div class="card-title">Новые Правила предоставления гостиничных услуг с 1 марта</div>
+        <div class="timeline-text">Обновлённые правила бронирования и отмен, требования к договорам с гостями.</div>
+        <div class="engagement">
+          <span class="badge views">4 847</span>
+          <span class="badge fwd">↗ 326</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/travelline_news/8896" target="_blank">@travelline_news/8896</a></div>
+      </div>
+
+      <div class="timeline-item hot">
+        <div class="timeline-date">10 фев</div>
+        <div class="card-title">Овербукинг: отели обяжут переселять гостей за свой счёт</div>
+        <div class="timeline-text">Госдума рассматривает законопроект. Реакция отельеров резко негативная.</div>
+        <div class="engagement">
+          <span class="badge views">4 818</span>
+          <span class="badge fwd">↗ 51</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5160" target="_blank">@wrkhotel/5160</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">11 фев</div>
+        <div class="card-title">QR-код вместо паспорта при заселении — с 28 марта</div>
+        <div class="timeline-text">Пятый этап Указа Президента: гости смогут заселяться по цифровому документу.</div>
+        <div class="engagement">
+          <span class="badge views">4 677</span>
+          <span class="badge fwd">↗ 222</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5163" target="_blank">@wrkhotel/5163</a></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">13 фев</div>
+        <div class="card-title">VALO и Новотель — иск Генпрокуратуры</div>
+        <div class="timeline-text">Активы сети апарт-отелей VALO могут конфисковать. Прецедент для всего апарт-сегмента.</div>
+        <div class="engagement">
+          <span class="badge views">4 345</span>
+          <span class="badge fwd">↗ 131</span>
+        </div>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5161" target="_blank">@wrkhotel/5161</a></div>
+      </div>
+    </div>
+
+    <!-- Рынок -->
+    <div style="font-size:14px;font-weight:700;color:var(--accent);margin:24px 0 12px">Тренды и данные</div>
+
+    <div class="card">
+      <div class="card-title">День Влюблённых: загрузка и тематика</div>
+      <div class="card-body">Москва подтянула загрузку перед 14 февраля. Тематические предложения работают — отельеры ищут способы монетизировать инфоповоды.</div>
+      <div class="engagement"><span class="badge views">5 643 / 4 044</span><span class="badge fwd">↗ 262</span></div>
+      <div class="source-tag"><a href="https://t.me/portierdenuit/7447" target="_blank">@portierdenuit</a> · <a href="https://t.me/wrkhotel/5171" target="_blank">@wrkhotel</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Апарт-сегмент: рост ×1,5</div>
+      <div class="card-body">Спрос на туристические апартаменты вырос в 1,5 раза в 2025. Рост каналов (×1,6) и длительности бронирования.</div>
+      <div class="engagement"><span class="badge views">4 650</span><span class="badge fwd">↗ 102</span></div>
+      <div class="source-tag"><a href="https://t.me/bronevik_com/2188" target="_blank">@bronevik_com</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Премия Ozon Travel 2025</div>
+      <div class="card-body">Ozon как OTA-площадка набирает вес. Высокая вовлечённость аудитории.</div>
+      <div class="engagement"><span class="badge views">5 272</span><span class="badge fwd">↗ 14</span></div>
+      <div class="source-tag"><a href="https://t.me/Hoteliernews/11589" target="_blank">@Hoteliernews</a></div>
+    </div>
+
+    <div class="card">
+      <div class="card-body" style="font-size:13px">
+        <strong>Также:</strong> загрузка на 23 февраля растёт (<a href="https://t.me/portierdenuit/7449" target="_blank">@portierdenuit</a>) · корп. бронирования: средний чек 5 790 руб. (<a href="https://t.me/bronevik_com/2193" target="_blank">@bronevik_com</a>) · льготную ипотеку расторгли за посуточную сдачу (<a href="https://t.me/wrkhotel/5162" target="_blank">@wrkhotel</a>)
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: CONCLUSIONS ===== -->
+  <div class="section" id="conclusions">
+    <div class="section-title">Выводы для TravelLine</div>
+
+    <div style="font-size:14px;color:var(--red);font-weight:700;margin-bottom:12px">Угрозы</div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #1</div>
+      <div class="card-title">Островок забирает повестку: «комиссия не меняется»</div>
+      <div class="card-body">Островок заявил о стабильности комиссии на фоне конфликта ЯП. Высокая вовлечённость. Конференция «Ориентир» усиливает присутствие. Если отели уходят от ЯП, Островок позиционирует себя как «безопасный выбор».</div>
+      <div class="source-tag"><a href="https://t.me/extranetetg/2090" target="_blank">@extranetetg/2090</a></div>
+    </div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #2</div>
+      <div class="card-title">Bnovo: календарь часовых услуг — новая ниша</div>
+      <div class="card-body">Bnovo запустил бронирование SPA, бань, проката. Закрывают потребность, которую TL не покрывает. Если клиент выбирает PMS по доп.услугам, Bnovo получает преимущество.</div>
+      <div class="source-tag"><a href="https://t.me/bnovonews/3694" target="_blank">@bnovonews/3694</a></div>
+    </div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #3</div>
+      <div class="card-title">MAX-переход вызвал негатив у аудитории</div>
+      <div class="card-body">Самый негативный пост TL за неделю. Аудитория воспринимает как навязывание. Конкуренты могут использовать: «мы остаёмся в Telegram».</div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8898" target="_blank">@travelline_news/8898</a></div>
+    </div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">Угроза #4</div>
+      <div class="card-title">Забронируй + A&A → Roomlink + ценовой арбитраж OTA</div>
+      <div class="card-body">Smartway Travel Group объединила два бренда (350 агентств, 22 000 отелей). Активно переподписывают договоры. Отельеры нашли связку: Озон/Островок/Забронируй/Броневик берут самую низкую цену и перепродают в своих системах.</div>
+      <div class="source-tag"><a href="https://t.me/Hoteliernews/11615" target="_blank">@Hoteliernews/11615</a> · <a href="https://t.me/c/1264671967/102026" target="_blank">TL: Беседка</a></div>
+    </div>
+
+    <div style="font-size:14px;color:var(--green);font-weight:700;margin:24px 0 12px">Возможности</div>
+
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #1</div>
+      <div class="card-title">326 репостов юридического разбора — контент-лидерство</div>
+      <div class="card-body">TL воспринимается как источник экспертизы. Нужно закрепить: юридические разборы системно. Ближайшие темы: овербукинг-законопроект, QR-заселение.</div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8896" target="_blank">@travelline_news/8896</a></div>
+    </div>
+
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #2</div>
+      <div class="card-title">Война комиссий = рост спроса на прямые каналы</div>
+      <div class="card-body">Каждая неделя конфликта — дополнительный трафик в прямые каналы. TL как поставщик модуля бронирования — естественный бенефициар. 34 упоминания в чатах за неделю.</div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5167" target="_blank">@wrkhotel</a></div>
+    </div>
+
+    <div class="insight-card opportunity">
+      <div class="insight-label green">Возможность #3</div>
+      <div class="card-title">1 000 отельеров на бизнес-завтраках — конвертировать в лиды</div>
+      <div class="card-body">Hotel Advisors собрали 1 000+ отельеров. Шаров выступил — теперь нужен follow-up. Есть ли CRM-процесс?</div>
+      <div class="source-tag"><a href="https://t.me/hotel_advisors/5389" target="_blank">@hotel_advisors</a></div>
+    </div>
+
+    <div style="font-size:14px;color:var(--accent);font-weight:700;margin:24px 0 12px">Рекомендации</div>
+
+    <div class="rec-card">
+      <div class="rec-icon marketing">📣</div>
+      <div><div class="card-title">Маркетинг</div><div class="card-body">Юридические разборы — в регулярную рубрику. Ближайшие: овербукинг, QR-заселение. Потенциал: 200+ репостов каждый.</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon product">⚙️</div>
+      <div><div class="card-title">Продукт</div><div class="card-body">Оценить нишу часовых услуг (Bnovo уже запустил). Есть ли спрос среди клиентов TL на бронирование SPA/бани/бассейна?</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon marketing">📣</div>
+      <div><div class="card-title">Коммуникация</div><div class="card-body">MAX-мессенджер: смягчить тон. Не «переходите», а «мы теперь есть и там, но Telegram остаётся основным каналом».</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon sales">📞</div>
+      <div><div class="card-title">Sales</div><div class="card-body">Follow-up после бизнес-завтраков Hotel Advisors. 1 000 контактов, Шаров уже выступил — нужна воронка.</div></div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-icon intel">🔎</div>
+      <div><div class="card-title">Разведка</div><div class="card-body">Островок: «Ориентир» 20 февраля — что покажут? Roomlink: какой функционал после объединения?</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:24px;color:var(--text2);font-size:12px;">
+  <details style="text-align:left;max-width:900px;margin:0 auto 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;">
+    <summary style="cursor:pointer;font-size:13px;color:var(--text2);font-weight:500;">Источники: 22 канала в 5 категориях</summary>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:12px;font-size:12px;">
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <strong style="color:var(--text);font-size:12px;margin-bottom:2px;">OTA-конкуренты</strong>
+        <a href="https://t.me/yandex_travel_pro" target="_blank" style="color:var(--text2);text-decoration:none;">Яндекс Путешествия PRO</a>
+        <a href="https://t.me/extranetetg" target="_blank" style="color:var(--text2);text-decoration:none;">Островок Экстранет</a>
+        <a href="https://t.me/bronevik_com" target="_blank" style="color:var(--text2);text-decoration:none;">Bronevik.com</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <strong style="color:var(--text);font-size:12px;margin-bottom:2px;">B2B SaaS конкуренты</strong>
+        <a href="https://t.me/uhotelsapp" target="_blank" style="color:var(--text2);text-decoration:none;">Uhotels</a>
+        <a href="https://t.me/bnovonews" target="_blank" style="color:var(--text2);text-decoration:none;">Bnovo</a>
+        <a href="https://t.me/hotellab_io" target="_blank" style="color:var(--text2);text-decoration:none;">Hotellab</a>
+        <a href="https://t.me/otelkontur" target="_blank" style="color:var(--text2);text-decoration:none;">Контур.Отель</a>
+        <a href="https://t.me/bronirui_online" target="_blank" style="color:var(--text2);text-decoration:none;">Бронируй Онлайн</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <strong style="color:var(--text);font-size:12px;margin-bottom:2px;">Отраслевые СМИ</strong>
+        <a href="https://t.me/wrkhotel" target="_blank" style="color:var(--text2);text-decoration:none;">WRKHotel</a>
+        <a href="https://t.me/hotel_geek" target="_blank" style="color:var(--text2);text-decoration:none;">Hotel Geek</a>
+        <a href="https://t.me/russianhospitalityawards" target="_blank" style="color:var(--text2);text-decoration:none;">Russian Hospitality</a>
+        <a href="https://t.me/portierdenuit" target="_blank" style="color:var(--text2);text-decoration:none;">Ночной портье</a>
+        <a href="https://t.me/AZO_channel" target="_blank" style="color:var(--text2);text-decoration:none;">Ассоциация загородных отелей</a>
+        <a href="https://t.me/Hoteliernews" target="_blank" style="color:var(--text2);text-decoration:none;">Новости отелей</a>
+        <a href="https://t.me/HotelierPRO" target="_blank" style="color:var(--text2);text-decoration:none;">Hotelier.PRO</a>
+        <a href="https://t.me/frontdesk_ru" target="_blank" style="color:var(--text2);text-decoration:none;">Front Desk</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <strong style="color:var(--text);font-size:12px;margin-bottom:2px;">TravelLine</strong>
+        <a href="https://t.me/travelline_news" target="_blank" style="color:var(--text2);text-decoration:none;">TravelLine (офиц.)</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <strong style="color:var(--text);font-size:12px;margin-bottom:2px;">Чаты отельеров</strong>
+        <a href="https://t.me/chat_hotel" target="_blank" style="color:var(--text2);text-decoration:none;">Закрытый чат WRKHotel</a>
+        <a href="https://t.me/hotel_advisors" target="_blank" style="color:var(--text2);text-decoration:none;">Hotel Advisors</a>
+        <a href="https://t.me/HRSRussia" target="_blank" style="color:var(--text2);text-decoration:none;">HRS Russia</a>
+        <span style="color:var(--text2);">TL: Беседка (приватная группа)</span>
+        <a href="https://t.me/hotelinfo_official_chat" target="_blank" style="color:var(--text2);text-decoration:none;">Контур для отельера (чат)</a>
+      </div>
+    </div>
+  </details>
+  Данные из 22 Telegram-каналов · Анализ с участием AI · Все цитаты верифицируемы по ссылкам
+</div>
+
+<script>
+  // Hash navigation
+  function activateTab(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
+
+    document.querySelectorAll('.nav-btn[data-section]').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+    const btn = document.querySelector(`.nav-btn[data-section="${sectionId}"]`);
+    if (btn) btn.classList.add('active');
+    section.classList.add('active');
+    return true;
+  }
+
+  // Initialize from hash on load
+  const initialHash = location.hash.slice(1);
+  if (initialHash && !activateTab(initialHash)) {
+    activateTab('b2b');
+  }
+
+  // Tab clicks update URL hash
+  document.querySelectorAll('.nav-btn[data-section]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.dataset.section;
+      history.pushState(null, '', `#${section}`);
+      activateTab(section);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Handle browser back/forward
+  window.addEventListener('popstate', () => {
+    const hash = location.hash.slice(1);
+    activateTab(hash || 'b2b');
+  });
+</script>
+</body>
+</html>
