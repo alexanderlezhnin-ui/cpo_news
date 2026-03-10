@@ -78,7 +78,7 @@
   .comp-block .comp-name { font-size: 17px; font-weight: 700; }
   .comp-block .comp-meta { font-size: 12px; color: var(--text2); }
   .comp-block .comp-item { font-size: 14px; color: var(--text2); margin-bottom: 10px; padding-left: 18px; position: relative; }
-  .comp-block .comp-item::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+  .comp-block .comp-item::before { content: '\2192'; position: absolute; left: 0; color: var(--accent); }
   .comp-block.empty { opacity: 0.5; }
   .comp-block.empty .comp-header { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
   .ps-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; }
@@ -141,7 +141,7 @@
 <div class="container">
 
   <div class="header">
-    <h1>Еженедельная сводка для CPO</h1>
+    <h1>Сводка CPO — 2–10 марта 2026</h1>
     <div class="meta">
       <span>2–10 марта 2026</span>
       <span>21 канал · 5 категорий</span>
@@ -151,192 +151,136 @@
 
   <div class="nav" style="margin-bottom:12px">
     <span style="color:var(--text2);font-size:13px;padding:8px 0;">Недели:</span>
-    <a href="week-2026-02-15.html" class="nav-btn">← 9–15 фев</a>
+    <a href="week-2026-02-07.html" class="nav-btn">&larr; 24 янв — 7 фев</a>
+    <a href="week-2026-02-15.html" class="nav-btn">9–15 фев</a>
     <a href="week-2026-02-22.html" class="nav-btn">16–22 фев</a>
-    <a href="index.html" class="nav-btn">23 фев — 1 мар</a>
+    <a href="week-2026-03-01.html" class="nav-btn">23 фев — 1 мар</a>
     <span class="nav-btn active" style="cursor:default">2–10 мар</span>
   </div>
 
   <!-- Sentiment bar -->
   <div class="sentiment-bar">
     <div class="sentiment-card">
-      <div class="name">TravelLine</div>
+      <div class="name">Яндекс Пут.</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:20%"></div>
+        <div class="bar-neu" style="width:50%"></div>
+        <div class="bar-neg" style="width:30%"></div>
+      </div>
+      <div class="counts"><span class="pos">+2</span> <span>~5</span> <span class="neg">-3</span></div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Bnovo</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:50%"></div>
+        <div class="bar-neu" style="width:50%"></div>
+      </div>
+      <div class="counts"><span class="pos">+3</span> <span>~3</span> <span class="neg">-0</span></div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Островок</div>
+      <div class="bar-container">
+        <div class="bar-pos" style="width:60%"></div>
+        <div class="bar-neu" style="width:40%"></div>
+      </div>
+      <div class="counts"><span class="pos">+3</span> <span>~2</span> <span class="neg">-0</span></div>
+    </div>
+    <div class="sentiment-card">
+      <div class="name">Контур</div>
       <div class="bar-container">
         <div class="bar-pos" style="width:20%"></div>
         <div class="bar-neu" style="width:60%"></div>
         <div class="bar-neg" style="width:20%"></div>
       </div>
-      <div class="counts"><span class="pos">+4</span><span>~12</span><span class="neg">-3</span></div>
-    </div>
-    <div class="sentiment-card no-data">
-      <div class="name">Uhotels</div>
-      <div class="bar-container"><div class="bar-neu" style="width:100%"></div></div>
-      <div class="counts"><span style="color:var(--text2)">нет данных</span></div>
+      <div class="counts"><span class="pos">+1</span> <span>~3</span> <span class="neg">-1</span></div>
     </div>
     <div class="sentiment-card">
-      <div class="name">Bnovo</div>
+      <div class="name">Bronevik</div>
       <div class="bar-container">
-        <div class="bar-pos" style="width:25%"></div>
-        <div class="bar-neu" style="width:50%"></div>
-        <div class="bar-neg" style="width:25%"></div>
+        <div class="bar-pos" style="width:40%"></div>
+        <div class="bar-neu" style="width:60%"></div>
       </div>
-      <div class="counts"><span class="pos">+3</span><span>~6</span><span class="neg">-3</span></div>
-    </div>
-    <div class="sentiment-card">
-      <div class="name">Островок</div>
-      <div class="bar-container">
-        <div class="bar-pos" style="width:30%"></div>
-        <div class="bar-neu" style="width:55%"></div>
-        <div class="bar-neg" style="width:15%"></div>
-      </div>
-      <div class="counts"><span class="pos">+4</span><span>~7</span><span class="neg">-2</span></div>
-    </div>
-    <div class="sentiment-card">
-      <div class="name">Контур</div>
-      <div class="bar-container">
-        <div class="bar-pos" style="width:10%"></div>
-        <div class="bar-neu" style="width:85%"></div>
-        <div class="bar-neg" style="width:5%"></div>
-      </div>
-      <div class="counts"><span class="pos">+1</span><span>~9</span><span class="neg">-1</span></div>
+      <div class="counts"><span class="pos">+2</span> <span>~3</span> <span class="neg">-0</span></div>
     </div>
   </div>
 
+  <!-- Tab navigation -->
   <div class="nav">
-    <button class="nav-btn active" data-section="commissions">Война комиссий</button>
-    <button class="nav-btn" data-section="b2b">Конкуренты</button>
-    <button class="nav-btn" data-section="market">Рынок</button>
+    <button class="nav-btn active" data-section="b2b">B2B конкуренты</button>
+    <button class="nav-btn" data-section="ota">OTA</button>
     <button class="nav-btn" data-section="tl-voice">Голос TL</button>
     <button class="nav-btn" data-section="client-voice">Голос клиента</button>
+    <button class="nav-btn" data-section="market">Рынок</button>
     <button class="nav-btn" data-section="conclusions">Выводы</button>
   </div>
 
-  <!-- ===== ВОЙНА КОМИССИЙ ===== -->
-  <div class="section active" id="commissions">
-    <div class="section-title">Война комиссий</div>
-
-    <!-- Яндекс Путешествия -->
-    <div class="comp-block" style="border-color: var(--orange);">
-      <div class="comp-header">
-        <div>
-          <div class="comp-name">Яндекс Путешествия</div>
-          <div class="comp-meta">@yandex_travel_pro · 8 постов · Тема комиссий замолчала, фокус на контент</div>
-        </div>
-      </div>
-
-      <div class="comp-item">
-        <strong><a href="https://t.me/yandex_travel_pro/1931" target="_blank" style="color:var(--text)">Соглашение с правительством Новгородской области</a></strong> — подписано партнёрство по развитию туризма. 2 722 просмотра, 6 репостов. Расширение регионального охвата.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/yandex_travel_pro/1934" target="_blank" style="color:var(--text)">Меры господдержки отелей в 2026</a></strong> — 2 499 просмотров, 20 репостов. Полезный контент: субсидии, гранты, бесплатное обучение. Ни слова про конфликт с сетями.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/yandex_travel_pro/1932" target="_blank" style="color:var(--text)">Интеграция с «Бронируй Онлайн» — детские места</a></strong> — синхронизация стоимости детских мест в тарифах через channel manager «Бронируй Онлайн». 2 577 просмотров. Важно: ЯП активно развивает связку с Бронируй Онлайн.
-      </div>
-      <div class="comp-item">
-        <strong>Cosmos Hotel Group прекратил сотрудничество с ЯП</strong> — Александр Биба, президент Cosmos Hotel Group (40+ отелей), рассказал в интервью о прекращении сотрудничества и международной экспансии.
-        <div class="source-tag"><a href="https://t.me/portierdenuit/7664" target="_blank">@portierdenuit/7664</a></div>
-      </div>
-      <div class="comp-item">
-        <strong>Отельеры в чатах:</strong> «ЯП как и все продукты Яндекса — демпингует, потом накручивает в 1000%». Усталость от темы, но позиция неизменна. Возврат Booking как надежда на конкуренцию.
-        <div class="source-tag"><a href="https://t.me/chat_hotel/140548" target="_blank">@chat_hotel/140548</a> · <a href="https://t.me/chat_hotel/140772" target="_blank">@chat_hotel/140772</a></div>
-      </div>
-
-      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;color:var(--text2);">
-        Тема комиссий тихая неделю: ЯП не делает новых объявлений по ставкам. Фокус переключился на контент и регуляторику.
-      </div>
-    </div>
-
-    <!-- Островок -->
-    <div class="comp-block" style="border-color: var(--green);">
-      <div class="comp-header">
-        <div>
-          <div class="comp-name">Островок</div>
-          <div class="comp-meta">@extranetetg · 14 постов · Конференция «Ориентир» отгремела, готовятся к MITT</div>
-        </div>
-      </div>
-
-      <div class="comp-item">
-        <strong><a href="https://t.me/extranetetg/2169" target="_blank" style="color:var(--text)">Сверка до 6 марта</a></strong> — отельерам напомнили о финансовой сверке в экстранете. 2 134 просмотра, 13 репостов. Стандартный операционный контент.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/extranetetg/2170" target="_blank" style="color:var(--text)">ИИ для посуточного бизнеса</a></strong> — кейс Натали Черниченко (масштабирование с помощью ИИ). 2 002 просмотра. Островок позиционирует себя как технологичный OTA.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/extranetetg/2179" target="_blank" style="color:var(--text)">MITT 2026 — ждём на стенде A1063</a></strong> — 11–13 марта в Крокус Экспо. Деловая сессия 12 марта «Как работать с новым потребителем». 1 572 просмотра.
-      </div>
-      <div class="comp-item">
-        <strong>Конференция «Ориентир» завершилась</strong> — розыгрыш призов от спикеров до 9 марта. Активная работа по удержанию вовлечённости аудитории после мероприятия.
-        <div class="source-tag"><a href="https://t.me/Hoteliernews/11868" target="_blank">@Hoteliernews/11868</a></div>
-      </div>
-      <div class="comp-item">
-        <strong>Из чатов:</strong> жалоба на систему отзывов — отель упал с 10 до 7.6 после одного негативного отзыва, Островок удалил отзыв, но оценка осталась. Недовольство политикой работы с отзывами.
-        <div class="source-tag"><a href="https://t.me/chat_hotel/140700" target="_blank">@chat_hotel/140700</a></div>
-      </div>
-    </div>
-
-    <!-- Bronevik -->
-    <div class="comp-block" style="border-color: var(--accent);">
-      <div class="comp-header">
-        <div>
-          <div class="comp-name">Bronevik.com</div>
-          <div class="comp-meta">@bronevik_com · 26 постов · Стратегический ход — партнёрство с Аэроклубом</div>
-        </div>
-      </div>
-
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronevik_com/2237" target="_blank" style="color:var(--text)">Партнёрство с «Аэроклубом»</a></strong> — стратегическое событие недели. База отелей Bronevik интегрирована в IT-систему Аэроклуба (2 800 корпоративных клиентов, крупнейший корп-тревел агент РФ). 825 просмотров, 13 репостов, 31 реакция. Открывает B2B канал привлечения деловых гостей.
-        <div class="source-tag"><a href="https://t.me/portierdenuit/7630" target="_blank">@portierdenuit/7630</a> · <a href="https://t.me/wrkhotel/5204" target="_blank">@wrkhotel/5204</a></div>
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronevik_com/2244" target="_blank" style="color:var(--text)">Закон о вывесках — инструкция для отелей</a></strong> — с 1 марта новые требования к информационным табличкам (русский язык). 868 просмотров. Полезный compliance-контент.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronevik_com/2245" target="_blank" style="color:var(--text)">Рынок отелей меняется — вебинар</a></strong> — новые правила игры и привлечение гостей в 2026. «Туристы стали экономнее». 797 просмотров.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronevik_com/2252" target="_blank" style="color:var(--text)">Гостевые дома — легализация</a></strong> — Минэкономразвития предложило распространить классификацию гостевых домов на все регионы. 803 просмотра.
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== B2B КОНКУРЕНТЫ ===== -->
-  <div class="section" id="b2b">
+  <!-- ====== B2B COMPETITORS ====== -->
+  <div class="section active" id="b2b">
     <div class="section-title">B2B конкуренты</div>
 
+    <!-- Uhotels -->
+    <div class="comp-block empty">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Uhotels</div>
+          <div class="comp-meta">@uhotelsapp · PMS · 0 постов за неделю — канал не публиковал</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bnovo -->
-    <div class="comp-block" style="border-color: var(--orange);">
+    <div class="comp-block">
       <div class="comp-header">
         <div>
           <div class="comp-name">Bnovo</div>
-          <div class="comp-meta">@bnovonews · 6 постов · CRM, вебинары, реферальная программа · Жалобы на цену из чатов</div>
+          <div class="comp-meta">@bnovonews · PMS · 6 постов · фокус на лояльность, SEO и работу с базой гостей</div>
         </div>
       </div>
+      <div class="comp-item">
+        <strong>Работа с базой повторных гостей:</strong> расширенные фильтры для сегментации по периоду проживания, чеку, допуслугам. Монетизация существующей базы вместо затрат на рекламу. 1 639 просмотров, 16 репостов.
+        <div class="source-tag"><a href="https://t.me/bnovonews/3714" target="_blank">@bnovonews/3714</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Вебинар по SEO для отелей (10 марта):</strong> как привлекать гостей через поисковые запросы и увеличивать прямые брони без роста рекламного бюджета. Продвигался через Frontdesk (652 просмотра, 12 репостов) и Hoteliernews.
+        <div class="source-tag"><a href="https://t.me/bnovonews/3716" target="_blank">@bnovonews/3716</a> · <a href="https://t.me/frontdesk_ru/4948" target="_blank">@frontdesk_ru/4948</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Реферальная программа: до 13 000 ₽ за каждый подключённый объект.</strong> Масштабируют дистрибуцию через существующих клиентов. Без активных продаж — просто советуешь продукт.
+        <div class="source-tag"><a href="https://t.me/bnovonews/3715" target="_blank">@bnovonews/3715</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Февральский дайджест индустрии:</strong> ключевые изменения — новые правила отмен с 1 марта, прогнозы по загрузке, изменения в дистрибуции. 1 612 просмотров. Регулярный контент-маркетинг.
+        <div class="source-tag"><a href="https://t.me/bnovonews/3717" target="_blank">@bnovonews/3717</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Подготовка к блокировке мессенджеров:</strong> Bnovo завёл канал в мессенджере MAX как резервный канал коммуникации с клиентами.
+        <div class="source-tag"><a href="https://t.me/bnovonews/3718" target="_blank">@bnovonews/3718</a></div>
+      </div>
+    </div>
 
-      <div class="comp-item">
-        <strong><a href="https://t.me/bnovonews/3714" target="_blank" style="color:var(--text)">Расширенные фильтры базы гостей</a></strong> — сегментация по периоду проживания, чеку, допуслугам. Продуктовый анонс. 1 639 просмотров, 16 репостов, 18 реакций. Активное развитие CRM-функций.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bnovonews/3717" target="_blank" style="color:var(--text)">Дайджест индустрии — февральский выпуск</a></strong> — новые правила отмен, предоплата, ставка ЦБ 21%, авиабилеты. 1 612 просмотров, 6 репостов. Полезный контент для отельеров.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bnovonews/3716" target="_blank" style="color:var(--text)">Вебинар по SEO и прямым бронированиям</a></strong> — 10 марта 12:00. Бесплатно. 1 438 просмотров. Прямая конкуренция за внимание аудитории с TL.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bnovonews/3715" target="_blank" style="color:var(--text)">Реферальная программа — до 13 000 руб. за подключение</a></strong> — агрессивный growth hacking. 1 416 просмотров. Bnovo платит за каждый новый подключённый объект.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bnovonews/3718" target="_blank" style="color:var(--text)">Канал в мессенджере MAX</a></strong> — хеджирование риска блокировки Telegram. 1 485 просмотров.
-      </div>
-
-      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:600">Из чатов:</div>
-        <div class="comp-item">
-          <strong><a href="https://t.me/chat_hotel/141064" target="_blank" style="color:var(--text)">«Обнаглели с ценником — стал космос»</a></strong> — отельер открыто спрашивает альтернативы шахматки. Продолжение тренда недовольства ценами Bnovo.
+    <!-- Бронируй Онлайн -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Бронируй Онлайн</div>
+          <div class="comp-meta">@bronirui_online · PMS · 12 постов (лидер по активности) · MITT + вебинары + регуляторика</div>
         </div>
-        <div class="comp-item">
-          <strong><a href="https://t.me/chat_hotel/141033" target="_blank" style="color:var(--text)">Овербукинг по вине Bnovo</a></strong> — вопрос о компенсации. Операционные проблемы системы.
-        </div>
+      </div>
+      <div class="comp-item">
+        <strong>Синхронизация детских мест с Яндекс Путешествиями:</strong> передача стоимости детских мест по возрасту и типу места через менеджер каналов. Расширение интеграции с ЯП именно в тот момент, когда другие уходят.
+        <div class="source-tag"><a href="https://t.me/bronirui_online/1762" target="_blank">@bronirui_online/1762</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Вебинар 4 марта «OTA и прямые брони без потери маржи».</strong> Без записи — только онлайн, подарки участникам. Активная воронка лидогенерации. 813 просмотров поста-анонса в Hoteliernews.
+        <div class="source-tag"><a href="https://t.me/bronirui_online/1767" target="_blank">@bronirui_online/1767</a> · <a href="https://t.me/Hoteliernews/11800" target="_blank">@Hoteliernews/11800</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Участие в MITT 2026 (11–13 марта):</strong> стенд А3067, Крокус Экспо. Также: Марина Гончаренко (исполнительный директор) открывает сессию Hotel Advisors 12 марта вместе с Данильченко.
+        <div class="source-tag"><a href="https://t.me/bronirui_online/1771" target="_blank">@bronirui_online/1771</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Регуляторный контент — лучший охват недели:</strong> разбор новых ППГУ с 1 марта (813 просмотров, 43 репоста), разъяснение закона о вывесках (619 просмотров, 7 репостов). Занимают нишу «регуляторного советника» для отельеров.
+        <div class="source-tag"><a href="https://t.me/bronirui_online/1759" target="_blank">@bronirui_online/1759</a> · <a href="https://t.me/bronirui_online/1769" target="_blank">1769</a></div>
       </div>
     </div>
 
@@ -345,54 +289,20 @@
       <div class="comp-header">
         <div>
           <div class="comp-name">Контур.Отель</div>
-          <div class="comp-meta">@otelkontur · 10 постов · Регуляторика МВД · Тихая неделя</div>
+          <div class="comp-meta">@otelkontur · PMS / бухгалтерия · 10 постов · фокус на цифровизацию и ИИ</div>
         </div>
       </div>
-
       <div class="comp-item">
-        <strong><a href="https://t.me/otelkontur/3337" target="_blank" style="color:var(--text)">Управление закупками для отеля</a></strong> — контент про поставщиков и надёжность цепочек. 400 просмотров, 2 репоста. Низкий engagement.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/otelkontur/3345" target="_blank" style="color:var(--text)">ИИ для управления отелем</a></strong> — «меньше рутины, больше прозрачности». 333 просмотра.
+        <strong>Контент про цифровизацию и ИИ:</strong> серия карточек о том, как ИИ снижает ручную рутину и повышает прозрачность для руководителя. Позиционирование — «умная система», а не просто PMS.
+        <div class="source-tag"><a href="https://t.me/otelkontur/3345" target="_blank">@otelkontur/3345</a></div>
       </div>
       <div class="comp-item">
-        <strong>Из чатов — МВД/регуляторика:</strong> отельеры продолжают использовать Контур для отправки уведомлений в МВД. «Отправляем через Контур, пока проблем не было». Контур воспринимается как стандарт для compliance.
-        <div class="source-tag"><a href="https://t.me/c/1264671967/104759" target="_blank">TL:Беседка/104759</a> · <a href="https://t.me/c/1264671967/104763" target="_blank">TL:Беседка/104763</a></div>
-      </div>
-      <div style="margin-top:8px;font-size:13px;color:var(--text2);">Контур не делает продуктовых анонсов — только полезный контент. Доминирует в нише регуляторики, но channel manager по-прежнему слабое место.</div>
-    </div>
-
-    <!-- Бронируй Онлайн -->
-    <div class="comp-block" style="border-color: var(--green);">
-      <div class="comp-header">
-        <div>
-          <div class="comp-name">Бронируй Онлайн</div>
-          <div class="comp-meta">@bronirui_online · 12 постов · Интеграция с ЯП + вебинар + закон</div>
-        </div>
-      </div>
-
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronirui_online/1759" target="_blank" style="color:var(--text)">Новый гостиничный закон с 1 марта</a></strong> — разбор изменений: невозвратный тариф не легализован, возврат по срокам. 813 просмотров, 43 репоста, 10 реакций. Вирусный для их масштаба.
+        <strong>B2B-экосистема:</strong> контент про требования к поставщикам для отелей — стабильность качества и сопровождение важнее цены. Контур расширяет восприятие за рамки PMS.
+        <div class="source-tag"><a href="https://t.me/otelkontur/3337" target="_blank">@otelkontur/3337</a></div>
       </div>
       <div class="comp-item">
-        <strong><a href="https://t.me/bronirui_online/1762" target="_blank" style="color:var(--text)">Интеграция с Яндекс Путешествиями — детские места</a></strong> — совместно с ЯП реализована синхронизация стоимости детских мест. 571 просмотр. ЯП делает ставку на Бронируй Онлайн как channel manager.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronirui_online/1769" target="_blank" style="color:var(--text)">Закон о запрете иностранных слов в рекламе</a></strong> — практический разбор для отелей. 619 просмотров. Compliance-контент работает хорошо.
-      </div>
-      <div class="comp-item">
-        <strong><a href="https://t.me/bronirui_online/1768" target="_blank" style="color:var(--text)">Вебинар «OTA и прямые брони без потери маржи»</a></strong> — 4 марта. Продвигается через Hoteliernews.
-        <div class="source-tag"><a href="https://t.me/Hoteliernews/11800" target="_blank">@Hoteliernews/11800</a></div>
-      </div>
-    </div>
-
-    <!-- Uhotels -->
-    <div class="comp-block empty">
-      <div class="comp-header">
-        <div>
-          <div class="comp-name">Uhotels</div>
-          <div class="comp-meta">@uhotelsapp · 0 постов за период · Полное молчание</div>
-        </div>
+        <strong>Упоминания в чатах — нейтральные/негативные:</strong> отельеры жалуются на нестабильную синхронизацию с МВД («ждём исправления»). В Сочи кто-то агрессивно продвигает Контур гостевым домам как инструмент регистрации иностранцев.
+        <div class="source-tag"><a href="https://t.me/c/chat_hotel/140885" target="_blank">chat_hotel/140885</a> · <a href="https://t.me/c/chat_hotel/140897" target="_blank">140897</a></div>
       </div>
     </div>
 
@@ -401,415 +311,451 @@
       <div class="comp-header">
         <div>
           <div class="comp-name">Hotellab</div>
-          <div class="comp-meta">@hotellab_io · 0 постов за период · Активности нет</div>
+          <div class="comp-meta">@hotellab_io · Revenue Management · Канал недоступен (username не найден)</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Сигналы -->
+    <div class="card" style="border-left: 3px solid var(--orange);">
+      <div class="card-title" style="color: var(--orange);">Новые сигналы</div>
+      <div class="card-body">
+        <p><strong>Booking.com теряет инвесторов из-за AI-агентов:</strong> акции снизились на 32% с конца 2025 года. Инвесторы закладывают риск того, что AI-ассистенты от Google и других техгигантов начнут бронировать напрямую, минуя OTA. Это системный сигнал для всего рынка дистрибуции. 4 393 просмотра, 73 репоста.</p>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5210" target="_blank">@wrkhotel/5210</a></div>
+        <br>
+        <p><strong>Cosmos Hotel Group — прекращение сотрудничества с Яндекс Путешествиями:</strong> Александр Биба, президент Cosmos Hotel Group (40+ отелей), рассказал в подкасте об уходе с ЯП. Крупнейший публичный выход с ЯП — значимый сигнал рынку. 8 982 просмотра, 92 репоста.</p>
+        <div class="source-tag"><a href="https://t.me/portierdenuit/7664" target="_blank">@portierdenuit/7664</a></div>
+        <br>
+        <p><strong>WRKHotel переносит базу «Архив Отельеров» в мессенджер MAX</strong> — первые движения крупных отраслевых медиа к альтернативным платформам. 4 613 просмотров, 51 репост.</p>
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5211" target="_blank">@wrkhotel/5211</a></div>
       </div>
     </div>
   </div>
 
-  <!-- ===== РЫНОК ===== -->
-  <div class="section" id="market">
-    <div class="section-title">Рынок</div>
+  <!-- ====== OTA ====== -->
+  <div class="section" id="ota">
+    <div class="section-title">OTA</div>
 
-    <div class="timeline">
-
-      <div class="timeline-item hot">
-        <div class="timeline-date">1–2 марта — Новые правила гостиничного рынка</div>
-        <div class="timeline-text">
-          С 1 марта вступили в силу <strong>три крупных законодательных изменения</strong>:
-          <br><br>
-          1. <strong>Новые правила оказания гостиничных услуг</strong> — унифицированы для всех СРА (гостиницы, базы отдыха, кемпинги). Ключевое: невозвратный тариф de facto не легализован — полный возврат предоплаты если гость предупредил за сутки. На сайте обязателен уникальный номер в госреестре.
-          <br>
-          2. <strong>Запрет иностранных слов на вывесках и в рекламе</strong> — вся публичная информация должна быть на русском языке как основном. Отельеры в панике: 8591 страниц словарей разрешённых слов уже в Архиве Отельера.
-          <br>
-          3. <strong>Новые правила классификации</strong> — Росстандарт готовит стандарты для приёма иностранных гостей (вступят 1 июня 2026).
+    <!-- Яндекс Путешествия -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Яндекс Путешествия</div>
+          <div class="comp-meta">@yandex_travel_pro · 8 постов · война комиссий — фаза "крупные уходят"</div>
         </div>
-        <div class="source-tag"><a href="https://t.me/portierdenuit/7623" target="_blank">@portierdenuit/7623</a> · <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a> · <a href="https://t.me/bronirui_online/1759" target="_blank">@bronirui_online/1759</a></div>
       </div>
-
-      <div class="timeline-item hot">
-        <div class="timeline-date">3 марта — Bronevik × Аэроклуб: M&A рынка корп-тревела</div>
-        <div class="timeline-text">
-          <strong>Стратегическое событие недели</strong>: Bronevik.com интегрировал базу отелей напрямую в IT-систему Аэроклуба — крупнейшего агентства делового туризма (2 800 корпоративных клиентов). Это новый B2B-канал привлечения деловых гостей для отелей. Рынок корп-тревела консолидируется.
-        </div>
-        <div class="source-tag"><a href="https://t.me/wrkhotel/5204" target="_blank">@wrkhotel/5204</a> · <a href="https://t.me/portierdenuit/7630" target="_blank">@portierdenuit/7630</a> · <a href="https://t.me/bronevik_com/2237" target="_blank">@bronevik_com/2237</a></div>
-      </div>
-
-      <div class="timeline-item hot">
-        <div class="timeline-date">4 марта — Booking.com минус 32% с конца 2025</div>
-        <div class="timeline-text">
-          Акции Booking.com упали на 32% за несколько месяцев. Инвесторы закладывают в цену риск того, что <strong>AI-ассистенты начнут бронировать напрямую, минуя OTA</strong>. В чатах — надежда, что Booking вернётся в РФ и создаст конкуренцию ЯП. Тема AI-агентов в дистрибуции набирает обороты.
-        </div>
-        <div class="source-tag"><a href="https://t.me/wrkhotel/5210" target="_blank">@wrkhotel/5210</a> · <a href="https://t.me/HotelierPRO/9426" target="_blank">@HotelierPRO/9426</a></div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">4 марта — VALO перешёл под государство</div>
-        <div class="timeline-text">
-          Структура VALO окончательно перешла под владение государством. Консолидация активов продолжается.
-        </div>
-        <div class="source-tag"><a href="https://t.me/wrkhotel/5209" target="_blank">@wrkhotel/5209</a></div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">5 марта — Туристический кэшбэк 25% может вернуться</div>
-        <div class="timeline-text">
-          Госдума призвала возродить программу туристического кэшбэка в размере 25% от стоимости тура. 5 171 просмотр, 83 реакции — сильный сигнал для отрасли. Если реализуется — рост внутреннего туризма.
-        </div>
-        <div class="source-tag"><a href="https://t.me/wrkhotel/5214" target="_blank">@wrkhotel/5214</a></div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">5 марта — ГОСТ для глэмпингов с июня 2026</div>
-        <div class="timeline-text">
-          ГОСТ Р 72311-2025 вступает в силу в июне 2026. Впервые официальное определение глэмпинга, стандарты размещения. Новый сегмент потенциальных клиентов TL.
-        </div>
-        <div class="source-tag"><a href="https://t.me/AZO_channel/2486" target="_blank">@AZO_channel/2486</a></div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">7 марта — Cosmos Hotel Group: прекращение сотрудничества с ЯП</div>
-        <div class="timeline-text">
-          Интервью с Александром Биба, президентом Cosmos Hotel Group (40+ отелей). Темы: отказ от ЯП, международная экспансия российских брендов, баланс эффективности и гостеприимства. 8 982 просмотра, 92 репоста — хит недели в отраслевых медиа.
-        </div>
+      <div class="comp-item">
+        <strong>Cosmos Hotel Group (40+ отелей) прекратила сотрудничество с ЯП</strong> — президент Александр Биба заявил об этом публично в подкасте «Промкаст». Крупнейший публичный выход с ЯП после волны февральского бойкота. 8 982 просмотра, 92 репоста.
         <div class="source-tag"><a href="https://t.me/portierdenuit/7664" target="_blank">@portierdenuit/7664</a></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">9 марта — Налог на землю для гостевых домов ×5</div>
-        <div class="timeline-text">
-          ФНС поддержало пятикратное увеличение налога на землю для гостевых домов. 3 240 просмотров, 137 репостов, 124 реакции — болезненная тема для малых СРА.
-        </div>
-        <div class="source-tag"><a href="https://t.me/wrkhotel/5215" target="_blank">@wrkhotel/5215</a></div>
+      <div class="comp-item">
+        <strong>Соглашение с Новгородской областью:</strong> партнёрство для продвижения региона через аудиторию ЯП + совместные проекты для туристического развития. 2 722 просмотра.
+        <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1931" target="_blank">@yandex_travel_pro/1931</a></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">2–3 марта — Загрузка рынка</div>
-        <div class="timeline-text">
-          Hotel Advisors: данные на 3 марта — Москва 39.1% на 7 марта, 33.4% к концу недели. Умеренно положительная динамика январь–февраль: рост есть, но уже на уровне прошлого года. Длинные выходные 8 марта поддержали показатели.
-        </div>
-        <div class="source-tag"><a href="https://t.me/portierdenuit/7632" target="_blank">@portierdenuit/7632</a> · <a href="https://t.me/hotel_advisors/5504" target="_blank">@hotel_advisors/5504</a></div>
+      <div class="comp-item">
+        <strong>Детские тарифы через Бронируй Онлайн:</strong> отели с интеграцией через менеджер каналов «Бронируй Онлайн» теперь могут устанавливать разные тарифы по возрасту ребёнка. 2 577 просмотров.
+        <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1932" target="_blank">@yandex_travel_pro/1932</a></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">2–3 марта — Hotel Business Days в Санкт-Петербурге</div>
-        <div class="timeline-text">
-          Отраслевое мероприятие в Cosmos Saint-Petersburg Pribaltiyskaya Hotel. Островок на стенде №34. Hotel Advisors — репортаж с площадки.
-        </div>
-        <div class="source-tag"><a href="https://t.me/extranetetg/2168" target="_blank">@extranetetg/2168</a> · <a href="https://t.me/hotel_advisors/5503" target="_blank">@hotel_advisors/5503</a></div>
+      <div class="comp-item">
+        <strong>19 программ господдержки для отелей:</strong> субсидии, гранты, льготы, бесплатное обучение. Позиционирование «партнёр отельеров», а не только площадка. 2 499 просмотров, 20 репостов.
+        <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1934" target="_blank">@yandex_travel_pro/1934</a></div>
       </div>
+      <div class="comp-item">
+        <strong>Кейс Санатория Дон:</strong> через ЯП расширили аудиторию из Воронежа на Тулу, Брянск, Красноярск. Контент про ROI для региональных объектов. 2 605 просмотров, 16 репостов.
+        <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1933" target="_blank">@yandex_travel_pro/1933</a></div>
+      </div>
+    </div>
 
+    <!-- Островок -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Островок</div>
+          <div class="comp-meta">@extranetetg · 14 постов · поствебинарная активность + сверка</div>
+        </div>
+      </div>
+      <div class="comp-item">
+        <strong>Розыгрыш подарков после конференции «Ориентир»</strong> — до 9 марта включительно. Поддерживает вовлечённость аудитории после крупного мероприятия. 5 246 просмотров через Hoteliernews.
+        <div class="source-tag"><a href="https://t.me/Hoteliernews/11868" target="_blank">@Hoteliernews/11868</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Сверка с отелями до 6 марта:</strong> финансовая сверка в разделе «Договоры и счета» экстранета. 2 134 просмотра, 13 репостов — высокая вовлечённость на операционный контент.
+        <div class="source-tag"><a href="https://t.me/extranetetg/2169" target="_blank">@extranetetg/2169</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Контент про ИИ для посуточного бизнеса:</strong> кейс Натали Черниченко — как ИИ помогает управлять несколькими объектами. 2 002 просмотра.
+        <div class="source-tag"><a href="https://t.me/extranetetg/2170" target="_blank">@extranetetg/2170</a></div>
+      </div>
+      <div class="comp-item" style="color: var(--green);">
+        Позитивный сентимент: аудитория тепло реагирует на розыгрыш после «Ориентира». Серия постов 3 марта (6 постов одним днём) — агрессивное насыщение ленты после паузы.
+      </div>
+    </div>
+
+    <!-- Bronevik -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Bronevik.com</div>
+          <div class="comp-meta">@bronevik_com · B2B/корп тревел · 26 постов · MITT + новые партнёрства</div>
+        </div>
+      </div>
+      <div class="comp-item">
+        <strong>Стратегическое партнёрство с «Аэроклубом»</strong> — лидер рынка делового туризма (TravelTech для управления командировками). Новый канал привлечения корпоративных гостей для партнёрских отелей. 825 просмотров, 13 репостов.
+        <div class="source-tag"><a href="https://t.me/bronevik_com/2237" target="_blank">@bronevik_com/2237</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>MITT 2026 (11–13 марта) — стенд А1067:</strong> серия постов #ЯнаMITT с анонсами команды. Участие в VIII Конгрессе турагентов 6 марта.
+        <div class="source-tag"><a href="https://t.me/bronevik_com/2236" target="_blank">@bronevik_com/2236</a> · <a href="https://t.me/bronevik_com/2239" target="_blank">2239</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Разъяснение по новым правилам бронирования:</strong> коснутся ли изменения владельцев квартир — ответ: нет (только гостиничные услуги). 950 просмотров, 10 репостов — лучший пост недели по охвату.
+        <div class="source-tag"><a href="https://t.me/bronevik_com/2234" target="_blank">@bronevik_com/2234</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Инициатива Минэкономразвития по гостевым домам:</strong> расширение классификации на все регионы России. Bronevik активно освещает регуляторные темы для привлечения новых сегментов. 803 просмотра, 12 репостов.
+        <div class="source-tag"><a href="https://t.me/bronevik_com/2252" target="_blank">@bronevik_com/2252</a></div>
+      </div>
+    </div>
+
+    <!-- Другие OTA -->
+    <div class="comp-block">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Другие OTA — сигналы из чатов</div>
+          <div class="comp-meta">Комфорт Букинг, Booking.com — упоминания отельеров</div>
+        </div>
+      </div>
+      <div class="comp-item">
+        <strong>Booking.com -32% с конца 2025 из-за AI-агентов.</strong> Инвесторы ждут, что AI-ассистенты начнут бронировать напрямую. Если сбудется — OTA теряют функцию, TL выигрывает. 4 393 просмотра.
+        <div class="source-tag"><a href="https://t.me/wrkhotel/5210" target="_blank">@wrkhotel/5210</a></div>
+      </div>
+      <div class="comp-item">
+        <strong>Комфорт Букинг повышает комиссию интернет-эквайринга на 20%.</strong> Отельеры в Беседке ищут альтернативных провайдеров. 10 ответов — горячее обсуждение.
+        <div class="source-tag"><a href="https://t.me/c/1264671967/104682" target="_blank">Беседка/104682</a></div>
+      </div>
     </div>
   </div>
 
-  <!-- ===== ГОЛОС TL ===== -->
+  <!-- ====== TL VOICE ====== -->
   <div class="section" id="tl-voice">
-    <div class="section-title">Голос TravelLine</div>
-    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;">6 постов в канале @travelline_news за 2–10 марта · Фокус на MITT-2026 и контентный маркетинг</div>
+    <div class="section-title">Голос TL — что говорят О НАС</div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Событие</div>
-      <div class="ps-title">Стенд на MITT-2026 — тема «Космос»</div>
-      <div class="ps-body">Анонс присутствия на крупнейшей туристической выставке страны. История бренда: первый крупный отель TL — гостиница «Космос» (2008). 3 083 просмотра, 7 репостов, 24 реакции — лучший пост за период.</div>
-      <div class="engagement">
-        <span class="badge views">3 083</span>
-        <span class="badge fwd">↗ 7</span>
-        <span class="badge react">24</span>
-      </div>
+      <div class="ps-label praise">ХВАЛЯТ</div>
+      <div class="ps-title">MITT 2026: бизнес-завтрак Юрия Костина — 2 633 просмотра, 20 репостов</div>
+      <div class="ps-body">TL анонсировал бизнес-завтрак на MITT 12 марта (10–14:00, конференц-зал F). Тема: как усилить работу с гостем от первого касания до повторного визита. Высокий отклик — 5 реплаев и 20 репостов для анонса мероприятия.</div>
+      <div class="source-tag"><a href="https://t.me/travelline_news/8955" target="_blank">@travelline_news/8955</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label praise">ХВАЛЯТ</div>
+      <div class="ps-title">«Космос — это только начало»: история TL с первым клиентом — 3 083 просмотра</div>
+      <div class="ps-body">Пост о старте TL — первый крупный клиент «Космос» в 2008 году, история основателя Саши Галочкина. Тема стенда на MITT. Лучший пост канала за неделю: 3 083 просмотра, 7 репостов.</div>
       <div class="source-tag"><a href="https://t.me/travelline_news/8951" target="_blank">@travelline_news/8951</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Событие</div>
-      <div class="ps-title">Бизнес-завтрак CPO Юры Костина на MITT</div>
-      <div class="ps-body">12 марта, 10:00–14:00, Крокус Экспо, зал F. Тема: «Как усилить работу с гостем — от первого касания до повторного визита». 2 633 просмотра, 20 репостов, 24 реакции. Хорошее вовлечение.</div>
-      <div class="engagement">
-        <span class="badge views">2 633</span>
-        <span class="badge fwd">↗ 20</span>
-        <span class="badge react">24</span>
-      </div>
-      <div class="source-tag"><a href="https://t.me/travelline_news/8955" target="_blank">@travelline_news/8955</a></div>
-    </div>
-
-    <div class="ps-block">
-      <div class="ps-label praise">Контент</div>
-      <div class="ps-title">Статья: как увеличить загрузку загородного отеля</div>
-      <div class="ps-body">9 советов: от сайта до коллабораций с блогерами. 2 859 просмотров, 35 репостов — отличный показатель для практической статьи.</div>
-      <div class="engagement">
-        <span class="badge views">2 859</span>
-        <span class="badge fwd">↗ 35</span>
-        <span class="badge react">11</span>
-      </div>
+      <div class="ps-label praise">ХВАЛЯТ</div>
+      <div class="ps-title">«9 советов по загрузке загородного отеля» — 2 859 просмотров, 35 репостов</div>
+      <div class="ps-body">Практические советы с кейсами: от развития сайта до коллабораций с блогерами. Ссылка на базу знаний TL. Регулярный качественный контент поддерживает позиционирование TL как эксперта отрасли.</div>
       <div class="source-tag"><a href="https://t.me/travelline_news/8953" target="_blank">@travelline_news/8953</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Контент</div>
-      <div class="ps-title">Новая рубрика «От Хаммурапи до Галочкина»</div>
-      <div class="ps-body">Исторические экскурсы в гостеприимство от Димы Канашина. Первый выпуск — про рассылки к 8 марта. 2 492 просмотра, 16 репостов, 40 реакций — максимальные реакции за период. Рубрика зашла.</div>
-      <div class="engagement">
-        <span class="badge views">2 492</span>
-        <span class="badge fwd">↗ 16</span>
-        <span class="badge react">40</span>
-      </div>
+      <div class="ps-label praise">ХВАЛЯТ</div>
+      <div class="ps-title">Рубрика «От Хаммурапи до Галочкина»: история гостеприимства через рассылки TL</div>
+      <div class="ps-body">Новая рубрика Димы Канашина с историческим экскурсом + ссылка на возможности рассылок в TL. 2 492 просмотра, 16 репостов, 6 ответов. Образовательный контент через историю — нестандартный формат.</div>
       <div class="source-tag"><a href="https://t.me/travelline_news/8956" target="_blank">@travelline_news/8956</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Соцсети</div>
-      <div class="ps-title">Агрегатор соцсетей TravelLine</div>
-      <div class="ps-body">Пост со всеми площадками: Telegram, Беседка, MAX, ВКонтакте. Хеджирование рисков блокировки мессенджеров. 2 735 просмотров.</div>
-      <div class="source-tag"><a href="https://t.me/travelline_news/8952" target="_blank">@travelline_news/8952</a></div>
+      <div class="ps-label complaint">КРИТИКУЮТ</div>
+      <div class="ps-title">TL + AmoCRM: изменение брони ломает CRM-автоворонку — поддержка не решает</div>
+      <div class="ps-body">Апарт-отель WINGS: при любом изменении брони в TL (смена имени гостя, дат) сделка в AmoCRM улетает в автоворонку «Отмена». Служба поддержки TL не смогла решить. 3 ответа в треде — проблема воспроизводится.</div>
+      <span class="ps-status unresolved">не решено</span>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/140542" target="_blank">chat_hotel/140542</a></div>
     </div>
 
-    <div style="margin-top:16px;padding:14px;background:var(--surface2);border-radius:var(--radius);font-size:14px;color:var(--text2);">
-      <strong style="color:var(--text)">Вывод по контенту TL:</strong> Неделя полностью про MITT-2026. Продуктовых анонсов нет. Engagement нормальный — рубрика «Хаммурапи до Галочкина» потенциально вирусная. Прямая конкуренция с Bnovo за аудиторию — оба проводят вебинары по SEO 10 марта.
+    <div class="ps-block">
+      <div class="ps-label complaint">КРИТИКУЮТ</div>
+      <div class="ps-title">«Управление заказами» постоянно падает — поддержка отвечает отмазками</div>
+      <div class="ps-body">Наталья Жарковская (Беседка): постоянная ошибка в управлении заказами, поддержка TL предлагает стандартные отмазки — интернет, браузер, другой компьютер. «Надоедают ваши "может что-то с интернетом"». Один раз помогло изменение прав, затем снова сломалось. 17 ответов.</div>
+      <span class="ps-status unresolved">постоянная боль</span>
+      <div class="source-tag"><a href="https://t.me/c/1264671967/104363" target="_blank">Беседка/104363</a></div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-label pending">ЗАПРОС</div>
+      <div class="ps-title">Hotel GPT: только широкоформатные изображения — нужны другие форматы</div>
+      <div class="ps-body">Сергей в Беседке: @travelline_admin — Hotel GPT генерирует только широкоформатные изображения, нужны другие форматы. TL поддержка предложила написать на support@travelline.ru.</div>
+      <span class="ps-status in-progress">в обработке</span>
+      <div class="source-tag"><a href="https://t.me/c/1264671967/104750" target="_blank">Беседка/104750</a></div>
     </div>
   </div>
 
-  <!-- ===== ГОЛОС КЛИЕНТА ===== -->
+  <!-- ====== CLIENT VOICE ====== -->
   <div class="section" id="client-voice">
     <div class="section-title">Голос клиента</div>
-    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;">chat_hotel · TL:Беседка · hotel_advisors · HRSRussia — 1 609 сообщений за период</div>
 
-    <div style="font-size:14px;font-weight:700;color:var(--orange);margin-bottom:12px">Проблемы с TravelLine</div>
+    <div class="ps-block" style="border-left: 3px solid var(--red);">
+      <div class="ps-label problem">ГЛАВНАЯ БОЛЬ НЕДЕЛИ</div>
+      <div class="ps-title">Закон о русском языке с 1 марта: паника из-за иностранных слов в названиях номеров и вывесках</div>
+      <div class="ps-body">
+        С 1 марта вся публичная информация обязана быть на русском языке. Отельеры в панике — «ресепшен», «делюкс», «супериор», «check-in» под вопросом. Самый острый вопрос: если в реестре ФСА название отеля на английском — нужна ли новая самооценка? Тред 30 ответов в chat_hotel.
+        <br><br>
+        WRKHotel разместил в «Архиве Отельера» 5 словарей разрешённых слов (8 591 страница). Frontdesk разъяснил: зарегистрированные товарные знаки и фирменные наименования — исключение. Все конкуренты TL уже опубликовали разъяснения, TL — нет.
+      </div>
+      <span class="ps-status unresolved">без инструментального решения от TL</span>
+      <div class="source-tag">
+        <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a> ·
+        <a href="https://t.me/c/chat_hotel/140779" target="_blank">chat_hotel/140779</a> ·
+        <a href="https://t.me/c/chat_hotel/140650" target="_blank">chat_hotel/140650</a> ·
+        <a href="https://t.me/frontdesk_ru/4931" target="_blank">@frontdesk_ru/4931</a>
+      </div>
+    </div>
 
-    <div class="ps-block">
-      <div class="ps-label complaint">Поддержка</div>
-      <div class="ps-title">«Третий день на линии по 2 часа» — отчёт по бронированиям не выгружается</div>
-      <div class="ps-body">Конкретная жалоба: отчёт по бронированиям не работает больше года, каждый вопрос решается только «истериками». Отельер открыто рассматривает переход на другую систему и спрашивает опыт.</div>
-      <div class="source-tag"><a href="https://t.me/c/1264671967/104414" target="_blank">TL:Беседка/104414</a></div>
-      <div class="ps-status unresolved">Системная проблема</div>
+    <div class="ps-block" style="border-left: 3px solid var(--red);">
+      <div class="ps-label problem">НОВЫЕ ППГУ</div>
+      <div class="ps-title">Агенты-мошенники: перенос дат без штрафа через доброе согласие отеля</div>
+      <div class="ps-body">
+        Регина в chat_hotel: агент просит перенести заезд с 02.03 на 05.03 — отель соглашается, затем агент отменяет «без штрафа» (дата изменена). 30 ответов — самый активный тред недели в chat_hotel. Юридическая дыра в новых правилах, которую нужно закрывать через условия договора.
+      </div>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/140582" target="_blank">chat_hotel/140582</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label complaint">Интеграция</div>
-      <div class="ps-title">TravelLine × AmoCRM — сделка улетает в автоворонку «Отмена»</div>
-      <div class="ps-body">При изменении данных в бронировании TL (смена имени, дат) сделка в AmoCRM падает в воронку отмены. Несколько дней без ответа от поддержки.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/140542" target="_blank">@chat_hotel/140542</a></div>
-      <div class="ps-status unresolved">Без ответа</div>
+      <div class="ps-label problem">ПРОБЛЕМА</div>
+      <div class="ps-title">ФНС поддержало пятикратный рост налога на землю для гостевых домов</div>
+      <div class="ps-body">
+        WRKHotel: ФНС поддержало 5× увеличение земельного налога для гостевых домов. 3 242 просмотра, 137 репостов — один из самых виральных постов недели. Удар по сегменту глэмпингов и гостевых домов.
+      </div>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/141070" target="_blank">chat_hotel/141070</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label complaint">Продукт</div>
-      <div class="ps-title">«Заявки на доработку — ни одну не выполнили за год»</div>
-      <div class="ps-body">Отель перешёл на TL год назад. «ТЛ очень хорош в аналитике, это факт! Но много отрицательных моментов. Заявки на доработку не выполнены ни одной». Запрос фич висит без движения.</div>
-      <div class="source-tag"><a href="https://t.me/c/1264671967/104351" target="_blank">TL:Беседка/104351</a></div>
-      <div class="ps-status in-progress">Фиксировать паттерн</div>
+      <div class="ps-label problem">ПРОБЛЕМА</div>
+      <div class="ps-title">НДС и кассы: как оформить полупансион при УСН «доходы-расходы»</div>
+      <div class="ps-body">
+        Беседка: 32 ответа на вопрос о правильном оформлении чека при расчёте на УСН д-р. Тариф «полупансион» при 3★ нельзя продавать с 0% НДС — как включить ужин с 22%? Один из самых активных тредов Беседки за неделю.
+      </div>
+      <div class="source-tag"><a href="https://t.me/c/1264671967/104506" target="_blank">Беседка/104506</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Хвалят</div>
-      <div class="ps-title">«ТЛ работал, когда сервер атаковали»</div>
-      <div class="ps-body">Отельер: при атаке на сервер — не работало ничего: ни PMS, ни почта, ни телефон. «TL работал» — надёжность системы в критичный момент. Аргумент для удержания.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/141049" target="_blank">@chat_hotel/141049</a></div>
+      <div class="ps-label problem">ПРОБЛЕМА</div>
+      <div class="ps-title">Пожарные инспекции: новые нарушения каждые 2 года, устранение в 100+ тыс. рублей</div>
+      <div class="ps-body">
+        Г.Т. в chat_hotel: пожарка каждые 2 года находит «новые» нарушения (в этот раз — высота перил 80→120 см). 21 ответ, отельеры делятся опытом и советуют юристов.
+      </div>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/140921" target="_blank">chat_hotel/140921</a></div>
     </div>
 
     <div class="ps-block">
-      <div class="ps-label praise">Хвалят</div>
-      <div class="ps-title">TL взял проблему в работу — позитивный сигнал</div>
-      <div class="ps-body">Отельер: «ТЛ взял в работу проблему, надеюсь, разберутся». Поддержка реагирует, отношение доброжелательное несмотря на проблему с кешированием.</div>
-      <div class="source-tag"><a href="https://t.me/c/1264671967/104384" target="_blank">TL:Беседка/104384</a></div>
+      <div class="ps-label solution">ПОЗИТИВ</div>
+      <div class="ps-title">Возврат туристического кэшбэка 25%: инициатива депутата Госдумы</div>
+      <div class="ps-body">
+        Депутат Николай Новичков призвал вернуть программу туристического кэшбэка 25% от стоимости тура. 5 171 просмотр, 20 репостов — отельеры ждут поддержку на фоне экономической турбулентности и снижения спроса на летние туры.
+      </div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5214" target="_blank">@wrkhotel/5214</a></div>
     </div>
 
-    <div style="font-size:14px;font-weight:700;color:var(--accent);margin: 20px 0 12px">Горячие обсуждения рынка</div>
-
-    <div class="ps-block">
-      <div class="ps-label pending">Закон</div>
-      <div class="ps-title">Невозвратный тариф — практика применения нового закона</div>
-      <div class="ps-body">С 1 марта невозвратный тариф не имеет юридической силы. Схема обхода: гость просит перенести дату → гостиница соглашается → гость отменяет на новые даты без штрафа. Активное обсуждение в чатах.</div>
-      <div class="source-tag"><a href="https://t.me/wrkhotel/5202" target="_blank">@wrkhotel/5202</a> · <a href="https://t.me/chat_hotel/140588" target="_blank">@chat_hotel/140588</a></div>
-    </div>
-
-    <div class="ps-block">
-      <div class="ps-label pending">OTA</div>
-      <div class="ps-title">«Букинг мог бы конкурировать с ЯП — но вернётся ли?»</div>
-      <div class="ps-body">Дискуссия о возможном возврате Booking.com в РФ. «Если вернётся — все отельеры будут в плюсе». Усталость от монополии ЯП и поиск альтернатив. 14 реакций.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/140774" target="_blank">@chat_hotel/140774</a></div>
-    </div>
-
-    <div class="ps-block">
-      <div class="ps-label pending">OTA</div>
-      <div class="ps-title">Bnovo: «Ценник стал космос» — поиск альтернатив шахматки</div>
-      <div class="ps-body">Публичный запрос альтернатив Bnovo из-за роста цен. Возможность для TL — показать ценность своей шахматки отельерам, которые ищут замену.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/141064" target="_blank">@chat_hotel/141064</a></div>
-    </div>
-
-    <div class="ps-block">
-      <div class="ps-label pending">Рынок</div>
-      <div class="ps-title">Март набирается, но дорогой сегмент «встал мертво»</div>
-      <div class="ps-body">Отельер: «Часто звонки с Яндекса по дешёвым номерам, дорогой (35 000 руб.) вообще не берут. Тот что 25 000 — наполняется». Тренд на экономию подтверждается данными Hotel Advisors.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/141015" target="_blank">@chat_hotel/141015</a></div>
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-title">Горячие темы в чатах — сводная таблица</div>
+      <table class="data-table" style="margin-top: 8px;">
+        <tr><th>Тема</th><th>Обсуждений</th><th>Настроение</th></tr>
+        <tr><td>Русскоязычные вывески / закон о языке</td><td>30+ тредов</td><td style="color:var(--red)">Паника</td></tr>
+        <tr><td>Схемы обхода через агентов (отмена без штрафа)</td><td>30 ответов</td><td style="color:var(--red)">Злость</td></tr>
+        <tr><td>НДС, кассы, чеки при новых правилах</td><td>~20 тредов</td><td style="color:var(--orange)">Тревога</td></tr>
+        <tr><td>Налог на землю гостевых домов</td><td>137 репостов</td><td style="color:var(--red)">Негатив</td></tr>
+        <tr><td>MITT 2026 / мероприятия</td><td>~5 упоминаний</td><td style="color:var(--green)">Позитив</td></tr>
+        <tr><td>Загрузка на 8 марта (Москва, СПб, Казань)</td><td>данные HA+НП</td><td style="color:var(--green)">Оптимизм</td></tr>
+      </table>
     </div>
   </div>
 
-  <!-- ===== ВЫВОДЫ ===== -->
+  <!-- ====== MARKET ====== -->
+  <div class="section" id="market">
+    <div class="section-title">Рынок</div>
+
+    <table class="data-table">
+      <tr><th>Показатель</th><th>Значение</th><th>Источник</th></tr>
+      <tr><td>Загрузка Москвы на 7 марта</td><td style="color:var(--green)">39,1%</td><td><a href="https://t.me/portierdenuit/7632" target="_blank" style="color:var(--accent)">portierdenuit/7632</a></td></tr>
+      <tr><td>Загрузка СПб на 7 марта</td><td style="color:var(--green)">45,2%</td><td><a href="https://t.me/portierdenuit/7632" target="_blank" style="color:var(--accent)">portierdenuit/7632</a></td></tr>
+      <tr><td>Загрузка Казани на 7 марта</td><td style="color:var(--green)">55%</td><td><a href="https://t.me/portierdenuit/7632" target="_blank" style="color:var(--accent)">portierdenuit/7632</a></td></tr>
+      <tr><td>Загрузка Подмосковья на 7 марта</td><td style="color:var(--green)">66,2%</td><td><a href="https://t.me/portierdenuit/7632" target="_blank" style="color:var(--accent)">portierdenuit/7632</a></td></tr>
+      <tr><td>Горнолыжные курорты — номерной фонд 2025</td><td>+1,5× (854 новых номера 3–5★)</td><td><a href="https://t.me/Hoteliernews/11799" target="_blank" style="color:var(--accent)">Hoteliernews/11799</a></td></tr>
+      <tr><td>Booking.com акции с конца 2025</td><td style="color:var(--red)">−32% (AI-агент риск)</td><td><a href="https://t.me/wrkhotel/5210" target="_blank" style="color:var(--accent)">wrkhotel/5210</a></td></tr>
+      <tr><td>Отельеры и ИИ</td><td>50% используют, из них 12% регулярно</td><td><a href="https://t.me/portierdenuit/7585" target="_blank" style="color:var(--accent)">portierdenuit/7585</a></td></tr>
+      <tr><td>Спрос на летние туры (экскурсионный сегмент)</td><td style="color:var(--red)">только 10% путёвок продано</td><td><a href="https://t.me/HotelierPRO/9417" target="_blank" style="color:var(--accent)">HotelierPRO/9417</a></td></tr>
+      <tr><td>Турналог Новосибирск за 2025 год</td><td style="color:var(--green)">100+ млн руб</td><td><a href="https://t.me/Hoteliernews/11716" target="_blank" style="color:var(--accent)">Hoteliernews/11716</a></td></tr>
+    </table>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-title">Регуляторика — что вступило в силу и что впереди</div>
+      <div class="card-body">
+        <p><strong>С 1 марта 2026 (уже в силе):</strong>
+        <br>1. Закон о русском языке: вся публичная информация на русском. Исключение — зарегистрированные товарные знаки.
+        <br>2. Новые ППГУ: невозвратные тарифы юридически не работают; удержать можно только стоимость первых суток при незаезде; при выселении нарушителя — компенсация убытков.
+        <br><br><strong>С июня 2026:</strong>
+        <br>— ГОСТ Р 72311-2025 (глэмпинги): первое официальное определение глэмпинга, требования к расположению и модулям.
+        <br>— Стандарт по приёму иностранцев: Росстандарт — адаптация сервиса с учётом культурных особенностей (фокус на китайских туристов).
+        <br><br><strong>Инициативы:</strong>
+        <br>— ФНС поддержало 5× земельный налог для гостевых домов.
+        <br>— Минэкономразвития: распространить классификацию гостевых домов на все регионы.
+        <br>— Сочи: снижение цен на время работы режима «Ковёр» в аэропорту.</p>
+        <div class="source-tag">
+          <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a> ·
+          <a href="https://t.me/AZO_channel/2486" target="_blank">@AZO_channel/2486</a> ·
+          <a href="https://t.me/hotel_geek/2857" target="_blank">@hotel_geek/2857</a> ·
+          <a href="https://t.me/c/chat_hotel/141070" target="_blank">chat_hotel/141070</a> ·
+          <a href="https://t.me/bronevik_com/2252" target="_blank">@bronevik_com/2252</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">MITT 2026 (11–13 марта) — кто и где</div>
+      <div class="card-body">
+        <p>
+        <strong>TravelLine</strong>: стенд с темой «Космос». Бизнес-завтрак Юрия Костина 12 марта (10–14:00, конференц-зал F). Тема: работа с гостем от первого касания до повторного визита.
+        <br><strong>Бронируй Онлайн</strong>: стенд А3067 все 3 дня.
+        <br><strong>Bronevik.com</strong>: стенд А1067. Марина Гончаренко открывает сессию Hotel Advisors 12 марта в 13:30.
+        <br><strong>Hotel Advisors</strong>: сессия 12 марта в 13:30 — данные рынка и скрытые резервы роста. Спикеры: Данильченко, Гончаренко, Прасов, Шувленов.
+        </p>
+        <div class="source-tag">
+          <a href="https://t.me/travelline_news/8955" target="_blank">@travelline_news/8955</a> ·
+          <a href="https://t.me/bronirui_online/1771" target="_blank">@bronirui_online/1771</a> ·
+          <a href="https://t.me/c/hotel_advisors/5525" target="_blank">hotel_advisors/5525</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Waldorf Astoria в Минске — международный контекст</div>
+      <div class="card-body">
+        Первый ультралюксовый отель в Белоруссии — Waldorf Astoria (Hilton) открылся в центре Минска, набережная Свислочи. 155 номеров и люксов. Международные бренды продолжают экспансию в постсоветском пространстве.
+        <div class="source-tag"><a href="https://t.me/hotel_geek/2861" target="_blank">@hotel_geek/2861</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CONCLUSIONS ====== -->
   <div class="section" id="conclusions">
-    <div class="section-title">Выводы и приоритеты CPO</div>
+    <div class="section-title">Выводы</div>
 
     <div class="insight-card threat">
-      <div class="insight-label red">Угроза #1</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Поддержка TL — системная проблема репутации</div>
-      <div style="font-size:14px;color:var(--text2);">Три независимых жалобы за неделю: отчёт не выгружается год, интеграция с AmoCRM не работает, фича-реквесты игнорируются. Отельеры открыто рассматривают переход. Это не единичные кейсы — паттерн. Каждая публичная жалоба в Беседке = сигнал для других клиентов.</div>
-      <div class="source-tag"><a href="https://t.me/c/1264671967/104414" target="_blank">TL:Беседка/104414</a> · <a href="https://t.me/chat_hotel/140542" target="_blank">@chat_hotel/140542</a> · <a href="https://t.me/c/1264671967/104351" target="_blank">TL:Беседка/104351</a></div>
+      <div class="insight-label red">УГРОЗА #1</div>
+      <div class="card-title">TL + AmoCRM: баг ломает CRM-процессы клиентов — поддержка не решает</div>
+      <div class="card-body">Изменение брони в TL → сделка уходит в «Отмену» в AmoCRM. Поддержка не решила. Если проблема воспроизводима — это репутационный риск в сегменте малых отелей с CRM-автоматизацией. AmoCRM — один из самых популярных CRM у малого отельного бизнеса.</div>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/140542" target="_blank">chat_hotel/140542</a></div>
     </div>
 
     <div class="insight-card threat">
-      <div class="insight-label red">Угроза #2</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Bnovo теряет клиентов на ценах — TL не перехватывает</div>
-      <div style="font-size:14px;color:var(--text2);">В чатах публичные запросы «какую шахматку взять вместо Bnovo». Bnovo дорожает (+80% за полгода). TL пока не видно в этом разговоре. Нужна активная позиция — быть первым ответом когда отельер ищет альтернативу.</div>
-      <div class="source-tag"><a href="https://t.me/chat_hotel/141064" target="_blank">@chat_hotel/141064</a></div>
+      <div class="insight-label red">УГРОЗА #2</div>
+      <div class="card-title">Бронируй Онлайн и Bnovo захватывают нишу «регуляторного советника» — TL отстаёт</div>
+      <div class="card-body">Самая горящая тема недели (30+ тредов про русскоязычные вывески). Бронируй Онлайн, Bronevik, Frontdesk уже опубликовали разъяснения с сотнями просмотров. TL — не замечен. Кто объясняет регуляторику, тот строит доверие. TL мог бы выпустить конкретный гайд «что переименовать в ЛК TL».</div>
+      <div class="source-tag"><a href="https://t.me/bronirui_online/1769" target="_blank">@bronirui_online/1769</a> · <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a></div>
     </div>
 
     <div class="insight-card threat">
-      <div class="insight-label red">Угроза #3</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Бронируй Онлайн — приоритетный партнёр ЯП, не TL</div>
-      <div style="font-size:14px;color:var(--text2);">ЯП совместно с «Бронируй Онлайн» запустил синхронизацию детских мест. ЯП выбирает Бронируй Онлайн как channel manager для новых интеграций. TL рискует оказаться на второстепенной позиции в экосистеме ЯП.</div>
-      <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1932" target="_blank">@yandex_travel_pro/1932</a> · <a href="https://t.me/bronirui_online/1762" target="_blank">@bronirui_online/1762</a></div>
+      <div class="insight-label red">УГРОЗА #3</div>
+      <div class="card-title">Cosmos ушла с ЯП — TL не использует момент активно</div>
+      <div class="card-body">Александр Биба (Cosmos, 40+ отелей) публично рассказал об уходе с ЯП. 8 982 просмотра, 92 репоста. TL имеет данные о росте прямых продаж (публиковал неделю назад), но не вышел с отдельным материалом «Cosmos ушла с ЯП и вот как выросли прямые». Момент для нарратива — частично упущен.</div>
+      <div class="source-tag"><a href="https://t.me/portierdenuit/7664" target="_blank">@portierdenuit/7664</a></div>
+    </div>
+
+    <div class="insight-card threat">
+      <div class="insight-label red">УГРОЗА #4</div>
+      <div class="card-title">«Управление заказами» падает регулярно — качество поддержки TL под вопросом</div>
+      <div class="card-body">Наталья Жарковская (17 ответов в Беседке): постоянная ошибка, стандартные отмазки поддержки. Это не единичный случай — паттерн «проблема → отмазка» разрушает доверие к TL. Лояльные клиенты начинают выражать усталость публично.</div>
+      <div class="source-tag"><a href="https://t.me/c/1264671967/104363" target="_blank">Беседка/104363</a></div>
     </div>
 
     <div class="insight-card opportunity">
-      <div class="insight-label green">Возможность #1</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">MITT 2026 (11–13 марта) — главное событие недели, TL там есть</div>
-      <div style="font-size:14px;color:var(--text2);">TL присутствует, Юра Костин проводит бизнес-завтрак 12 марта. Островок на стенде A1063, Hotel Advisors с данными рынка. Нужно максимально использовать мероприятие для сбора сигналов от клиентов и новых лидов.</div>
+      <div class="insight-label green">ВОЗМОЖНОСТЬ #1</div>
+      <div class="card-title">MITT 2026 (12 марта) — выйти с цифрами по росту прямых продаж</div>
+      <div class="card-body">TL уже анонсировал бизнес-завтрак Костина. Нужно прийти с конкретными данными: сколько клиентов, ушедших с ЯП, нарастили прямые продажи через TL и на сколько. Особенно актуально после публичного выхода Cosmos. Это живые данные, которых нет у конкурентов.</div>
       <div class="source-tag"><a href="https://t.me/travelline_news/8955" target="_blank">@travelline_news/8955</a></div>
     </div>
 
     <div class="insight-card opportunity">
-      <div class="insight-label green">Возможность #2</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Регуляторика — незанятая ниша для TL</div>
-      <div style="font-size:14px;color:var(--text2);">С 1 марта три новых закона. Контур занял тему МВД, Бронируй Онлайн — тему невозвратных тарифов. TL не видно с compliance-контентом. Аудитория ищет практические разборы — это прямой путь к доверию CPO и владельцев отелей.</div>
-      <div class="source-tag"><a href="https://t.me/portierdenuit/7623" target="_blank">@portierdenuit/7623</a> · <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a></div>
+      <div class="insight-label green">ВОЗМОЖНОСТЬ #2</div>
+      <div class="card-title">Гайд «Как привести ЛК TL в соответствие с законом о русском языке»</div>
+      <div class="card-body">Горящая проблема 30+ тредов. Конкретный продуктовый контент: какие поля в ЛК TL нужно переименовать, как изменить категории номеров, что безопасно оставить. Этот контент найдут в поиске, расшарят в чатах. Бронируй и Bronevik уже играют в это поле, но у них нет ЛК TL — это уникальный угол TL.</div>
+      <div class="source-tag"><a href="https://t.me/c/chat_hotel/140779" target="_blank">chat_hotel/140779</a> · <a href="https://t.me/wrkhotel/5203" target="_blank">@wrkhotel/5203</a></div>
     </div>
 
     <div class="insight-card opportunity">
-      <div class="insight-label green">Возможность #3</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Туристический кэшбэк + глэмпинги — новые сегменты на подходе</div>
-      <div style="font-size:14px;color:var(--text2);">Госдума обсуждает кэшбэк 25%. ГОСТ для глэмпингов вступает в июне 2026. Оба события создают новых потенциальных клиентов TL. Подготовить продуктовые предложения под глэмпинги заранее.</div>
-      <div class="source-tag"><a href="https://t.me/wrkhotel/5214" target="_blank">@wrkhotel/5214</a> · <a href="https://t.me/AZO_channel/2486" target="_blank">@AZO_channel/2486</a></div>
+      <div class="insight-label green">ВОЗМОЖНОСТЬ #3</div>
+      <div class="card-title">AI-агенты убивают OTA — TL выигрывает стратегически</div>
+      <div class="card-body">Booking.com -32% на ожиданиях AI-агентов. Если AI-ассистенты начнут бронировать напрямую — OTA теряют смысл. TL, который строит инструменты прямых продаж, получает стратегическое преимущество. Это нарратив для MITT, для инвест-материалов и для разговора с крупными отельными сетями.</div>
+      <div class="source-tag"><a href="https://t.me/wrkhotel/5210" target="_blank">@wrkhotel/5210</a></div>
     </div>
 
-    <div style="margin-top:24px;margin-bottom:16px;font-size:16px;font-weight:700;">Приоритеты CPO на следующую неделю</div>
+    <!-- Recommendations -->
+    <div style="margin-top: 20px;">
+      <div class="section-title">Рекомендации</div>
 
-    <div class="rec-card">
-      <div class="rec-icon product">P</div>
-      <div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">1. Разобрать жалобу на отчёт по бронированиям</div>
-        <div style="font-size:13px;color:var(--text2);">Конкретный клиент в Беседке — год ждёт, уже на отток. Нужен личный контакт + эскалация по задаче. Это не баг-фикс, это сохранение клиента.</div>
-        <div class="source-tag"><a href="https://t.me/c/1264671967/104414" target="_blank">TL:Беседка/104414</a></div>
+      <div class="rec-card">
+        <div class="rec-icon product">1</div>
+        <div>
+          <div class="card-title">Баг TL + AmoCRM: воспроизвести и закрыть публично</div>
+          <div class="card-body">Проверить через техподдержку. Если подтверждается — ответить публично в chat_hotel, пообещать срок фикса. Молчание = признание вины. CRM-интеграция — критичная категория для малых отелей с автоматизированными продажами.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="rec-card">
-      <div class="rec-icon sales">S</div>
-      <div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">2. MITT — собрать сигналы от клиентов</div>
-        <div style="font-size:14px;color:var(--text2);">Бизнес-завтрак 12 марта — максимально использовать для качественного исследования. Что раздражает в TL? Что нравится? Какие фичи нужны? Данные с MITT → продуктовый роадмап.</div>
+      <div class="rec-card">
+        <div class="rec-icon marketing">2</div>
+        <div>
+          <div class="card-title">Выпустить гайд «Закон о русском языке: что изменить в ЛК TL»</div>
+          <div class="card-body">Самая горящая тема недели. Конкретный контент: какие поля в ЛК TL переименовать, как изменить категории номеров, что безопасно оставить (товарные знаки). Этот контент найдут в поиске и расшарят в чатах — у конкурентов нет ЛК TL.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="rec-card">
-      <div class="rec-icon marketing">M</div>
-      <div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">3. Compliance-контент по новым законам от 1 марта</div>
-        <div style="font-size:14px;color:var(--text2);">TL не видно в теме новых правил гостиничного законодательства. Нужна статья/пост: «Что изменилось с 1 марта и как настроить TL под новые требования». Конкуренты уже заняли эфир.</div>
-        <div class="source-tag"><a href="https://t.me/portierdenuit/7623" target="_blank">@portierdenuit/7623</a></div>
+      <div class="rec-card">
+        <div class="rec-icon sales">3</div>
+        <div>
+          <div class="card-title">MITT: выйти с кейсом Cosmos + данными по росту прямых продаж</div>
+          <div class="card-body">Cosmos ушла с ЯП публично — TL должен быть следующим абзацем: «и вот как выросли их прямые брони через TL». Данные > слова. Конкуренты тоже будут на MITT.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="rec-card">
-      <div class="rec-icon intel">I</div>
-      <div>
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px;">4. Мониторинг: ЯП × Бронируй Онлайн-интеграции</div>
-        <div style="font-size:14px;color:var(--text2);">ЯП делает совместные интеграции с конкурентом, а не с TL. Нужно понять: есть ли у TL такая же возможность? Если нет — что блокирует? Это вопрос позиции TL в экосистеме ЯП на следующие 2 года.</div>
-        <div class="source-tag"><a href="https://t.me/yandex_travel_pro/1932" target="_blank">@yandex_travel_pro/1932</a></div>
+      <div class="rec-card">
+        <div class="rec-icon intel">4</div>
+        <div>
+          <div class="card-title">Зафиксировать нарратив «AI убивает OTA — TL выигрывает»</div>
+          <div class="card-body">Booking.com теряет капитализацию из-за AI-агентов. Это нарратив уже есть в рынке (4 393 просмотра, 73 репоста). TL как платформа прямых продаж — правильный ответ на этот тренд. Стоит осмыслить и зафиксировать позицию до и во время MITT.</div>
+        </div>
       </div>
-    </div>
-
-    <div style="margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);">
-      <div style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text2);">Конкурентная таблица активности за период</div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Компания</th>
-            <th>Постов</th>
-            <th>Топ событие</th>
-            <th>Угроза для TL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Bnovo</strong></td>
-            <td>6</td>
-            <td>CRM-фильтры, реферальная программа</td>
-            <td style="color:var(--orange)">Средняя</td>
-          </tr>
-          <tr>
-            <td><strong>Бронируй Онлайн</strong></td>
-            <td>12</td>
-            <td>Интеграция с ЯП (детские места)</td>
-            <td style="color:var(--red)">Высокая</td>
-          </tr>
-          <tr>
-            <td><strong>Контур.Отель</strong></td>
-            <td>10</td>
-            <td>МВД-регуляторика как ниша</td>
-            <td style="color:var(--yellow)">Низкая</td>
-          </tr>
-          <tr>
-            <td><strong>Островок</strong></td>
-            <td>14</td>
-            <td>MITT, постконференция Ориентир</td>
-            <td style="color:var(--text2)">Нет</td>
-          </tr>
-          <tr>
-            <td><strong>Bronevik</strong></td>
-            <td>26</td>
-            <td>Партнёрство с Аэроклубом</td>
-            <td style="color:var(--text2)">Нет</td>
-          </tr>
-          <tr>
-            <td><strong>ЯП</strong></td>
-            <td>8</td>
-            <td>Соглашение с Новгородской обл.</td>
-            <td style="color:var(--orange)">Средняя</td>
-          </tr>
-          <tr>
-            <td><strong>Uhotels</strong></td>
-            <td>0</td>
-            <td>—</td>
-            <td style="color:var(--text2)">Нет</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
 </div>
 
 <script>
-  // Tab navigation
-  const navBtns = document.querySelectorAll('.nav-btn[data-section]');
-  const sections = document.querySelectorAll('.section');
-
-  function activate(id) {
-    navBtns.forEach(b => b.classList.toggle('active', b.dataset.section === id));
-    sections.forEach(s => s.classList.toggle('active', s.id === id));
-    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    document.querySelectorAll('.nav-btn[data-section]').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`.nav-btn[data-section="${sectionId}"]`);
+    if (btn) btn.classList.add('active');
+    window.location.hash = sectionId;
   }
 
-  navBtns.forEach(btn => {
-    btn.addEventListener('click', () => activate(btn.dataset.section));
+  document.querySelectorAll('.nav-btn[data-section]').forEach(btn => {
+    btn.addEventListener('click', () => showSection(btn.dataset.section));
   });
 
-  // Hash navigation
-  const hash = location.hash.slice(1);
-  const validIds = [...sections].map(s => s.id);
-  if (hash && validIds.includes(hash)) activate(hash);
+  if (window.location.hash) {
+    const section = window.location.hash.slice(1);
+    const el = document.getElementById(section);
+    if (el && el.classList.contains('section')) showSection(section);
+  }
 
-  window.addEventListener('popstate', () => {
-    const h = location.hash.slice(1);
-    if (h && validIds.includes(h)) activate(h);
+  window.addEventListener('hashchange', () => {
+    const section = window.location.hash.slice(1);
+    const el = document.getElementById(section);
+    if (el && el.classList.contains('section')) showSection(section);
   });
 </script>
 </body>
