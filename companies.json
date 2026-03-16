@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "description": "Справочник компаний для CPO News. Читать ПЕРЕД генерацией отчёта. Каждая новость/упоминание должны быть привязаны к правильной компании.",
+    "last_updated": "2026-02-16",
+    "rules": [
+      "Каждое упоминание в чатах — сопоставить с алиасами, не путать похожие названия",
+      "Если компания не найдена в справочнике — НЕ включать в отчёт, сначала разобраться",
+      "category определяет, в какой таб попадёт компания в отчёте"
+    ]
+  },
+
+  "b2b_saas": {
+    "_description": "PMS-конкуренты TravelLine. Таб: B2B конкуренты",
+    "companies": {
+      "travelline": {
+        "name": "TravelLine",
+        "aliases": ["тревеллайн", "тл", "tl", "travel line", "тревелайн", "тревел лайн"],
+        "telegram_channel": "travelline_news",
+        "type": "Свой продукт",
+        "products": ["модуль бронирования", "channel manager", "аналитика", "reputation", "rate shopper"],
+        "notes": "Наш продукт. Упоминания идут в 'Голос TL'"
+      },
+      "uhotels": {
+        "name": "Uhotels",
+        "aliases": ["юхотелс", "ю-хотелс", "u-hotels"],
+        "telegram_channel": "uhotelsapp",
+        "type": "PMS",
+        "products": ["PMS", "модуль бронирования", "channel manager"],
+        "notes": "Прямой конкурент TL"
+      },
+      "bnovo": {
+        "name": "Bnovo",
+        "aliases": ["бново", "бнова", "б-ново"],
+        "telegram_channel": "bnovonews",
+        "type": "PMS",
+        "products": ["PMS", "модуль бронирования", "channel manager", "календарь часовых услуг"],
+        "notes": "Прямой конкурент TL. Активный продуктовый маркетинг"
+      },
+      "bronirui_online": {
+        "name": "Бронируй Онлайн",
+        "aliases": ["бронируй онлайн", "bronirui", "bronirui_online"],
+        "NOT_aliases": ["забронируй", "забронируй.ру", "zabroniruй"],
+        "telegram_channel": "bronirui_online",
+        "type": "PMS / модуль бронирования",
+        "products": ["модуль бронирования", "сайт для отелей"],
+        "notes": "НЕ ПУТАТЬ с Забронируй.ру (Roomlink)! Это РАЗНЫЕ компании. Бронируй Онлайн — PMS для малых отелей"
+      },
+      "kontur_hotel": {
+        "name": "Контур.Отель",
+        "aliases": ["контур", "контур.отель", "контур отель", "otelkontur", "kontur"],
+        "telegram_channel": "otelkontur",
+        "telegram_chat": "hotelinfo_official_chat",
+        "type": "PMS / бухгалтерия",
+        "products": ["PMS", "бухучёт", "кассовые операции", "миграция"],
+        "notes": "Часть экосистемы Контур. Сильны в бухгалтерии и регуляторике. Есть свой чат отельеров"
+      },
+      "hotellab": {
+        "name": "Hotellab",
+        "aliases": ["хотеллаб", "hotel lab"],
+        "telegram_channel": "hotellab_io",
+        "type": "Revenue management",
+        "products": ["revenue management", "динамическое ценообразование"],
+        "notes": "Не прямой PMS-конкурент, но конкурирует в аналитике/ценообразовании"
+      }
+    }
+  },
+
+  "ota": {
+    "_description": "OTA и каналы дистрибуции. Таб: OTA",
+    "companies": {
+      "yandex_travel": {
+        "name": "Яндекс Путешествия",
+        "aliases": ["яндекс путешествия", "яндекс.путешествия", "яп", "yandex travel", "яндекс тревел"],
+        "telegram_channel": "yandex_travel_pro",
+        "type": "OTA",
+        "notes": "Крупнейший OTA в РФ. Конфликт с отелями из-за комиссий"
+      },
+      "ostrovok": {
+        "name": "Островок",
+        "aliases": ["островок", "ostrovok", "extranetetg"],
+        "telegram_channel": "extranetetg",
+        "type": "OTA",
+        "notes": "Второй по размеру OTA. Выигрывает от кризиса ЯП"
+      },
+      "bronevik": {
+        "name": "Bronevik.com",
+        "aliases": ["броневик", "bronevik"],
+        "telegram_channel": "bronevik_com",
+        "type": "OTA / B2B-тревел",
+        "notes": "Фокус на корпоративный тревел"
+      },
+      "roomlink": {
+        "name": "Roomlink (бывш. Забронируй + A&A)",
+        "aliases": ["забронируй", "забронируй.ру", "zabroniruй", "roomlink", "румлинк", "room link", "a&a", "система бронирования"],
+        "NOT_aliases": ["бронируй онлайн", "bronirui_online"],
+        "telegram_channel": null,
+        "type": "OTA / корп-тревел",
+        "parent": "Smartway Travel Group",
+        "notes": "НЕ ПУТАТЬ с Бронируй Онлайн! Roomlink = Забронируй.ру + A&A (Smartway Group). 350 агентств, 22 000 отелей. Канал дистрибуции, НЕ PMS"
+      },
+      "ozon_travel": {
+        "name": "Ozon Travel",
+        "aliases": ["озон тревел", "ozon travel", "озон"],
+        "telegram_channel": null,
+        "type": "OTA / маркетплейс",
+        "notes": "Набирает вес как OTA-площадка. Замечен в ценовом арбитраже"
+      },
+      "avito": {
+        "name": "Авито",
+        "aliases": ["авито", "avito"],
+        "telegram_channel": null,
+        "type": "Классифайд / OTA",
+        "notes": "Растёт как канал продаж для отелей"
+      }
+    }
+  },
+
+  "media": {
+    "_description": "Отраслевые СМИ и сообщества. НЕ конкуренты, источники информации",
+    "channels": {
+      "wrkhotel": { "name": "WRKHotel", "type": "СМИ" },
+      "hotel_geek": { "name": "Hotel Geek", "type": "СМИ" },
+      "russianhospitalityawards": { "name": "Russian Hospitality Awards", "type": "Премия" },
+      "portierdenuit": { "name": "Ночной портье", "type": "Блог/СМИ" },
+      "AZO_channel": { "name": "Ассоциация загородных отелей", "type": "Ассоциация" },
+      "Hoteliernews": { "name": "Новости отелей", "type": "СМИ" },
+      "HotelierPRO": { "name": "Hotelier.PRO", "type": "СМИ" },
+      "frontdesk_ru": { "name": "Front Desk", "type": "СМИ" }
+    }
+  },
+
+  "confusable_pairs": [
+    {
+      "pair": ["bronirui_online", "roomlink"],
+      "warning": "Бронируй Онлайн (PMS, @bronirui_online) ≠ Забронируй.ру/Roomlink (OTA, Smartway Group). РАЗНЫЕ компании! Слово 'бронируй' может относиться к обоим — проверять контекст",
+      "how_to_distinguish": "Если в тексте 'забронируй', 'roomlink', 'румлинк', 'A&A', 'Smartway' — это Roomlink. Если 'бронируй онлайн', '@bronirui_online' — это PMS-конкурент"
+    }
+  ]
+}

@@ -81,6 +81,7 @@ CHANNELS = {
             "hotel_advisors",
             "HRSRussia",           # HRS — чат про гостиничные системы
             -1001264671967,        # TL: Беседка (приватная группа, 7516 участников)
+            "hotelinfo_official_chat",  # Чат отельеров (hotelinfo)
         ]
     },
 }

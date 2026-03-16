@@ -7,6 +7,7 @@ import json
 import sys
 import io
 import re
+import argparse
 from datetime import datetime
 from collections import defaultdict
 from pathlib import Path
@@ -14,8 +15,10 @@ from pathlib import Path
 # Fix Windows encoding
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-DATA_FILE = Path("data/2026-02-07/all_channels.json")
+DATA_FILE = Path("data/2026-02-11/all_channels.json")
 OUTPUT_DIR = Path("public")
+OVERLAY_FILE = Path("data/2026-02-11/analysis_overlay.json")
+CANDIDATES_FILE = Path("data/2026-02-11/candidates.json")
 
 # Russian month names
 MONTHS_RU = {
@@ -25,13 +28,22 @@ MONTHS_RU = {
 }
 
 # Dates to generate
-DATES = ["2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07"]
+DATES = ["2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10"]
 
 
 def load_data():
     """Load all channel messages."""
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def load_overlay(overlay_path=None):
+    """Load analysis overlay JSON if it exists."""
+    path = Path(overlay_path) if overlay_path else OVERLAY_FILE
+    if path.exists():
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return None
 
 
 def filter_by_date(data, target_date):
@@ -94,17 +106,44 @@ def get_top_posts_diverse(messages, n=3):
 
 
 def format_reactions(reactions):
-    """Format reactions as string."""
+    """Format reactions as string, filtering out raw Telethon objects."""
     if not reactions:
         return ""
-    parts = [f"{r['emoji']}{r['count']}" for r in reactions[:4]]
+    parts = []
+    for r in reactions[:4]:
+        emoji = r.get('emoji', '')
+        count = r.get('count', 0)
+        # Skip raw Telethon objects (ReactionPaid, ReactionCustomEmoji, etc.)
+        if not emoji or 'Reaction' in str(emoji) or 'document_id' in str(emoji):
+            continue
+        parts.append(f"{emoji}{count}")
     return " ".join(parts)
 
 
+DAYS_OF_WEEK_RU = {
+    0: "понедельник", 1: "вторник", 2: "среда", 3: "четверг",
+    4: "пятница", 5: "суббота", 6: "воскресенье"
+}
+
+DAYS_OF_WEEK_SHORT = {
+    0: "пн", 1: "вт", 2: "ср", 3: "чт", 4: "пт", 5: "сб", 6: "вс"
+}
+
+
 def format_date_ru(date_str):
-    """Format date in Russian: '2 февраля 2026'."""
+    """Format date in Russian: '8 февраля 2026, воскресенье'."""
     dt = datetime.fromisoformat(date_str)
-    return f"{dt.day} {MONTHS_RU[dt.month]} {dt.year}"
+    dow = DAYS_OF_WEEK_RU[dt.weekday()]
+    return f"{dt.day} {MONTHS_RU[dt.month]} {dt.year}, {dow}"
+
+
+def format_date_short(date_str):
+    """Format short date with day of week: '8 фев, вс'."""
+    dt = datetime.fromisoformat(date_str)
+    months_short = {1: "янв", 2: "фев", 3: "мар", 4: "апр", 5: "мая", 6: "июн",
+                    7: "июл", 8: "авг", 9: "сен", 10: "окт", 11: "ноя", 12: "дек"}
+    dow = DAYS_OF_WEEK_SHORT[dt.weekday()]
+    return f"{dt.day} {months_short[dt.month]}, {dow}"
 
 
 def get_nav_links(current_date):
@@ -129,6 +168,26 @@ def escape_html(text):
     # Convert markdown bold to HTML
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     text = text.replace('\n', '<br>')
+    return text
+
+
+def escape_html_preserve_links(text):
+    """Escape HTML but preserve <a> tags."""
+    # Temporarily protect <a> tags
+    links = {}
+    def save_link(m):
+        key = f'\x00LINK{len(links)}\x00'
+        links[key] = m.group(0)
+        return key
+    text = re.sub(r'<a\s[^>]*>.*?</a>', save_link, text)
+
+    # Escape remaining HTML
+    text = text.replace('<', '&lt;').replace('>', '&gt;')
+    text = text.replace('\n', ' ')
+
+    # Restore <a> tags
+    for key, link in links.items():
+        text = text.replace(key, link)
     return text
 
 
@@ -219,6 +278,45 @@ def classify_message(msg):
             break
 
     return result
+
+
+def compute_business_impact_score(msg, cls):
+    """Score message by business impact for TravelLine CPO."""
+    score = 0
+    text = msg.get('text', '').lower()
+
+    # Direct TL impact
+    if cls['tl_related']:
+        score += 30
+    if cls['tl_related'] and cls['sentiment'] == 'negative':
+        score += 35
+    if cls['tl_related'] and cls['sentiment'] == 'positive':
+        score += 10
+
+    # Direct booking signals (opportunity/threat)
+    booking_keywords = ['прямые продаж', 'прямые брони', 'прямое бронирован',
+                        'модуль бронирован', 'отключились от', 'ушли от яндекс',
+                        'без ота', 'без агрегатор']
+    if any(kw in text for kw in booking_keywords):
+        score += 25
+
+    # Competitor feature launches
+    feature_keywords = ['запустил', 'новый api', 'обновлен', 'новая функц',
+                        'интеграц', 'партнёрство', 'программа лояльности']
+    if cls['competitors_mentioned'] and any(kw in text for kw in feature_keywords):
+        score += 20
+
+    # Regulatory / market-structural
+    if cls['category'] == 'market_signal':
+        score += 15
+
+    # Engagement multiplier
+    views = msg.get('views', 0) or 0
+    forwards = msg.get('forwards', 0) or 0
+    if views > 2000 or forwards > 50:
+        score += 10
+
+    return score
 
 
 def get_day_delta(data, current_date, prev_date):
@@ -368,6 +466,61 @@ def deduplicate_messages(messages):
     return unique
 
 
+def extract_candidates(data):
+    """Extract candidate messages for each day, output for analysis."""
+    all_candidates = {}
+
+    for date_str in DATES:
+        messages = filter_by_date(data, date_str)
+        messages = deduplicate_messages(messages)
+
+        scored = []
+        for msg in messages:
+            cls = classify_message(msg)
+            if cls['relevance'] == 'irrelevant':
+                continue
+
+            engagement = get_engagement_score(msg)
+            business_score = compute_business_impact_score(msg, cls)
+
+            scored.append({
+                'channel': msg.get('channel', ''),
+                'msg_id': msg.get('id', ''),
+                'message_id': f"{msg.get('channel', '')}/{msg.get('id', '')}",
+                'text': msg.get('text', ''),
+                'sender': msg.get('sender', ''),
+                'channel_name': msg.get('channel_name', ''),
+                'category': msg.get('category', ''),
+                'category_label': msg.get('category_label', ''),
+                'date': msg.get('date', ''),
+                'engagement_score': engagement,
+                'business_score': business_score,
+                'classification': cls,
+                'views': msg.get('views', 0),
+                'forwards': msg.get('forwards', 0),
+                'reactions': msg.get('reactions', []),
+                'source_link': get_source_link(msg)
+            })
+
+        # Sort by hybrid score: business impact (60%) + engagement (40%)
+        scored.sort(key=lambda x: -(x['business_score'] * 0.6 + x['engagement_score'] * 0.4 / 1000))
+
+        # Max 2 per channel
+        selected = []
+        channel_counts = {}
+        for item in scored:
+            ch = item['channel']
+            channel_counts[ch] = channel_counts.get(ch, 0) + 1
+            if channel_counts[ch] <= 2:
+                selected.append(item)
+            if len(selected) >= 20:
+                break
+
+        all_candidates[date_str] = selected
+
+    return all_candidates
+
+
 def get_source_link(msg):
     """Generate Telegram link for a message."""
     channel = msg.get('channel', '')
@@ -383,25 +536,221 @@ def get_source_link(msg):
         return f"https://t.me/{channel}/{msg_id}"
 
 
-def generate_signal_html(msg, priority):
-    """Generate HTML for a single signal card."""
-    text = msg.get('text', '')[:150]
-    if len(msg.get('text', '')) > 150:
-        text += '...'
-    text = escape_html(text)
+def clean_markdown(text, keep_links=False):
+    """Remove markdown formatting from text, preserving URLs.
+    If keep_links=True, convert [text](url) to <a> tags instead of stripping.
+    """
+    # Temporarily protect bare URLs from underscore removal
+    urls = {}
+    def save_url(m):
+        key = f'\x00URL{len(urls)}\x00'
+        urls[key] = m.group(0)
+        return key
+    text = re.sub(r'(?<!\()https?://\S+', save_url, text)
 
+    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+    text = re.sub(r'__(.+?)__', r'\1', text)
+    text = re.sub(r'[*_~`]', '', text)
+
+    if keep_links:
+        # Convert [text](url) to clickable <a> tags
+        text = re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)',
+                       r'<a href="\2" target="_blank" style="color:var(--accent);text-decoration:none">\1</a>', text)
+    else:
+        text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+
+    # Restore bare URLs
+    for key, url in urls.items():
+        text = text.replace(key, url)
+    return text
+
+
+def _find_first_text_line(lines):
+    """Find index and cleaned text of first meaningful line (skip empty, URLs, emoji-only)."""
+    for i, line in enumerate(lines):
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        if re.match(r'^https?://', line_clean):
+            continue
+        if len(re.sub(r'[\s\U0001F000-\U0001FFFF\u2600-\u27BF\u200d\uFE0F#\-—•→←↗↘▸▾]+', '', line_clean)) == 0:
+            continue
+        # Remove leading emoji
+        cleaned_line = re.sub(r'^[\U0001F000-\U0001FFFF\u2600-\u27BF\u200d\uFE0F\s#]+', '', line_clean).strip()
+        if cleaned_line:
+            return i, cleaned_line
+    return -1, ''
+
+
+def extract_headline_and_summary(text):
+    """
+    Extract a headline (full first line) and summary (up to 100 words) from message text.
+
+    Headline: first meaningful line, full text (no truncation).
+    Summary: remaining content up to 100 words, with markdown links preserved as <a> tags.
+    """
+    if not text:
+        return '', ''
+
+    # Clean markdown for headline (no links in headlines)
+    cleaned = clean_markdown(text, keep_links=False)
+    lines = cleaned.strip().split('\n')
+
+    idx, headline = _find_first_text_line(lines)
+
+    if not headline:
+        # Entire text is URL(s)
+        if re.match(r'^https?://', cleaned.strip()):
+            domain_match = re.match(r'https?://(?:www\.)?([^/]+)', cleaned.strip())
+            headline = f'Ссылка: {domain_match.group(1)}' if domain_match else 'Ссылка'
+        return headline or 'Сообщение', ''
+
+    # If headline turned out to be a URL, try next line
+    if re.match(r'^https?://', headline):
+        next_idx, next_line = _find_first_text_line(lines[idx + 1:])
+        if next_line and not re.match(r'^https?://', next_line):
+            headline = next_line
+            idx = idx + 1 + next_idx
+        else:
+            domain_match = re.match(r'https?://(?:www\.)?([^/]+)', headline)
+            headline = f'Ссылка: {domain_match.group(1)}' if domain_match else 'Ссылка'
+            return headline, ''
+
+    summary_start_idx = idx + 1
+
+    # Build summary from remaining lines — use original text with links preserved
+    cleaned_with_links = clean_markdown(text, keep_links=True)
+    link_lines = cleaned_with_links.strip().split('\n')
+
+    remaining_parts = []
+    for line in link_lines[summary_start_idx:]:
+        line_clean = line.strip()
+        if not line_clean:
+            continue
+        # Skip bare URLs (not wrapped in <a>)
+        if re.match(r'^https?://', line_clean) and '<a ' not in line_clean:
+            continue
+        # Skip emoji-only lines (strip <a> tags for check)
+        text_only = re.sub(r'<[^>]+>', '', line_clean)
+        if len(re.sub(r'[\s\U0001F000-\U0001FFFF\u2600-\u27BF\u200d\uFE0F#\-—•→←↗↘▸▾]+', '', text_only)) == 0:
+            continue
+        remaining_parts.append(line_clean)
+
+    remaining_text = ' '.join(remaining_parts)
+    remaining_text = re.sub(r'\s+', ' ', remaining_text).strip()
+
+    # Count words (ignoring HTML tags for word count)
+    text_for_counting = re.sub(r'<[^>]+>', '', remaining_text)
+    word_count = len(text_for_counting.split())
+
+    if word_count > 100:
+        # Truncate to ~100 words while preserving HTML tags
+        words_seen = 0
+        result = []
+        i = 0
+        in_tag = False
+        current_word = []
+        while i < len(remaining_text):
+            ch = remaining_text[i]
+            if ch == '<':
+                in_tag = True
+                if current_word:
+                    result.append(''.join(current_word))
+                    current_word = []
+                tag_chars = [ch]
+                i += 1
+                while i < len(remaining_text) and remaining_text[i] != '>':
+                    tag_chars.append(remaining_text[i])
+                    i += 1
+                if i < len(remaining_text):
+                    tag_chars.append('>')
+                    i += 1
+                result.append(''.join(tag_chars))
+                in_tag = False
+                continue
+            if ch in (' ', '\t', '\n'):
+                if current_word:
+                    result.append(''.join(current_word))
+                    current_word = []
+                    words_seen += 1
+                    if words_seen >= 100:
+                        break
+                result.append(ch)
+            else:
+                current_word.append(ch)
+            i += 1
+        if current_word:
+            result.append(''.join(current_word))
+        summary = ''.join(result).strip() + '...'
+    elif word_count > 0:
+        summary = remaining_text
+    else:
+        summary = ''
+
+    return headline, summary
+
+
+def generate_signal_html(msg, priority, overlay_entry=None):
+    """Generate HTML for a single signal card with analysis + citation."""
     channel = msg.get('channel', '')
     channel_name = msg.get('channel_name', channel)
     link = get_source_link(msg)
     sender = msg.get('sender', '')
     reactions = format_reactions(msg.get('reactions', []))
 
-    return f'''
+    # Build meta line: avoid duplicating sender and channel_name
+    if sender and sender != channel_name:
+        meta_source = f'{sender} · {channel_name}'
+    else:
+        meta_source = channel_name
+
+    if overlay_entry:
+        # Analytical mode: headline + citation
+        headline = escape_html(overlay_entry.get('headline', ''))
+        citation = escape_html(overlay_entry.get('citation', ''))
+        tl_impact = overlay_entry.get('tl_impact', '')
+
+        citation_html = ''
+        if citation:
+            citation_html = f'''
+        <div class="signal-citation">
+          <span class="citation-mark">&laquo;</span>{citation}<span class="citation-mark">&raquo;</span>
+        </div>'''
+
+        impact_html = ''
+        if tl_impact and priority == 'red':
+            impact_html = f'<div class="signal-impact">{escape_html(tl_impact)}</div>'
+
+        return f'''
     <div class="signal-card {priority}">
       <div class="signal-content">
-        <div class="signal-title">{text}</div>
+        <div class="signal-headline">{headline}</div>
+        {citation_html}
+        {impact_html}
         <div class="signal-meta">
-          {sender} в {channel_name}
+          {meta_source}
+          {' · ' + reactions if reactions else ''}
+        </div>
+      </div>
+      <div class="signal-source">
+        <a href="{link}" target="_blank">Открыть →</a>
+      </div>
+    </div>'''
+    else:
+        # Auto mode: headline + summary
+        headline, summary = extract_headline_and_summary(msg.get('text', ''))
+        headline = escape_html(headline) if headline else 'Сообщение'
+        # Summary contains <a> tags from clean_markdown(keep_links=True) — escape text but preserve links
+        summary_safe = escape_html_preserve_links(summary) if summary else ''
+        summary_html = f'<div class="signal-summary">{summary_safe}</div>' if summary_safe else ''
+
+        return f'''
+    <div class="signal-card {priority}">
+      <div class="signal-content">
+        <div class="signal-headline">{headline}</div>
+        {summary_html}
+        <div class="signal-meta">
+          {meta_source}
           {' · ' + reactions if reactions else ''}
         </div>
       </div>
@@ -450,7 +799,7 @@ def get_chat_discussions(messages, n=5):
     return [msg for msg, score in interesting[:n]]
 
 
-def generate_html(date_str, messages, data):
+def generate_html(date_str, messages, data, overlay=None):
     """Generate HTML report for a day."""
 
     # Deduplicate messages
@@ -465,6 +814,37 @@ def generate_html(date_str, messages, data):
 
     # Group by priority
     priority_groups = group_by_priority(messages)
+
+    # Build overlay lookup for this date
+    overlay_lookup = {}
+    day_headline = ''
+    if overlay and date_str in overlay.get('dates', {}):
+        day_overlay = overlay['dates'][date_str]
+        day_headline = day_overlay.get('day_headline', '')
+        for signal in day_overlay.get('signals', []):
+            key = signal.get('message_id', '')
+            overlay_lookup[key] = signal
+
+        # Override priority groups from overlay
+        if overlay_lookup:
+            red, yellow, green = [], [], []
+            for signal in day_overlay.get('signals', []):
+                msg_key = signal['message_id']
+                matched = next((m for m in messages
+                    if f"{m.get('channel','')}/{m.get('id','')}" == msg_key), None)
+                if not matched:
+                    continue
+                p = signal.get('priority', 'yellow')
+                if p == 'red':
+                    red.append(matched)
+                elif p == 'green':
+                    green.append(matched)
+                else:
+                    yellow.append(matched)
+
+            priority_groups['red'] = red[:5]
+            priority_groups['yellow'] = yellow[:7]
+            priority_groups['green'] = green[:3]
 
     date_ru = format_date_ru(date_str)
     prev_link, next_link = get_nav_links(date_str)
@@ -487,15 +867,12 @@ def generate_html(date_str, messages, data):
     delta_class = delta['trend']
     tl_arrow = '↓' if delta['tl_mentions_today'] < delta['tl_mentions_yesterday'] else '↑'
 
+    headline_html = f'<div class="day-headline">{escape_html(day_headline)}</div>' if day_headline else ''
+
     header_html = f'''
   <div class="day-summary">
-    <h1>📊 {date_ru}
-      <span class="day-label {delta_class}">{delta['label']} ({delta_sign}{delta['total_delta_pct']}%)</span>
-    </h1>
-    <div class="day-stats">
-      <span>💬 {delta['total_today']} сообщений (вчера: {delta['total_yesterday']})</span>
-      <span>📍 TravelLine: {delta['tl_mentions_today']} {tl_arrow} vs {delta['tl_mentions_yesterday']}</span>
-    </div>
+    <h1>📊 {date_ru}</h1>
+    {headline_html}
   </div>'''
 
     # Generate priority sections
@@ -507,7 +884,8 @@ def generate_html(date_str, messages, data):
     <div class="priority-header red">
       🔴 ТРЕБУЕТ ВНИМАНИЯ <span class="priority-count">{len(priority_groups['red'])}</span>
     </div>
-    {''.join(generate_signal_html(m, 'red') for m in priority_groups['red'])}
+    <div class="priority-description">Прямая угроза или возможность для прямых бронирований TL</div>
+    {''.join(generate_signal_html(m, 'red', overlay_lookup.get(f"{m.get('channel','')}/{m.get('id','')}")) for m in priority_groups['red'])}
   </div>'''
 
     if priority_groups['yellow']:
@@ -516,7 +894,8 @@ def generate_html(date_str, messages, data):
     <div class="priority-header yellow">
       🟡 МОНИТОРИТЬ <span class="priority-count">{len(priority_groups['yellow'])}</span>
     </div>
-    {''.join(generate_signal_html(m, 'yellow') for m in priority_groups['yellow'])}
+    <div class="priority-description">Действия конкурентов, регуляторика, рыночные тренды</div>
+    {''.join(generate_signal_html(m, 'yellow', overlay_lookup.get(f"{m.get('channel','')}/{m.get('id','')}")) for m in priority_groups['yellow'])}
   </div>'''
 
     if priority_groups['green']:
@@ -525,28 +904,15 @@ def generate_html(date_str, messages, data):
     <div class="priority-header green">
       🟢 ПОЗИТИВ <span class="priority-count">{len(priority_groups['green'])}</span>
     </div>
-    {''.join(generate_signal_html(m, 'green') for m in priority_groups['green'])}
+    <div class="priority-description">Хорошие новости для TL, рост лояльности, партнёрства</div>
+    {''.join(generate_signal_html(m, 'green', overlay_lookup.get(f"{m.get('channel','')}/{m.get('id','')}")) for m in priority_groups['green'])}
   </div>'''
 
     # If no priority signals, show a note
     if not priority_sections:
         priority_sections = '<p style="color:var(--text2)">Нет значимых сигналов за этот день</p>'
 
-    # Stats section with competitor mentions
-    comp_stats = ''.join(
-        f'<span>{comp}: {count}</span>'
-        for comp, count in sorted(priority_groups['stats']['competitors'].items(), key=lambda x: -x[1])[:4]
-    )
-
-    stats_html = f'''
-  <div class="section-title">📈 Статистика</div>
-  <div class="day-stats" style="margin-bottom:20px">
-    <span>TL упоминаний: {priority_groups['stats']['tl_mentions']}</span>
-    {comp_stats}
-  </div>
-  <div style="font-size:12px;color:var(--text2)">
-    Источник: анализ {priority_groups['stats']['total_analyzed']} сообщений из 21 канала
-  </div>'''
+    stats_html = ''  # Removed: was non-informative metrics
 
     html = f'''<!DOCTYPE html>
 <html lang="ru">
@@ -649,6 +1015,12 @@ def generate_html(date_str, messages, data):
     border-radius: 10px;
     font-size: 12px;
   }}
+  .priority-description {{
+    font-size: 12px;
+    color: var(--text2);
+    margin: -6px 0 12px 0;
+    font-style: italic;
+  }}
 
   /* Signal card (matches weekly report cards) */
   .signal-card {{
@@ -669,6 +1041,7 @@ def generate_html(date_str, messages, data):
   .signal-card.green {{ border-left: 3px solid var(--green); }}
   .signal-content {{ flex: 1; }}
   .signal-title {{ font-size: 15px; font-weight: 600; margin-bottom: 8px; }}
+  .signal-summary {{ font-size: 14px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }}
   .signal-meta {{ font-size: 14px; color: var(--text2); }}
   .signal-meta a {{ color: var(--accent); text-decoration: none; }}
   .signal-meta a:hover {{ text-decoration: underline; }}
@@ -685,6 +1058,49 @@ def generate_html(date_str, messages, data):
   }}
   .signal-source a:hover {{ background: var(--accent); color: #fff; border-color: var(--accent); }}
 
+  /* Analytical headline (bold, larger) */
+  .signal-headline {{
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }}
+
+  /* Citation block (italic, indented, left border) */
+  .signal-citation {{
+    border-left: 2px solid var(--border);
+    padding: 6px 12px;
+    margin: 8px 0 10px 0;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text2);
+    background: rgba(35,46,60,0.5);
+    border-radius: 0 6px 6px 0;
+  }}
+  .citation-mark {{
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 600;
+  }}
+
+  /* TL impact note (only on red cards) */
+  .signal-impact {{
+    font-size: 13px;
+    color: var(--accent);
+    padding: 6px 10px;
+    background: rgba(100,181,246,0.08);
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }}
+
+  /* Day headline in summary */
+  .day-headline {{
+    font-size: 14px;
+    color: var(--text2);
+    margin-top: 4px;
+    font-weight: 400;
+  }}
+
   /* Day summary header (matches weekly report) */
   .day-summary {{
     background: linear-gradient(135deg, #1e3a5f 0%, #2b3a4a 100%);
@@ -694,26 +1110,6 @@ def generate_html(date_str, messages, data):
     border: 1px solid var(--border);
   }}
   .day-summary h1 {{ font-size: 22px; font-weight: 700; margin-bottom: 8px; }}
-  .day-label {{
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-left: 8px;
-  }}
-  .day-label.down {{ background: rgba(229,57,53,0.2); color: var(--red); }}
-  .day-label.up {{ background: rgba(79,174,78,0.2); color: var(--green); }}
-  .day-label.stable {{ background: rgba(100,181,246,0.2); color: var(--accent); }}
-  .day-stats {{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 12px;
-    font-size: 13px;
-    color: var(--text2);
-  }}
-  .day-stats span {{ display: flex; align-items: center; gap: 4px; }}
 
   .footer {{
     text-align: center;
@@ -725,6 +1121,47 @@ def generate_html(date_str, messages, data):
     color: var(--accent);
     text-decoration: none;
   }}
+
+  /* Sources block */
+  .sources-block {{
+    text-align: left;
+    max-width: 900px;
+    margin: 0 auto 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+  }}
+  .sources-block summary {{
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 500;
+  }}
+  .sources-block summary:hover {{ color: var(--accent); }}
+  .sources-grid {{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 12px;
+  }}
+  .source-category {{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }}
+  .source-category strong {{
+    color: var(--text);
+    font-size: 12px;
+    margin-bottom: 2px;
+  }}
+  .source-category a {{
+    color: var(--text2);
+    text-decoration: none;
+  }}
+  .source-category a:hover {{ color: var(--accent); }}
+  .source-category span {{ color: var(--text2); }}
 
   @media (max-width: 600px) {{
     .container {{ padding: 10px; }}
@@ -748,7 +1185,48 @@ def generate_html(date_str, messages, data):
 </div>
 
 <div class="footer">
-  Дневной отчёт CPO News · <a href="index.html">Недельный обзор →</a>
+  <details class="sources-block">
+    <summary>Источники: 21 канал в 5 категориях</summary>
+    <div class="sources-grid">
+      <div class="source-category">
+        <strong>OTA-конкуренты</strong>
+        <a href="https://t.me/yandex_travel_pro">Яндекс Путешествия PRO</a>
+        <a href="https://t.me/extranetetg">Островок Экстранет</a>
+        <a href="https://t.me/bronevik_com">Bronevik.com</a>
+      </div>
+      <div class="source-category">
+        <strong>B2B SaaS конкуренты</strong>
+        <a href="https://t.me/bnovonews">Bnovo</a>
+        <a href="https://t.me/hotellab_io">Hotellab</a>
+        <a href="https://t.me/otelkontur">Контур.Отель</a>
+        <a href="https://t.me/bronirui_online">Бронируй Онлайн</a>
+        <a href="https://t.me/uhotelsapp">Uhotels</a>
+      </div>
+      <div class="source-category">
+        <strong>Отраслевые СМИ</strong>
+        <a href="https://t.me/wrkhotel">WRKHotel</a>
+        <a href="https://t.me/hotel_geek">Hotel Geek</a>
+        <a href="https://t.me/russianhospitalityawards">Russian Hospitality</a>
+        <a href="https://t.me/portierdenuit">Ночной портье</a>
+        <a href="https://t.me/AZO_channel">Ассоциация загородных отелей</a>
+        <a href="https://t.me/Hoteliernews">Новости отелей</a>
+        <a href="https://t.me/HotelierPRO">Hotelier.PRO</a>
+        <a href="https://t.me/frontdesk_ru">Front Desk</a>
+      </div>
+      <div class="source-category">
+        <strong>TravelLine</strong>
+        <a href="https://t.me/travelline_news">TravelLine (офиц.)</a>
+      </div>
+      <div class="source-category">
+        <strong>Чаты отельеров</strong>
+        <a href="https://t.me/chat_hotel">Закрытый чат WRKHotel</a>
+        <a href="https://t.me/hotel_advisors">Hotel Advisors</a>
+        <a href="https://t.me/HRSRussia">HRS Russia</a>
+        <span>TL: Беседка (приватная группа)</span>
+      </div>
+    </div>
+  </details>
+  <div style="margin-top:12px">Дневной отчёт CPO News · <a href="index.html">Недельный обзор →</a></div>
 </div>
 
 </body>
@@ -758,22 +1236,52 @@ def generate_html(date_str, messages, data):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Generate daily CPO reports')
+    parser.add_argument('--mode', choices=['generate', 'extract', 'merge'],
+                        default='generate',
+                        help='generate: current behavior; extract: output candidates.json; merge: use overlay.json')
+    parser.add_argument('--overlay', type=str, default=None,
+                        help='Path to analysis overlay JSON')
+    parser.add_argument('--candidates-out', type=str, default=None,
+                        help='Path to write candidates JSON')
+    args = parser.parse_args()
+
     print("Loading data...")
     data = load_data()
+
+    if args.mode == 'extract':
+        # Mode 1: Extract candidates for Claude analysis
+        candidates = extract_candidates(data)
+        out_path = Path(args.candidates_out) if args.candidates_out else CANDIDATES_FILE
+        with open(out_path, 'w', encoding='utf-8') as f:
+            json.dump(candidates, f, ensure_ascii=False, indent=2)
+        total = sum(len(v) for v in candidates.values())
+        print(f"Extracted {total} candidates across {len(DATES)} days -> {out_path}")
+        return
+
+    # Load overlay if available
+    overlay = None
+    if args.mode == 'merge' or args.overlay:
+        overlay_path = args.overlay or str(OVERLAY_FILE)
+        overlay = load_overlay(overlay_path)
+        if overlay:
+            print(f"Loaded overlay with {sum(len(d.get('signals',[])) for d in overlay.get('dates',{}).values())} signals")
+        else:
+            print(f"WARNING: Overlay not found at {overlay_path}, falling back to raw mode")
 
     for date_str in DATES:
         print(f"Generating {date_str}...")
         messages = filter_by_date(data, date_str)
         print(f"  Found {len(messages)} messages")
 
-        html = generate_html(date_str, messages, data)
+        html = generate_html(date_str, messages, data, overlay=overlay)
         output_file = OUTPUT_DIR / f"{date_str}.html"
 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(html)
         print(f"  Saved to {output_file}")
 
-    print("\nDone! Generated 6 daily reports.")
+    print(f"\nDone! Generated {len(DATES)} daily reports.")
 
 
 if __name__ == "__main__":
