@@ -85,7 +85,7 @@ requirements.txt          — Python deps: telethon, python-dotenv
 
 ### B2B SaaS competitors (5)
 - `bnovonews` — Bnovo (PMS конкурент)
-- `hotellab_io` — Hotellab (revenue management)
+- `Revlab_ru` — RevenueLab (revenue management)
 - `otelkontur` — Контур.Отель
 - `bronirui_online` — Бронируй Онлайн
 - `uhotelsapp` — TravelLine (свой канал в B2B контексте)

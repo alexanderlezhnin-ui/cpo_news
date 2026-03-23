@@ -49,7 +49,7 @@ CHANNELS = {
         "label": "B2B SaaS конкуренты (за клиентов)",
         "channels": [
             "bnovonews",           # Bnovo
-            "hotellab_io",         # Hotellab (revenue management)
+            "Revlab_ru",           # RevenueLab (revenue management)
             "otelkontur",          # Контур для отельера
             "bronirui_online",     # Бронируй Онлайн
             "uhotelsapp",          # TravelLine (свой)

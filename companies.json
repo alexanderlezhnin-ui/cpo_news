@@ -55,9 +55,9 @@
         "notes": "Часть экосистемы Контур. Сильны в бухгалтерии и регуляторике. Есть свой чат отельеров"
       },
       "hotellab": {
-        "name": "Hotellab",
-        "aliases": ["хотеллаб", "hotel lab"],
-        "telegram_channel": "hotellab_io",
+        "name": "RevenueLab",
+        "aliases": ["хотеллаб", "hotel lab", "revlab", "revenue lab", "ревенюлаб"],
+        "telegram_channel": "Revlab_ru",
         "type": "Revenue management",
         "products": ["revenue management", "динамическое ценообразование"],
         "notes": "Не прямой PMS-конкурент, но конкурирует в аналитике/ценообразовании"
